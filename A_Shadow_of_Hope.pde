@@ -1,10 +1,15 @@
+import gifAnimation.*;
+
 /* Declaración de variables */
+
 int pantalla; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
 int tiempoActual; //Para medir eventos basados en tiempo, se le asignará millis() en cada uso
 
 boolean fundidoCompleto; //Para verificar si se completó el fundido y prescindir de elementos
 boolean clicable;
+
+PImage titulo;
 
 /* Definición de variables para las distintas fuentes */
 PFont fTitulo;
@@ -20,6 +25,8 @@ void setup(){
   
   fundido = 255;
   
+  titulo = loadImage("TitleScreen.jpg");
+  
   /* Definición de Fuentes */
   fTitulo = createFont("alagard.ttf",75,false);
   fEncabezado = createFont("arpegius.ttf",50,false);
@@ -32,18 +39,17 @@ void draw(){
   
   if(pantalla == 0){
     /* Pantalla de Inicio */
-    /*
-    PImage inicio = loadImage("menu.jpg");
-    image(inicio,0,0);
-    */
+    
+    image(titulo,0,0);
+    
     fill(255);
     textFont(fTitulo);
     textAlign(CENTER,CENTER);
     text("A Shadow of Hope",width/2,90);
     
-    fill(255,150);
+    fill(255,200);
     textFont(fTextos);
-    text("Haga clic para iniciar", width/2, height/1.5);
+    text("Haga clic para iniciar", width/2, height-100);
     
     fill(255);
     textFont(fEncabezado);
@@ -59,8 +65,8 @@ void draw(){
     if(!fundidoCompleto){
       fill(0,fundido);
       rect(0,0,width,height);
-      if(millis()>=2500){
-        fundido -= 3;
+      if(millis()>=3000){
+        fundido -= 2;
         clicable = true;
         if (fundido <= 0){
           fundidoCompleto = true;
@@ -92,13 +98,18 @@ void draw(){
     textAlign(RIGHT,CENTER);
     text("(Aún no hay juego al que continuar, ¡paciencia!)                               Clic para continuar >",width-20,height-40);
     
+    /* Efecto de fundid o*/
     if(fundidoCompleto){
-      print("hola");
       fill(0,fundido);
       rect(0,0,width,height);
-      println(fundido);
-      println(millis()-tiempoActual);
-      if(millis() - tiempoActual >= 3000){
+      println(fundido);//debug
+      println(millis()-tiempoActual);//debug
+      
+      /* Funcionamiento del pantallazo negro */
+      /* Se debería escuchar un sonido contundente que coincida con el pantallazo, dando un efecto de apagón */
+      /* Pasados unos segundos en lo que se reproduce el sonido, se muestra la pantalla de controles */
+      
+      if(millis() - tiempoActual >= 3000){ //3 segundos de espera entre el pantallazo negro y la pantalla de controles
         fundido -= 15;
         if (fundido <= 0){
           fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
