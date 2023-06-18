@@ -1,5 +1,12 @@
-int pantalla; //1 para menú, 2 para controles, 3 para juego
+/* Declaración de variables */
+int pantalla; //0 para menú, 1 para controles, 2 para juego
+int fundido; //Para calcular la opacidad del efecto de fundido
+int tiempoActual; //Para medir eventos basados en tiempo, se le asignará millis() en cada uso
 
+boolean fundidoCompleto; //Para verificar si se completó el fundido y prescindir de elementos
+boolean clicable;
+
+/* Definición de variables para las distintas fuentes */
 PFont fTitulo;
 PFont fEncabezado;
 PFont fTextos;
@@ -9,7 +16,12 @@ void setup(){
   pantalla = 0;
   size(700,600);
   
-  fTitulo = createFont("alagard.ttf",80,false);
+  clicable = false;
+  
+  fundido = 255;
+  
+  /* Definición de Fuentes */
+  fTitulo = createFont("alagard.ttf",75,false);
   fEncabezado = createFont("arpegius.ttf",50,false);
   fTextos = createFont("pixel-unicode.ttf",30,false);
   fTextosSmall = createFont("pixel-unicode.ttf",20,false);
@@ -44,7 +56,20 @@ void draw(){
     textAlign(RIGHT,DOWN);
     text("Trabajo Práctico Final - FPOO, TUDIVJ",width-10,height-10);
     
-  }else if(pantalla == 1){  
+    if(!fundidoCompleto){
+      fill(0,fundido);
+      rect(0,0,width,height);
+      if(millis()>=2500){
+        fundido -= 3;
+        clicable = true;
+        if (fundido <= 0){
+          fundidoCompleto = true;
+          fundido = 255; //reseteando fundido para la siguiente pantalla
+        }
+      }      
+    }    
+    tiempoActual = millis();
+  }else if(pantalla == 1){      
     /* Pantalla de Controles */    
     fill(255);
     textFont(fEncabezado);
@@ -65,17 +90,34 @@ void draw(){
     
     textFont(fTextosSmall);
     textAlign(RIGHT,CENTER);
-    text("Clic para continuar >",width-20,height-40);
+    text("(Aún no hay juego al que continuar, ¡paciencia!)                               Clic para continuar >",width-20,height-40);
     
-  }else if(pantalla == 2){
-    textAlign(CENTER,CENTER);
-    textSize(80);
-    text("Juego",width/2,height/2);        
+    if(fundidoCompleto){
+      print("hola");
+      fill(0,fundido);
+      rect(0,0,width,height);
+      println(fundido);
+      println(millis()-tiempoActual);
+      if(millis() - tiempoActual >= 3000){
+        fundido -= 15;
+        if (fundido <= 0){
+          fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
+          fundido = 255; //reseteando fundido para la siguiente pantalla
+          clicable = true;
+        }
+      }      
+    }
+    
   }
 }
 
 void mousePressed(){
-  if(pantalla < 2){
-    pantalla++;
+  if (clicable){    
+    if(pantalla < 1){
+      pantalla++;
+    }
   }
+}
+
+void mouseReleased(){
 }
