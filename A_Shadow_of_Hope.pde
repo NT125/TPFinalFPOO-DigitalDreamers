@@ -4,9 +4,11 @@ import gifAnimation.*;
 
 int pantalla; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
+int fundido2; //Para calcular la opacidad del efecto de fundido
 int tiempoActual; //Para medir eventos basados en tiempo, se le asignará millis() en cada uso
 
 boolean fundidoCompleto; //Para verificar si se completó el fundido y prescindir de elementos
+boolean fundidoCompleto2; //Para verificar si se completó el fundido y prescindir de elementos
 boolean clicable;
 
 PImage titulo;
@@ -24,6 +26,7 @@ void setup(){
   clicable = false;
   
   fundido = 255;
+  fundido2 = 255;
   
   titulo = loadImage("TitleScreen.jpg");
   
@@ -41,6 +44,18 @@ void draw(){
     /* Pantalla de Inicio */
     
     image(titulo,0,0);
+    if(!fundidoCompleto2){
+      fill(0,fundido2);
+      rect(0,0,width,height);
+      if(millis()>=4500){
+        fundido2 -= 3;
+        clicable = true;
+        if (fundido2 <= 0){
+          fundidoCompleto2 = true;
+          fundido2 = 255; //reseteando fundido para la siguiente pantalla
+        }
+      }      
+    } 
     
     fill(255);
     textFont(fTitulo);
