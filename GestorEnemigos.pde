@@ -1,7 +1,7 @@
 /** */
 class GestorEnemigos{
   /** atributos */
-  private ArrayList<Enemigo> enemigos;
+  private ArrayList<Enemigo> enemigos; //Representa una lista de los enemigos que habra en el juego
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
   public GestorEnemigos(){
