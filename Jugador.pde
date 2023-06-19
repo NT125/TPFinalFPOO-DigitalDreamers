@@ -1,5 +1,5 @@
 /** Clase que representa al jugador */
-class Jugador extends GameObject{
+class Jugador extends GameObject implements IMovable{
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
   private PVector velocidad; //Representa al velocidad del jugador
