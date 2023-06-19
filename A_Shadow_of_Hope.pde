@@ -91,7 +91,7 @@ void draw(){
         }      
       }    
       tiempoActual = millis();
-    break;
+      break;
     case 1:
       /* Pantalla de Controles */    
       fill(255);
@@ -131,11 +131,11 @@ void draw(){
             fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
             fundido = 255; //reseteando fundido para la siguiente pantalla
             clicable = true;
+            }
           }
-        }
+      }    
       break;
-    }    
-  }
+  }//end switch
 }
 
 void mousePressed(){
