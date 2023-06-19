@@ -1,5 +1,11 @@
 import gifAnimation.*;
 
+//Objetos
+private GestorAntorcha getorAntorcha;
+private Jugador jugador;
+private GestorEnemigos gestorEnemigo;
+private Escenario escenario;
+
 /* Declaración de variables */
 
 int pantalla; //0 para menú, 1 para controles, 2 para juego
