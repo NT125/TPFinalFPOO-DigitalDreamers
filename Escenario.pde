@@ -3,6 +3,7 @@ class Esenario extends GameObject{
   /** atributos */
   private String nombre;
   private color colorEsenario;
+  private Arbol[] arboles;
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
   public Esenario(){}
@@ -11,6 +12,7 @@ class Esenario extends GameObject{
     super(posicion,ancho,alto);
     this.nombre=nombre;
     this.colorEsenario=colorEsenario;
+    arboles = new Arbol[5];
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
