@@ -13,7 +13,7 @@ class Jugador extends GameObject{
     super(posicion,ancho,alto);
     this.vivo = vivo;
     this.velocidad = velocidad;
-    this.rangoVision = rangoVision
+    this.rangoVision = rangoVision;
   }
   
   /** ---------------- ZONA DE METODOS ---------------- */
