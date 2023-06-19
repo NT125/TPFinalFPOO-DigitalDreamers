@@ -1,9 +1,7 @@
 import gifAnimation.*;
-/* Declarando gifs */
-Gif myAnimation; 
-Gif tituloScreen;
 
-/* Declaración de variables Globales */
+/* Declaración de variables */
+
 int pantalla; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
 int fundido2; //Para calcular la opacidad del efecto de fundido
@@ -13,6 +11,7 @@ boolean fundidoCompleto; //Para verificar si se completó el fundido y prescindi
 boolean fundidoCompleto2; //Para verificar si se completó el fundido y prescindir de elementos
 boolean clicable;
 
+Gif pantallaDeInicio;
 
 /* Definición de variables para las distintas fuentes */
 PFont fTitulo;
@@ -28,11 +27,9 @@ void setup(){
   
   fundido = 255;
   fundido2 = 255;
-  /* creacion de Gifs*/
-  myAnimation= new Gif(this, "Title.gif");
-  myAnimation.play();
-  tituloScreen = new Gif(this,"TitleScreen.gif");
-  tituloScreen.play();
+  
+  pantallaDeInicio = new Gif(this,"TitleScreen.gif");  
+  pantallaDeInicio.play();
   
   /* Definición de Fuentes */
   fTitulo = createFont("alagard.ttf",75,false);
@@ -43,31 +40,29 @@ void setup(){
 
 void draw(){
   background(0);
+  
   switch (pantalla){
-    case 0: {
+    case 0:
       /* Pantalla de Inicio */
+      
+      imageMode(CORNER);
+      image(pantallaDeInicio,0,0);
       if(!fundidoCompleto2){
         fill(0,fundido2);
         rect(0,0,width,height);
         if(millis()>=4500){
           fundido2 -= 3;
-          clicable = true;
           if (fundido2 <= 0){
             fundidoCompleto2 = true;
             fundido2 = 255; //reseteando fundido para la siguiente pantalla
           }
         }      
       } 
-      
       fill(255);
-      /*textFont(fTitulo);
-      text("A Shadow of Hope",width/2,90);*/
-      
-      //Gif
-      image(tituloScreen,0,0,width,height);
-      image(myAnimation,0,60,width,140);
-      
+      textFont(fTitulo);
       textAlign(CENTER,CENTER);
+      text("A Shadow of Hope",width/2,90);
+      
       fill(255,200);
       textFont(fTextos);
       text("Haga clic para iniciar", width/2, height-100);
@@ -88,17 +83,16 @@ void draw(){
         rect(0,0,width,height);
         if(millis()>=3000){
           fundido -= 2;
-          clicable = true;
           if (fundido <= 0){
             fundidoCompleto = true;
+            clicable = true;
             fundido = 255; //reseteando fundido para la siguiente pantalla
           }
         }      
       }    
       tiempoActual = millis();
-      break;
-    }// end case 0
-    case 1:{
+    break;
+    case 1:
       /* Pantalla de Controles */    
       fill(255);
       textFont(fEncabezado);
@@ -108,8 +102,7 @@ void draw(){
       textFont(fTextos);
       textAlign(LEFT,CENTER);
       text("WASD:  Mover al personaje",60,160);
-      text("Control:  Acción", 60, 200);
-      text("Control2:  Acción2", 60, 240);
+      text("J:  Iluminar/Accionar", 60, 200);
       
       textAlign(CENTER,CENTER);
       text("Objetivos del juego Objetivos del juego Objetivos del juego",width/2,370);
@@ -121,7 +114,7 @@ void draw(){
       textAlign(RIGHT,CENTER);
       text("(Aún no hay juego al que continuar, ¡paciencia!)                               Clic para continuar >",width-20,height-40);
       
-      /* Efecto de fundido*/
+      /* Efecto de fundid o*/
       if(fundidoCompleto){
         fill(0,fundido);
         rect(0,0,width,height);
@@ -139,17 +132,10 @@ void draw(){
             fundido = 255; //reseteando fundido para la siguiente pantalla
             clicable = true;
           }
-        }      
-      }
+        }
       break;
-    }// end case 1
-    case 2:{
-      /* Jugando */
-      
-      break;
-    }//end case 2
-    
-  }// end swith
+    }    
+  }
 }
 
 void mousePressed(){
