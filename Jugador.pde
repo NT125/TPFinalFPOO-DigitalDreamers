@@ -3,15 +3,17 @@ class Jugador extends GameObject{
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
   private PVector velocidad; //Representa al velocidad del jugador
+  private int rangoVision;   //Representa el rango de vicion que tendra el jugador
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
   public Jugador(){}
   //Constructor parametrizado
-  public Jugador(PVector posicion, int ancho, int alto, boolean vivo, PVector velocidad){
+  public Jugador(PVector posicion, int ancho, int alto, boolean vivo, PVector velocidad,int rangoVision){
     super(posicion,ancho,alto);
     this.vivo = vivo;
     this.velocidad = velocidad;
+    this.rangoVision = rangoVision
   }
   
   /** ---------------- ZONA DE METODOS ---------------- */
