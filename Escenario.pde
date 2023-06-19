@@ -1,9 +1,9 @@
 /** clase que representa al esenario */
 class Esenario extends GameObject{
   /** atributos */
-  private String nombre;
-  private color colorEsenario;
-  private Arbol[] arboles;
+  private String nombre;        //Representa al nombre del esenario
+  private color colorEsenario;  //Representa el color del esenario
+  private Arbol[] arboles;      //Representa a la cantidad de arboles que hay en el juego
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
   public Esenario(){}
