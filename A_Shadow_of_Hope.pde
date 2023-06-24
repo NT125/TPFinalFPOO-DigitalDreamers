@@ -8,7 +8,7 @@ private Escenario escenario;
 
 /* Declaración de variables */
 
-int pantalla; //0 para menú, 1 para controles, 2 para juego
+int estado; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
 int fundido2; //Para calcular la opacidad del efecto de fundido
 int tiempoActual; //Para medir eventos basados en tiempo, se le asignará millis() en cada uso
@@ -26,7 +26,7 @@ PFont fTextos;
 PFont fTextosSmall;
 
 void setup(){
-  pantalla = 0;
+  estado = MaquinaEstados.INICIANDO;
   size(700,600);
   
   clicable = false;
@@ -47,8 +47,8 @@ void setup(){
 void draw(){
   background(0);
   
-  switch (pantalla){
-    case 0:
+  switch (estado){
+    case MaquinaEstados.INICIANDO:
       /* Pantalla de Inicio */
       
       imageMode(CORNER);
@@ -98,7 +98,7 @@ void draw(){
       }    
       tiempoActual = millis();
       break;
-    case 1:
+    case MaquinaEstados.INSTRUCCIONANDO:
       /* Pantalla de Controles */    
       fill(255);
       textFont(fEncabezado);
@@ -137,17 +137,26 @@ void draw(){
             fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
             fundido = 255; //reseteando fundido para la siguiente pantalla
             clicable = true;
-            }
           }
+        }
       }    
+    case MaquinaEstados.JUGANDO:
+      /* Pantalla Comenzando a jugar Nivel 1 */    
       break;
+    case MaquinaEstados.PERDIENDO:
+      /* Pantalla Game Over */    
+      break;
+    case MaquinaEstados.GANANDO:
+      /* Pantalla de victoria */    
+      break;
+      
   }//end switch
 }
 
 void mousePressed(){
   if (clicable){    
-    if(pantalla < 1){
-      pantalla++;
+    if(estado < 1){
+      estado++;
     }
   }
 }
