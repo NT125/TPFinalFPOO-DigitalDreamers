@@ -1,5 +1,5 @@
 /** clase que representa al enemigo */
-class Enemigo extends GameObject implements IMovable{
+class Enemigo extends GameObject implements IMovable, IVisualizable{
   /* atributos */
   private PVector velocidad;  //Representa la velocidad del enemigo
   

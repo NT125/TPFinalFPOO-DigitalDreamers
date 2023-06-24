@@ -1,9 +1,9 @@
 /** clase que representa al esenario */
-class Escenario extends GameObject{
+class Escenario extends GameObject implements IVisualizable {
   /** atributos */
   private String nombre;        //Representa al nombre del esenario
   private color colorEsenario;  //Representa el color del esenario
-  private Arbol[] arboles;      //Representa a la cantidad de arboles que hay en el juego
+  private ArrayList <Arbol> arboles;      //Representa a la cantidad de arboles que hay en el juego
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
   public Escenario(){}
@@ -12,11 +12,19 @@ class Escenario extends GameObject{
     super(posicion,ancho,alto);
     this.nombre=nombre;
     this.colorEsenario=colorEsenario;
-    arboles = new Arbol[5];
+    arboles = new ArrayList <Arbol>();
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
-    
+    background(#BF4141);
+    for (int i=0; i<random(3,7); i++) {
+      Arbol a = new Arbol(new PVector(random(20,400),random(20,400)),30,30); 
+      arboles.add(a);
+    }
+    for (int i=0; i<arboles.size(); i++) {
+      Arbol a = arboles.get(i);
+      a.display();
+    }
   }
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   /* getters */

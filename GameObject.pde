@@ -17,9 +17,6 @@ abstract class GameObject {
     this.alto = alto;
   }
   
-  /** ------- ZONA DE METODOS ------- */
-  abstract public void display();
-  
   /** ------- ZONA DE METODOS ASESORES ------- */
   public void setPosicion(PVector posicion){
     this.posicion=posicion;

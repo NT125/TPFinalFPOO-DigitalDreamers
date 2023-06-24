@@ -1,5 +1,5 @@
 /** clase que representa al arbol */
-class Arbol extends GameObject{
+class Arbol extends GameObject implements IVisualizable{
   
   /** ---------------- ZONA DE CONSTRUCTURES ---------------- */
   //Constructor por defecto
