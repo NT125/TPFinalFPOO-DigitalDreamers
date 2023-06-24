@@ -28,6 +28,8 @@ PFont fTextosSmall;
 void setup(){
   estado = MaquinaEstados.INICIANDO;
   size(700,600);
+  PImage sprite = loadImage("sombra2.png");
+  jugador = new Jugador(new PVector(width/2, height/2), sprite, 32, 39,true,new PVector(14,14));
   
   clicable = false;
   
@@ -141,7 +143,9 @@ void draw(){
         }
       }    
     case MaquinaEstados.JUGANDO:
-      /* Pantalla Comenzando a jugar Nivel 1 */    
+      /* Pantalla Comenzando a jugar Nivel 1 */
+      jugador.display();
+      jugador.update();
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    
@@ -162,4 +166,12 @@ void mousePressed(){
 }
 
 void mouseReleased(){
+}
+
+void keyPressed() {
+  jugador.keyPressed();
+}
+
+void keyReleased() {
+  jugador.keyReleased();
 }
