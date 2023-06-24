@@ -12,18 +12,22 @@ class Escenario extends GameObject implements IVisualizable {
     super(posicion,ancho,alto);
     this.nombre=nombre;
     this.colorEsenario=colorEsenario;
-    arboles = new ArrayList <Arbol>();
+    arboles = new ArrayList();
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
     background(#BF4141);
-    for (int i=0; i<random(3,7); i++) {
-      Arbol a = new Arbol(new PVector(random(20,400),random(20,400)),30,30); 
-      arboles.add(a);
-    }
+    Arbol arbol;
     for (int i=0; i<arboles.size(); i++) {
-      Arbol a = arboles.get(i);
-      a.display();
+      arbol = arboles.get(i);
+      arbol.display();
+    }
+  }
+  public void crearArboles(){
+    Arbol arbol;
+    for (int i=0; i<6; i++) {
+      arbol = new Arbol(new PVector(random(20,width),random(20,height)),30,30); 
+      arboles.add(arbol);
     }
   }
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */

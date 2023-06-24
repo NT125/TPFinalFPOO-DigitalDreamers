@@ -45,7 +45,6 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
-    background(150);
     yframe=39;
     imageMode(CENTER);
     if (animacionActivada) {

@@ -10,6 +10,7 @@ class Arbol extends GameObject implements IVisualizable{
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
-    
+    fill(0);
+    rect(posicion.x, this.posicion.y, this.alto, this.alto);
   }
 }

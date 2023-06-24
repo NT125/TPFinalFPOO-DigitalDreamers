@@ -30,7 +30,7 @@ void setup(){
   size(700,600);
   PImage sprite = loadImage("sombra2.png");
   jugador = new Jugador(new PVector(width/2, height/2), sprite, 32, 39,true,new PVector(14,14));
-  
+  escenario = new Escenario(new PVector(0,0),500,600,"Sal",color (#C43535));
   clicable = false;
   
   fundido = 255;
@@ -44,6 +44,8 @@ void setup(){
   fEncabezado = createFont("arpegius.ttf",50,false);
   fTextos = createFont("pixel-unicode.ttf",30,false);
   fTextosSmall = createFont("pixel-unicode.ttf",20,false);
+  
+  escenario.crearArboles();
 }
 
 void draw(){
@@ -139,11 +141,15 @@ void draw(){
             fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
             fundido = 255; //reseteando fundido para la siguiente pantalla
             clicable = true;
+            estado = MaquinaEstados.JUGANDO;
           }
         }
-      }    
+      }  
+      
+      break;
     case MaquinaEstados.JUGANDO:
       /* Pantalla Comenzando a jugar Nivel 1 */
+      escenario.display();
       jugador.display();
       jugador.update();
       break;
@@ -159,8 +165,8 @@ void draw(){
 
 void mousePressed(){
   if (clicable){    
-    if(estado < 1){
-      estado++;
+    if(estado== MaquinaEstados.INICIANDO){
+      estado= MaquinaEstados.INSTRUCCIONANDO;
     }
   }
 }
