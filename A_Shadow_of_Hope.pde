@@ -173,13 +173,14 @@ void draw(){
     case MaquinaEstados.JUGANDO:
       /* Pantalla Comenzando a jugar Nivel 1 */
       escenario.display();
-      jugador.display();
+      
       jugador.update();
       escenario.mostrarArboles();
       Arbol arbol;
       for (int i=0; i<escenario.arboles.size(); i++) {
         arbol = escenario.arboles.get(i);
         jugador.colisionarArbol(arbol);
+        jugador.display();
       }
       break;
     case MaquinaEstados.PERDIENDO:

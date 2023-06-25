@@ -7,7 +7,7 @@ class Arbol extends GameObject implements IVisualizable {
   public Arbol() {
   }
   //Constructor parametrizado
-  public Arbol(PVector posicion, int alto, int ancho ,String nombre) {
+  public Arbol(PVector posicion, int alto, int ancho) {
     super(posicion, alto, ancho);
     this.imagen = loadImage("arbol_grande.png");
     Color=0;

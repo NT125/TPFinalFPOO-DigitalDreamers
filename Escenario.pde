@@ -34,7 +34,7 @@ class Escenario extends GameObject implements IVisualizable {
   public void crearArboles(){
     Arbol arbol;
     for (int i=0; i<random(4,10); i++) {
-      arbol = new Arbol(new PVector(random(20,width),random(20,height)),30,30); 
+      arbol = new Arbol(new PVector(random(20,width),random(20,height)),30,30);
       arboles.add(arbol);
     }
   }
