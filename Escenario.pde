@@ -33,9 +33,9 @@ class Escenario extends GameObject implements IVisualizable {
     image(loadImage("borde_oscuro.png"),0,0);
     
     /*dibuja las Paredes*/
-    for(Pared p:paredes){
+    /*for(Pared p:paredes){
       p.display();
-    }
+    }*/
   }
   public void mostrarArboles(){
     Arbol arbol;

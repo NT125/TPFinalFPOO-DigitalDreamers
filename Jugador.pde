@@ -43,13 +43,13 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable{
       image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
     //dibuja la luz que rodea al jugador
-    /*imageMode(CENTER);
-    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);*/
+    imageMode(CENTER);
+    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
     //dibuja la hitbox del jugador
-    rectMode(CENTER);
+    /*rectMode(CENTER);
     stroke(#CDF56A);
     fill(255,40);
-    rect(posicion.x, posicion.y, anchoFrame/2, altoFrame);
+    rect(posicion.x, posicion.y, anchoFrame/2, altoFrame);*/
     
   }
   public void tirarAntorcha(){
@@ -57,10 +57,19 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable{
   }
   public void mover(){
     this.posicion.add(this.velocidad);
-    
-    this.posicion.x = constrain(this.posicion.x, 10, width - this.anchoFrame/4);
-  this.posicion.y = constrain(this.posicion.y, 10, height - this.altoFrame/2);
-    
+    /** evita que el jugador salga del size*/
+    if(this.posicion.x <=30){
+      this.posicion.x = 40; 
+    }
+    if(this.posicion.x >= width -30){
+      this.posicion.x = width -40; 
+    }
+    if(this.posicion.y <=30){
+      this.posicion.y = 40; 
+    }
+    if(this.posicion.y >=height -50){
+      this.posicion.y = height -60; 
+    }
   }
   
   public char readCommand(){    

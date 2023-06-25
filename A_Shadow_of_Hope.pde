@@ -76,6 +76,7 @@ void setup(){
 }*/
 void draw(){
   background(0);
+  println(frameRate);
   
   switch (estado){
     case MaquinaEstados.INICIANDO:
