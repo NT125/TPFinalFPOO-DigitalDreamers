@@ -7,6 +7,7 @@ private GestorEnemigos gestorEnemigo;
 private Escenario escenario;
 
 /* Declaración de variables */
+PImage luz;
 
 int estado; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
@@ -28,9 +29,10 @@ PFont fTextosSmall;
 void setup(){
   estado = MaquinaEstados.INICIANDO;
   size(700,600);
+  luz = loadImage("LUZ.png");
   PImage sprite = loadImage("SpritesSombra_ver1.png");
   jugador = new Jugador(new PVector(width/2, height/2), sprite, 64, 63,true);
-  escenario = new Escenario(new PVector(0,0),500,600,"fondo_juego.png");
+  escenario = new Escenario(new PVector(0,0),500,600,"fondo_oscuro.png");
   clicable = false;
   
   fundido = 255;
@@ -157,6 +159,8 @@ void draw(){
         arbol = escenario.arboles.get(i);
         jugador.colisionarArbol(arbol);
       }
+      imageMode(CENTER);
+      image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    

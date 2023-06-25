@@ -229,4 +229,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;
   }
+  public PVector getPosicion(){
+    return this.posicion;
+  }
 }
