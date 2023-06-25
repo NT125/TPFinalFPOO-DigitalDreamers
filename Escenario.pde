@@ -3,6 +3,7 @@ class Escenario extends GameObject implements IVisualizable {
   /** atributos */
   private color colorEsenario;  //Representa el color del esenario
   private ArrayList <Arbol> arboles;      //Representa a la cantidad de arboles que hay en el juego
+  private Pared[] paredes;
   private PImage imagen;
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
@@ -11,18 +12,30 @@ class Escenario extends GameObject implements IVisualizable {
     this.posicion = new PVector(0,0);
   }
   // Constructor parametrizado
-  public Escenario(PVector posicion,int ancho,int alto,String nombre){
-    super(posicion,ancho,alto);
+  public Escenario(PVector posicion,String nombre){
+    this.posicion = posicion;
+    this.ancho=30;
     this.nombre=nombre; 
     this.imagen = loadImage(nombre);
     //this.imagen.resize(width+4,height);
     arboles = new ArrayList();
+    
+    paredes= new Pared[4];
+    paredes[0]=new Pared(new PVector(0,0), width, this.ancho); 
+    paredes[1]=new Pared(new PVector(0,height-this.ancho), width, this.ancho);
+    paredes[2]=new Pared(new PVector(0,0),this.ancho,height);
+    paredes[3]=new Pared(new PVector(width-this.ancho,0),this.ancho,height);
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){ 
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
-    //image(loadImage("borde_oscuro.png"),0,0);
+    image(loadImage("borde_oscuro.png"),0,0);
+    
+    /*dibuja las Paredes*/
+    for(Pared p:paredes){
+      p.display();
+    }
   }
   public void mostrarArboles(){
     Arbol arbol;
