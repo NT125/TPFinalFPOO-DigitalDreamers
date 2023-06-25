@@ -62,7 +62,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     rectMode(CENTER);
     stroke(#CDF56A);
     fill(255,40);
-    rect(posicion.x, posicion.y+ altoFrame/4, anchoFrame/2, altoFrame/2);
+    rect(posicion.x, posicion.y, anchoFrame/2, altoFrame);
     
   }
   public void tirarAntorcha(){
@@ -170,6 +170,36 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   public void colisionarEnemigo(Enemigo enemi){
     
   } 
+  
+  public void colisionarArbol(Arbol a) {
+
+    boolean isColliding = true; //definicion de una variable del tipo booleana para utilizarla como bandera
+
+    //No habra colicion si la posicion X de este jugador + el ancho del mismo sea menor o igual a la posicion X del arbol
+    if (((this.posicion.x+this.ancho) <= a.getPosicion().x)
+      // O esta posicion X sea mayor o igual a la posicion + el ancho del arbol
+      || (this.posicion.x >= (a.getPosicion().x+a.getAncho()))
+      // O esta posicion Y mas el alto de este jugador sea menor o igual a la posicion Y del arbol
+      || ((this.posicion.y+this.alto) <= a.getPosicion().y)
+      // O esta posicion Y sea mayor que la posicion Y mas el alto del arbol
+      || (this.posicion.y >= (a.getPosicion().y+a.getAlto()))) {
+
+      isColliding = false;   // asignación a la variable bandera como flaso
+    }
+
+    /*Bifurcacion logica que comprueba a la variable bandera*/
+    if (isColliding) {
+      // hay colicion, cambio de color a los objetos
+      println("hay colicion");
+      fill(#A7D634);
+      a.setColor(#A7D634);
+    } else {
+      // NO hay colicion, color permanece igual
+      println("NO hay colicion");
+      a.setColor(0);
+    }
+  }//end colisionarJugador
+  
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   /* getters */
   public boolean getVivo(){

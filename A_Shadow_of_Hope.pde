@@ -152,6 +152,11 @@ void draw(){
       jugador.display();
       jugador.update();
       escenario.mostrarArboles();
+      Arbol arbol;
+      for (int i=0; i<escenario.arboles.size(); i++) {
+        arbol = escenario.arboles.get(i);
+        jugador.colisionarArbol(arbol);
+      }
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    
