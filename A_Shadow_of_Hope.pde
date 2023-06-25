@@ -140,8 +140,7 @@ void draw(){
           if (fundido <= 0){
             fundidoCompleto = false; //alternando fundidoCompleto entre pantallas
             fundido = 255; //reseteando fundido para la siguiente pantalla
-            clicable = true;
-            estado = MaquinaEstados.JUGANDO;
+            clicable = true; 
           }
         }
       }  
@@ -167,6 +166,8 @@ void mousePressed(){
   if (clicable){    
     if(estado== MaquinaEstados.INICIANDO){
       estado= MaquinaEstados.INSTRUCCIONANDO;
+    }else if(estado == MaquinaEstados.INSTRUCCIONANDO){
+      estado= MaquinaEstados.JUGANDO;
     }
   }
 }
