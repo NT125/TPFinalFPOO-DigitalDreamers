@@ -3,7 +3,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
   private PVector velocidad; //Representa al velocidad del jugador
-  private final float velocidadMov=3;
+  private final float velocidadMov=120*(1/frameRate);
   private int rangoVision;   //Representa el rango de vicion que tendra el jugador
   /** atributos2 */
   private PImage sprite;
@@ -18,6 +18,9 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   private boolean animacionActivada1;
   private boolean animacionActivada2;
   private boolean animacionActivada3;
+  /** atributos agregados*/
+  private float frameDuration = 0.1; // Duración en segundos de cada fotograma
+  private float animationTime = 0; // Tiempo total transcurrido de la animación
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
@@ -141,6 +144,16 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   
   public void update() {
     this.posicion.add(this.velocidad);
+    
+    // Calcula el tiempo transcurrido desde el último cuadro
+    float deltaTime = 1.0 / frameRate;
+    
+    // Actualiza el tiempo total de la animación
+    animationTime += deltaTime;
+    
+    // Comprueba si ha pasado el tiempo suficiente para cambiar de fotograma
+    if (animationTime >= frameDuration) {
+    
     if (animacionActivada) {
       xFrame += anchoFrame;
       if (xFrame >= sprite.width) {
@@ -165,8 +178,9 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
         xFrame3 = 0;
       }
     }
+    animationTime = 0; // Reinicia el tiempo de la animación
   }
-  
+  }
   public void colisionarEnemigo(Enemigo enemi){
     
   } 
