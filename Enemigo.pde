@@ -1,5 +1,5 @@
 /** clase que representa al enemigo */
-class Enemigo extends GameObject implements IMovable, IVisualizable{
+class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   /* atributos */
   private PVector velocidad;  //Representa la velocidad del enemigo
   
@@ -8,7 +8,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   public Enemigo(){}
   //Constructor parametrizado
   public Enemigo(PVector posicion,int ancho,int alto, PVector velocidad){
-    super(posicion, ancho, alto);
+    //super(posicion, ancho, alto);
     this.velocidad = velocidad;
   }
   /** ---------------- ZONA DE METODOS ---------------- */

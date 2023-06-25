@@ -1,6 +1,7 @@
 /** Clase abstracta que representa a todos los Objetos del juego */
 abstract class GameObject {
   /** atributos*/
+  protected String nombre;    //Representa al nombre del objeto para aplicar su sprite
   protected PVector posicion; //Representa la posicion del objeto
   protected int ancho;        //Representa el ancho del objeto
   protected int alto;         //Representa el alto del objeto

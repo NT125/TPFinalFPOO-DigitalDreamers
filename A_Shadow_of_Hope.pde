@@ -7,8 +7,6 @@ private GestorEnemigos gestorEnemigo;
 private Escenario escenario;
 
 /* Declaración de variables */
-PImage luz;
-
 int estado; //0 para menú, 1 para controles, 2 para juego
 int fundido; //Para calcular la opacidad del efecto de fundido
 int fundido2; //Para calcular la opacidad del efecto de fundido
@@ -27,12 +25,11 @@ PFont fTextos;
 PFont fTextosSmall;
 
 void setup(){
-  estado = MaquinaEstados.INICIANDO;
+  estado = MaquinaEstados.JUGANDO;
   size(700,600);
-  luz = loadImage("LUZ.png");
-  PImage sprite = loadImage("SpritesSombra_ver1.png");
-  jugador = new Jugador(new PVector(width/2, height/2), sprite, 64, 63,true);
-  escenario = new Escenario(new PVector(0,0),500,600,"fondo_oscuro.png");
+  
+  jugador = new Jugador(new PVector(width/2, height/2), "SpritesSombra_ver1.png", 64, 63,true);
+  escenario = new Escenario(new PVector(0,0),500,600,"fondo_juego.png");
   clicable = false;
   
   fundido = 255;
@@ -50,6 +47,31 @@ void setup(){
   escenario.crearArboles();
 }
 
+/*void realizarFundido(boolean fundidoCompleto, int fundido, int duracion, int tiempoActual){
+  
+    if (!fundidoCompleto){
+      fill(0, fundido);
+      rect(0, 0, width, height);
+      
+      //println(fundido);//debug
+      //println(millis());//debug
+      /* Funcionamiento del pantallazo negro */
+      /* Se debería escuchar un sonido contundente que coincida con el pantallazo, dando un efecto de apagón */
+      /* Pasados unos segundos en lo que se reproduce el sonido, se muestra la pantalla de controles */
+        
+      /*while(tiempoActual>= duracion){
+        fundido -= 2;
+        println(fundido);
+        if (fundido <= 0){
+          fundidoCompleto = true;//alternando fundidoCompleto entre pantallas
+          clicable = true;
+          //fundido = 255;  // Reseteando fundido para la siguiente pantalla
+          
+        }      
+      }
+    }
+  
+}*/
 void draw(){
   background(0);
   
@@ -159,8 +181,6 @@ void draw(){
         arbol = escenario.arboles.get(i);
         jugador.colisionarArbol(arbol);
       }
-      imageMode(CENTER);
-      image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    

@@ -1,14 +1,15 @@
 /** clase que representa al esenario */
 class Escenario extends GameObject implements IVisualizable {
   /** atributos */
-  private String nombre;        //Representa al nombre del esenario
   private color colorEsenario;  //Representa el color del esenario
   private ArrayList <Arbol> arboles;      //Representa a la cantidad de arboles que hay en el juego
   private PImage imagen;
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
-  public Escenario(){}
+  public Escenario(){
+    this.posicion = new PVector(0,0);
+  }
   // Constructor parametrizado
   public Escenario(PVector posicion,int ancho,int alto,String nombre){
     super(posicion,ancho,alto);
@@ -21,7 +22,7 @@ class Escenario extends GameObject implements IVisualizable {
   public void display(){ 
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
-    image(loadImage("borde_oscuro.png"),0,0);
+    //image(loadImage("borde_oscuro.png"),0,0);
   }
   public void mostrarArboles(){
     Arbol arbol;

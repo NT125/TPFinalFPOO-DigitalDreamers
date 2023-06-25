@@ -1,26 +1,12 @@
 /** Clase que representa al jugador */
-class Jugador extends GameObject implements IMovable, IVisualizable{
+class Jugador extends SpriteObject implements IMovable, IVisualizable{
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
   private PVector velocidad; //Representa al velocidad del jugador
   private final float velocidadMov=120*(1/frameRate);
   private int rangoVision;   //Representa el rango de vicion que tendra el jugador
-  /** atributos2 */
-  private PImage sprite;
-  private int anchoFrame;
-  private int altoFrame;
-  private int xFrame;
-  private int yFrame;  //contador para animacion hacia arriba
-  private int xFrame1; // Nuevo contador para la animación hacia abajo
-  private int xFrame2; // Nuevo contador para la animación hacia izquierda
-  private int xFrame3; // Nuevo contador para la animación hacia derecha
-  private boolean animacionActivada;
-  private boolean animacionActivada1;
-  private boolean animacionActivada2;
-  private boolean animacionActivada3;
-  /** atributos agregados*/
-  private float frameDuration = 0.1; // Duración en segundos de cada fotograma
-  private float animationTime = 0; // Tiempo total transcurrido de la animación
+  /** atributos2 */ 
+  private PImage luz;
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   //Constructor por defecto
@@ -32,23 +18,17 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     this.rangoVision = rangoVision;
   }*/
-  public Jugador(PVector posicion, PImage sprite, int anchoFrame, int altoFrame, boolean vivo) {
+  public Jugador(PVector posicion, String nombre, int anchoFrame, int altoFrame, boolean vivo) {
+    super(anchoFrame,altoFrame);
     this.posicion = posicion;
-    this.velocidad = new PVector(0, 0);
-    this.sprite = sprite;
-    this.anchoFrame = anchoFrame;
-    this.altoFrame = altoFrame;
-    this.xFrame = 0;
-    this.yFrame = 0;
-    this.xFrame1 = 0; // Inicializar el contador de la animación hacia abajo en 0
-    this.xFrame2 = 0; // Inicializar el contador de la animación hacia la izquierda en 0
-    this.animacionActivada = false;
-    this.animacionActivada1 = false;
-    this.animacionActivada2 = false;
+    this.velocidad = new PVector(0, 0); 
+    this.luz = loadImage("LUZ.png"); 
+    this.sprite = loadImage(nombre);
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
-    yFrame=64;
+    //yFrame=64;
+    noTint();
     imageMode(CENTER);
     if (animacionActivada) {
       image(sprite.get(xFrame, yFrame * 2, anchoFrame, altoFrame), posicion.x, posicion.y); // animacion hacia arriba
@@ -62,6 +42,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     else {
       image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
+    //dibuja la luz que rodea al jugador
+    imageMode(CENTER);
+    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
+    //dibuja la hitbox del jugador
     rectMode(CENTER);
     stroke(#CDF56A);
     fill(255,40);
