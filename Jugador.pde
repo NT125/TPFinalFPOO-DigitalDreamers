@@ -3,6 +3,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
   private PVector velocidad; //Representa al velocidad del jugador
+  private final float velocidadMov=3;
   private int rangoVision;   //Representa el rango de vicion que tendra el jugador
   /** atributos2 */
   private PVector posicion;
@@ -29,7 +30,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     this.rangoVision = rangoVision;
   }*/
-  public Jugador(PVector posicion, PImage sprite, int anchoframe, int altoframe, boolean vivo,PVector velocidad) {
+  public Jugador(PVector posicion, PImage sprite, int anchoframe, int altoframe, boolean vivo) {
     this.posicion = posicion;
     this.velocidad = new PVector(0, 0);
     this.sprite = sprite;
@@ -71,10 +72,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     
     public void keyPressed(){
     if(this.readCommand() == 'w'){
-      this.velocidad.y -= 5;
+      this.velocidad.y -= velocidadMov;
       //Regulando la velocidad
-      if(this.velocidad.y <= -5){
-        this.velocidad.y = -5;
+      if(this.velocidad.y <= velocidadMov*-1){
+        this.velocidad.y = velocidadMov*-1;
       }
       this.animacionActivada = true; // Activa la animación cuando se mueve hacia arriba
       this.animacionActivada1 = false; // Desactiva la animación hacia abajo
@@ -82,10 +83,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
       this.animacionActivada3 = false; // Desactiva la animación hacia la derecha
     }
     if(this.readCommand() == 'd'){
-      this.velocidad.x += 5;
+      this.velocidad.x += velocidadMov;
       //Regulando la velocidad
-      if(this.velocidad.x >= 5){
-        this.velocidad.x = 5;
+      if(this.velocidad.x >= velocidadMov){
+        this.velocidad.x = velocidadMov;
       }
       this.animacionActivada = false; // Desactiva la animación cuando se mueve hacia los lados
       this.animacionActivada1 = false; // Desactiva la animación hacia abajo
@@ -93,10 +94,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
       this.animacionActivada3 = true; // Desactiva la animación hacia la derecha
     }
     if(this.readCommand() == 's'){
-      this.velocidad.y += 5;
+      this.velocidad.y += velocidadMov;
       //Regulando la velocidad
-      if(this.velocidad.y >= 5){
-        this.velocidad.y = 5;
+      if(this.velocidad.y >= velocidadMov){
+        this.velocidad.y = velocidadMov;
       }
       this.animacionActivada = false; // Desactiva la animación cuando se mueve hacia arriba
       this.animacionActivada1 = true; // Activa la animación cuando se mueve hacia abajo
@@ -104,10 +105,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
       this.animacionActivada3 = false; // Desactiva la animación hacia la derecha
     }
     if(this.readCommand() == 'a'){
-      this.velocidad.x -= 5;
+      this.velocidad.x -= velocidadMov;
       //Regulando la velocidad
-      if(this.velocidad.x <= -5){
-        this.velocidad.x = -5;
+      if(this.velocidad.x <= velocidadMov*-1){
+        this.velocidad.x = velocidadMov*-1;
       }
       this.animacionActivada = false; // Desactiva la animación cuando se mueve hacia los lados
       this.animacionActivada1 = false; // Desactiva la animación hacia abajo
@@ -134,7 +135,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   }
   
   public void update() {
-    posicion.add(velocidad);
+    this.posicion.add(this.velocidad);
     if (animacionActivada) {
       xframe += anchoframe;
       if (xframe >= sprite.width) {
