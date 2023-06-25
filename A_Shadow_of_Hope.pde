@@ -28,8 +28,8 @@ PFont fTextosSmall;
 void setup(){
   estado = MaquinaEstados.INICIANDO;
   size(700,600);
-  PImage sprite = loadImage("sombra2.png");
-  jugador = new Jugador(new PVector(width/2, height/2), sprite, 32, 39,true);
+  PImage sprite = loadImage("SpritesSombra_ver1.png");
+  jugador = new Jugador(new PVector(width/2, height/2), sprite, 64, 63,true);
   escenario = new Escenario(new PVector(0,0),500,600,"fondo_juego.png");
   clicable = false;
   

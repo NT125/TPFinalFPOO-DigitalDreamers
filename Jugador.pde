@@ -6,15 +6,14 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   private final float velocidadMov=3;
   private int rangoVision;   //Representa el rango de vicion que tendra el jugador
   /** atributos2 */
-  private PVector posicion;
   private PImage sprite;
-  private int anchoframe;
-  private int altoframe;
-  private int xframe;
-  private int yframe;  //contador para animacion hacia arriba
-  private int xframe1; // Nuevo contador para la animación hacia abajo
-  private int xframe2; // Nuevo contador para la animación hacia izquierda
-  private int xframe3; // Nuevo contador para la animación hacia derecha
+  private int anchoFrame;
+  private int altoFrame;
+  private int xFrame;
+  private int yFrame;  //contador para animacion hacia arriba
+  private int xFrame1; // Nuevo contador para la animación hacia abajo
+  private int xFrame2; // Nuevo contador para la animación hacia izquierda
+  private int xFrame3; // Nuevo contador para la animación hacia derecha
   private boolean animacionActivada;
   private boolean animacionActivada1;
   private boolean animacionActivada2;
@@ -30,35 +29,35 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     this.rangoVision = rangoVision;
   }*/
-  public Jugador(PVector posicion, PImage sprite, int anchoframe, int altoframe, boolean vivo) {
+  public Jugador(PVector posicion, PImage sprite, int anchoFrame, int altoFrame, boolean vivo) {
     this.posicion = posicion;
     this.velocidad = new PVector(0, 0);
     this.sprite = sprite;
-    this.anchoframe = anchoframe;
-    this.altoframe = altoframe;
-    this.xframe = 0;
-    this.yframe = 0;
-    this.xframe1 = 0; // Inicializar el contador de la animación hacia abajo en 0
-    this.xframe2 = 0; // Inicializar el contador de la animación hacia la izquierda en 0
+    this.anchoFrame = anchoFrame;
+    this.altoFrame = altoFrame;
+    this.xFrame = 0;
+    this.yFrame = 0;
+    this.xFrame1 = 0; // Inicializar el contador de la animación hacia abajo en 0
+    this.xFrame2 = 0; // Inicializar el contador de la animación hacia la izquierda en 0
     this.animacionActivada = false;
     this.animacionActivada1 = false;
     this.animacionActivada2 = false;
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
-    yframe=39;
+    yFrame=64;
     imageMode(CENTER);
     if (animacionActivada) {
-      image(sprite.get(xframe, yframe * 1, anchoframe, altoframe), posicion.x, posicion.y); // animacion hacia arriba
+      image(sprite.get(xFrame, yFrame * 2, anchoFrame, altoFrame), posicion.x, posicion.y); // animacion hacia arriba
     } else if (animacionActivada1){
-      image(sprite.get(xframe1, yframe * 0, anchoframe, altoframe), posicion.x, posicion.y);// animacion hacia abajo
+      image(sprite.get(xFrame1, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);// animacion hacia abajo
     } else if (animacionActivada2){
-      image(sprite.get(xframe2, yframe * 2, anchoframe, altoframe), posicion.x, posicion.y);// animacion hacia izquierda
+      image(sprite.get(xFrame2, yFrame * 3, anchoFrame, altoFrame), posicion.x, posicion.y);// animacion hacia izquierda
     }  else if (animacionActivada3){
-      image(sprite.get(xframe3, yframe * 3, anchoframe, altoframe), posicion.x, posicion.y);// animacion hacia derecha
+      image(sprite.get(xFrame3, yFrame * 1, anchoFrame, altoFrame), posicion.x, posicion.y);// animacion hacia derecha
     }
     else {
-      image(sprite.get(xframe * 0, yframe * 0, anchoframe, altoframe), posicion.x, posicion.y);
+      image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
   }
   public void tirarAntorcha(){
@@ -137,27 +136,27 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   public void update() {
     this.posicion.add(this.velocidad);
     if (animacionActivada) {
-      xframe += anchoframe;
-      if (xframe >= sprite.width) {
-        xframe = 0;
+      xFrame += anchoFrame;
+      if (xFrame >= sprite.width) {
+        xFrame = 0;
       }
     }
     if (animacionActivada1) {
-      xframe1 += anchoframe; // Incrementar el contador para la animación hacia abajo
-      if (xframe1 >= sprite.width) {
-        xframe1 = 0;
+      xFrame1 += anchoFrame; // Incrementar el contador para la animación hacia abajo
+      if (xFrame1 >= sprite.width) {
+        xFrame1 = 0;
       }
     }
     if (animacionActivada2) {
-      xframe2 += anchoframe; // Incrementar el contador para la animación hacia la izquierda
-      if (xframe2 >= sprite.width) {
-        xframe2 = 0;
+      xFrame2 += anchoFrame; // Incrementar el contador para la animación hacia la izquierda
+      if (xFrame2 >= sprite.width) {
+        xFrame2 = 0;
       }
     }
     if (animacionActivada3) {
-      xframe3 += anchoframe; // Incrementar el contador para la animación hacia la dderecha
-      if (xframe3 >= sprite.width) {
-        xframe3 = 0;
+      xFrame3 += anchoFrame; // Incrementar el contador para la animación hacia la dderecha
+      if (xFrame3 >= sprite.width) {
+        xFrame3 = 0;
       }
     }
   }
