@@ -18,12 +18,12 @@ class Escenario extends GameObject implements IVisualizable {
     arboles = new ArrayList();
   }
   /** ---------------- ZONA DE METODOS ---------------- */
-  public void display(){
-    
+  public void display(){ 
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
-    image(loadImage("borde_juego.png"),0,0);
-    //background(#BF4141);
+    image(loadImage("borde_oscuro.png"),0,0);
+  }
+  public void mostrarArboles(){
     Arbol arbol;
     for (int i=0; i<arboles.size(); i++) {
       arbol = arboles.get(i);
@@ -32,11 +32,16 @@ class Escenario extends GameObject implements IVisualizable {
   }
   public void crearArboles(){
     Arbol arbol;
-    for (int i=0; i<6; i++) {
+    for (int i=0; i<random(4,10); i++) {
       arbol = new Arbol(new PVector(random(20,width),random(20,height)),30,30); 
       arboles.add(arbol);
     }
   }
+  public void colisionarJugador(){
+  //colision de paredes
+  
+  }
+  
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   /* getters */
   public String getNombre(){
