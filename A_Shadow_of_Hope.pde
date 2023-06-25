@@ -3,6 +3,7 @@ import gifAnimation.*;
 //Objetos
 private GestorAntorcha getorAntorcha;
 private Jugador jugador;
+private Enemigo enemigo;
 private GestorEnemigos gestorEnemigo;
 private Escenario escenario;
 
@@ -30,6 +31,7 @@ void setup(){
   
   jugador = new Jugador(new PVector(width/2, height/2), "SpritesSombra_ver1.png", 64, 63,true);
   escenario = new Escenario(new PVector(0,0),500,600,"fondo_juego.png");
+  enemigo = new Enemigo(new PVector(350,300),45,45, new PVector(0.4,-0.3));
   clicable = false;
   
   fundido = 255;
@@ -180,6 +182,9 @@ void draw(){
       for (int i=0; i<escenario.arboles.size(); i++) {
         arbol = escenario.arboles.get(i);
         jugador.colisionarArbol(arbol);
+        enemigo.display();
+        enemigo.mover();
+        enemigo.rebotar();
         jugador.display();
       }
       break;

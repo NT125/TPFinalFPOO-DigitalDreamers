@@ -56,6 +56,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable{
     
   }
   public void mover(){
+    this.posicion.add(this.velocidad);
   }
   
   public char readCommand(){    
@@ -127,7 +128,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable{
   }
   
   public void update() {
-    this.posicion.add(this.velocidad);
+    mover();
     
     // Calcula el tiempo transcurrido desde el último cuadro
     float deltaTime = 1.0 / frameRate;
