@@ -68,8 +68,6 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
   public void tirarAntorcha(){
     
   }
-  public void mover(){
-  }
   
   public char readCommand(){    
     return key;
