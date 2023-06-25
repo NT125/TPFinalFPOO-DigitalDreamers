@@ -18,10 +18,24 @@ abstract class GameObject {
   }
   
   /** ------- ZONA DE METODOS ASESORES ------- */
+  /** setters*/
   public void setPosicion(PVector posicion){
     this.posicion=posicion;
   } 
+  public void setAlto(int alto){
+    this.alto=alto;
+  } 
+  public void setAncho(int ancho){
+    this.ancho=ancho;
+  } 
+  /** getters*/
   public PVector getPosicion(){
     return this.posicion;
+  }
+  public int getAlto(){
+    return this.alto;
+  }
+  public int getAncho(){
+    return this.ancho;
   }
 }
