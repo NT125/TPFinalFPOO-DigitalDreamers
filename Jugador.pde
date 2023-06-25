@@ -59,13 +59,19 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     else {
       image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
+    rectMode(CENTER);
+    stroke(#CDF56A);
+    fill(255,40);
+    rect(posicion.x, posicion.y+ altoFrame/4, anchoFrame/2, altoFrame/2);
+    
   }
   public void tirarAntorcha(){
     
   }
   public void mover(){
   }
-    public char readCommand(){    
+  
+  public char readCommand(){    
     return key;
   }
     
@@ -161,9 +167,9 @@ class Jugador extends GameObject implements IMovable, IVisualizable{
     }
   }
   
-  public void colisionEnemigo(Enemigo enemi){
+  public void colisionarEnemigo(Enemigo enemi){
     
-  }
+  } 
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   /* getters */
   public boolean getVivo(){

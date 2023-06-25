@@ -151,6 +151,7 @@ void draw(){
       escenario.display();
       jugador.display();
       jugador.update();
+      escenario.mostrarArboles();
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    
