@@ -18,16 +18,18 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display(){
     image(enemigo,posicion.x-ancho/2,posicion.y-alto/2,ancho,alto);
-    //hitbox
+    /** hitbox */
+    /*
     ellipse(posicion.x,posicion.y,ancho,alto);
     strokeWeight(3);
     point(posicion.x,posicion.y);
     strokeWeight(1);
+    */
   }
   public void rebotar(){
-    //rectangulo para ver donde colisiona el punto del enemigo
-    rect(ancho,alto,width-ancho*2, height-alto*2);
-    //el enemigono sale de la pantalla
+    /** guía visual: rectangulo para ver donde colisiona el punto del enemigo */
+    //rect(ancho,alto,width-ancho*2, height-alto*2);
+    /** el enemigono sale de la pantalla */
     if(this.posicion.x >= width-ancho || this.posicion.x<= 0+ancho){
       this.velocidad.x *= -1;
     }

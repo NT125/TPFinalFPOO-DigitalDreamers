@@ -16,13 +16,17 @@ class Arbol extends GameObject implements IVisualizable {
   public void display() {
     imageMode(CORNER);
     image(this.imagen, this.posicion.x-ancho/2, this.posicion.y, 100, 100);
-    //ayuda para posicionar el sprite
+    /** ayuda para posicionar el sprite */
+    /*
     rect(posicion.x-ancho/2, this.posicion.y, 100,100);
     fill(Color, 40);
-    //hitbox arbol
+    */
+    
+    /** hitbox arbol */
+    /*
     rectMode(CORNER);
     rect(posicion.x, this.posicion.y, this.ancho, this.alto);
-    
+    */
   }
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   public void setColor(color Color){

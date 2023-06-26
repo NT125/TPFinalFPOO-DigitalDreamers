@@ -32,6 +32,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   public void display() {
     //yFrame=64;
     noTint();
+    imageMode(CENTER);
     if (animacionActivada) {
       image(sprite.get(xFrame, yFrame * 2, anchoFrame, altoFrame), posicion.x, posicion.y); // animacion hacia arriba
     } else if (animacionActivada1) {
@@ -43,15 +44,16 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     } else {
       image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
-    //dibuja la luz que rodea al jugador
+    /** dibuja la luz que rodea al jugador */
     imageMode(CENTER);
-    //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
-    imageMode(CORNER);
-    //dibuja la hitbox del jugador
+    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
+    /** dibuja la hitbox del jugador */
+    /*
     rectMode(CORNER);
     stroke(#CDF56A);
     fill(255, 40);
-    rect(posicion.x+ancho/2+3, posicion.y+4, ancho-5, alto);
+    rect(posicion.x-ancho/2, posicion.y-alto/2, ancho, alto);
+    */
   }
   public void tirarAntorcha() {
   }
@@ -59,17 +61,17 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     this.posicion.add(this.velocidad);
     //rect(ancho,ancho,width-ancho*2,height-ancho*2);
     /** evita que el jugador salga del la pantalla*/
-    if (this.posicion.x <=ancho/2) {
-      this.posicion.x = ancho/2;
+    if (this.posicion.x - ancho/2 <= 30) {
+      this.posicion.x = ancho/2 + 30;
     }
-    if (this.posicion.x >= width -ancho*2-ancho/2) {
-      this.posicion.x = width -ancho*2-ancho/2;
+    if (this.posicion.x + ancho/2 >= width - 30) {
+      this.posicion.x = (width - 30) - ancho/2;
     }
-    if (this.posicion.y <= ancho/2) {
-      this.posicion.y = ancho/2;
+    if (this.posicion.y - alto/2 <= 40) {
+      this.posicion.y = alto/2 + 40;
     }
-    if (this.posicion.y >=height -ancho*2-ancho/2) {
-      this.posicion.y = height -ancho*2-ancho/2;
+    if (this.posicion.y + alto/2 >= height - 40) {
+      this.posicion.y = (height - 40) - alto/2;
     }
     
   }//end mover
@@ -139,7 +141,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     this.animacionActivada3 = false; // Desactiva la animación hacia la derecha
   }
   
-  /** Que hace? */
+  /** Actualizando los datos del jugador (posición, animación) */
   public void update() {
     mover();
     // Calcula el tiempo transcurrido desde el último cuadro
@@ -177,7 +179,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       animationTime = 0; // Reinicia el tiempo de la animación
     }
   }
-  public void colisionarEnemigo(Enemigo enemi) {
+  public void colisionarEnemigo(Enemigo e) {
   }
   //Verificar colisiones
   /*boolean colisionarRectangulos(PVector posicion1, float tam1, PVector posicion2, float tam2) {
