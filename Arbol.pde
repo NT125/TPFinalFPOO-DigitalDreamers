@@ -1,7 +1,7 @@
 /** clase que representa al arbol */
 class Arbol extends GameObject implements IVisualizable {
   private PImage imagen;
-  color Color;
+  private color Color;
   /** ---------------- ZONA DE CONSTRUCTURES ---------------- */
   //Constructor por defecto
   public Arbol() {
@@ -14,13 +14,17 @@ class Arbol extends GameObject implements IVisualizable {
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display() {
-    imageMode(CENTER);
-    image(this.imagen, this.posicion.x, this.posicion.y, 100, 100);
+    imageMode(CORNER);
+    image(this.imagen, this.posicion.x-ancho/2, this.posicion.y, 100, 100);
+    //ayuda para posicionar el sprite
+    rect(posicion.x-ancho/2, this.posicion.y, 100,100);
     fill(Color, 40);
-    rectMode(CENTER);
-    rect(posicion.x, this.posicion.y+alto, this.ancho*2, this.alto);
+    //hitbox arbol
+    rectMode(CORNER);
+    rect(posicion.x, this.posicion.y, this.ancho, this.alto);
+    
   }
-  
+  /** ---------------- ZONA DE METODOS ASESORES ---------------- */
   public void setColor(color Color){
     this.Color=Color;
   }

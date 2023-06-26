@@ -26,12 +26,13 @@ PFont fTextos;
 PFont fTextosSmall;
 
 void setup(){
-  estado = MaquinaEstados.JUGANDO;
+  estado = MaquinaEstados.INICIANDO;
   size(700,600);
+  //frameRate(60);
   
   jugador = new Jugador(new PVector(width/2, height/2), "SpritesSombra_ver1.png", 64, 63,true);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
-  enemigo = new Enemigo(new PVector(350,300),45,45, new PVector(0.4,-0.3));
+  enemigo = new Enemigo(new PVector(350,300),45,45, new PVector(60,-29.9));
   clicable = false;
   
   fundido = 255;
@@ -45,8 +46,8 @@ void setup(){
   fEncabezado = createFont("arpegius.ttf",50,false);
   fTextos = createFont("pixel-unicode.ttf",30,false);
   fTextosSmall = createFont("pixel-unicode.ttf",20,false);
-  
-  escenario.crearArboles();
+  /* sacarlo mas adelante */
+  //escenario.crearArboles();
 }
 
 /*void realizarFundido(boolean fundidoCompleto, int fundido, int duracion, int tiempoActual){
@@ -176,18 +177,18 @@ void draw(){
     case MaquinaEstados.JUGANDO:
       /* Pantalla Comenzando a jugar Nivel 1 */
       escenario.display();
-      
-      jugador.update();
       escenario.mostrarArboles();
-      Arbol arbol;
-      for (int i=0; i<escenario.arboles.size(); i++) {
+      //Arbol arbol;
+      //solo coliciones
+      /*for (int i=0; i<escenario.arboles.size(); i++) {
         arbol = escenario.arboles.get(i);
         jugador.colisionarArbol(arbol);
-        enemigo.display();
-        enemigo.mover();
-        enemigo.rebotar();
-        jugador.display();
-      }
+      }*/
+      enemigo.display();
+      enemigo.mover();
+      enemigo.rebotar();
+      jugador.display();
+      jugador.update();
       break;
     case MaquinaEstados.PERDIENDO:
       /* Pantalla Game Over */    
@@ -202,8 +203,10 @@ void draw(){
 void mousePressed(){
   if (clicable){    
     if(estado== MaquinaEstados.INICIANDO){
+      pantallaDeInicio.pause();
       estado= MaquinaEstados.INSTRUCCIONANDO;
     }else if(estado == MaquinaEstados.INSTRUCCIONANDO){
+      escenario.crearArboles();
       estado= MaquinaEstados.JUGANDO;
     }
   }
