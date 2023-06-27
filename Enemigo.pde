@@ -42,7 +42,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
     posicion.add(velocidadNormal);
   }
-  public void ColisionParedes(){
+  public void colisionarParedes(){
   
   }
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */

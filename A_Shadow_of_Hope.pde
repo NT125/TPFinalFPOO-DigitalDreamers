@@ -32,7 +32,7 @@ void setup(){
   
   jugador = new Jugador(new PVector(width/2, height/2), "SpritesSombra_ver1.png", 64, 64,true);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
-  enemigo = new Enemigo(new PVector(350,300),45,45, new PVector(60,-29.9));
+  enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
   clicable = false;
   
   fundido = 255;
@@ -141,11 +141,8 @@ void draw(){
       text("W/A/S/D:  Mover al personaje",60,160);
       text("J:  Iluminar/Accionar (No implementado aún)", 60, 200);
       
-      textAlign(CENTER,CENTER);
-      text("Objetivos del juego Objetivos del juego Objetivos del juego",width/2,370);
-      text("Objetivos del juego Objetivos del juego Objetivos del juego",width/2,400);
-      text("Objetivos del juego Objetivos del juego Objetivos del juego",width/2,430);
-      text("...",width/2,470);
+      textAlign(CENTER,TOP);
+      text("Tu visión está limitada hasta donde alumbre tu antorcha\nEvita en todo momento a los Devoradores\n(Aún no es posible avanzar de nivel)",width/2,370);
       
       textFont(fTextosSmall);
       textAlign(RIGHT,CENTER);
@@ -155,8 +152,6 @@ void draw(){
       if(fundidoCompleto){
         fill(0,fundido);
         rect(0,0,width,height);
-        println(fundido);//debug
-        println(millis()-tiempoActual);//debug
         
         /* Funcionamiento del pantallazo negro */
         /* Se debería escuchar un sonido contundente que coincida con el pantallazo, dando un efecto de apagón */
@@ -194,13 +189,11 @@ void draw(){
       if(!fundidoCompleto){
         fill(0,fundido);
         rect(0,0,width,height);
-        if(millis() - tiempoActual >= 2000){
           fundido -= 20;
-          if (fundido <= 0){
-            fundidoCompleto = true;
-            fundido = 255; //reseteando fundido para la siguiente pantalla
-          }
-        }      
+        if (fundido <= 0){
+          fundidoCompleto = true;
+          fundido = 255; //reseteando fundido para la siguiente pantalla
+        }  
       }
       
       break;

@@ -1,6 +1,6 @@
 /** clase que representa al a pared */
 class Pared extends GameObject implements IVisualizable {
-  color Color;
+  private color colorPared;
   
   /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
   public Pared() {}
@@ -8,18 +8,18 @@ class Pared extends GameObject implements IVisualizable {
     this.posicion=posicion;
     this.alto = alto;
     this.ancho = ancho;
-    Color=130; 
+    colorPared=130; 
   }
   /** ---------------- ZONA DE METODOS ---------------- */
   public void display() {
     rectMode(CORNER);
-    fill(Color);
+    fill(colorPared);
     rect(posicion.x, this.posicion.y, this.ancho, this.alto);
     
   }
   /** ---------------- ZONA DE METODOS ASESORES ---------------- */
-  public void setColor(color Color){
-    this.Color=Color;
+  public void setcolorPared(color colorPared){
+    this.colorPared=colorPared;
   }
 
 }
