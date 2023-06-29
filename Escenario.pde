@@ -1,16 +1,22 @@
-/** clase que representa al esenario */
+/** Clase del escenario en pantalla. */
+
 class Escenario extends GameObject implements IVisualizable {
-  /** atributos */
-  private ArrayList <Arbol> arboles;      //Representa a la cantidad de arboles que hay en el juego
-  //private Pared[] paredes;
+  /** -- ATRIBUTOS -- */
+  /** ArrayList para almacenar los árboles del escenario */
+  private ArrayList <Arbol> arboles;
+  
+  /** Imagen para que se dibuje el escenario */
   private PImage imagen;
   
-  /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
-  //Constructor por defecto
+  
+  
+  /** -- CONSTRUCTORES -- */
+  /** Constructor por defecto */
   public Escenario(){
     this.posicion = new PVector(0,0);
   }
-  // Constructor parametrizado
+  
+  /* Constructor parametrizado */
   public Escenario(PVector posicion,String nombre){
     this.posicion = posicion;
     //this.anchoP=30;
@@ -25,7 +31,11 @@ class Escenario extends GameObject implements IVisualizable {
     paredes[2]=new Pared(new PVector(0,0),this.ancho,height);
     paredes[3]=new Pared(new PVector(width-this.ancho,0),this.ancho,height);*/
   }
-  /** ---------------- ZONA DE METODOS ---------------- */
+  
+  
+  
+  /** -- MÉTODOS -- */
+  /** Dibujando el escenario */
   public void display(){ 
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
@@ -36,6 +46,8 @@ class Escenario extends GameObject implements IVisualizable {
       p.display();
     }*/
   }
+  
+  /** Colocando los árboles en el escnario */
   public void mostrarArboles(){
     Arbol arbol;
     for (int i=0; i<arboles.size(); i++) {
@@ -43,6 +55,8 @@ class Escenario extends GameObject implements IVisualizable {
       arbol.display();
     }
   }
+  
+  /** Creando un árbol individual */
   public void crearArboles(){
     Arbol arbol;
     for (int i=0; i<random(2,6); i++) {
@@ -50,19 +64,20 @@ class Escenario extends GameObject implements IVisualizable {
       arboles.add(arbol);
     }
   }
-  public void colisionarJugador(){
-  //colision de paredes
   
-  }
+  /** Calculando la colisión con el jugador */
+  public void colisionarJugador(){}
   
-  /** ---------------- ZONA DE METODOS ASESORES ---------------- */
-  /* getters */
+  
+  
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** Getters */
   public String getNombre(){
     return this.nombre;
   } 
-  /* setters */
+  
+  /** Setters */
   public void setNombre(String nombre){
     this.nombre = nombre;
-  } 
-  
+  }   
 }
