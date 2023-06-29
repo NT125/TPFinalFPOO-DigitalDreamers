@@ -1,27 +1,37 @@
-/** clase que representa a la antorcha*/
-class Antorcha{
-  /** atributos */
-  private boolean encendido;  //Representa a si la antorcha esta prendida
+/** Clase de la Antorcha: Representa la antorcha individual. */
+
+class Antorcha{    
+  /** -- ATRIBUTOS -- */
+  /** Verifica si la antorcha está encendida. */
+  private boolean encendido;
+    
   
-  /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
-  //Constructor por defecto
+    
+  /** -- CONSTRUCTORES -- */
+  /** Constructor por defecto. */
   public Antorcha(){}
-  //Constructor parametrizado
+  
+  /** Constructor parametrizado. */
   public Antorcha(boolean encendido){
     this.encendido = encendido;
   }
-  /** ---------------- ZONA DE METODOS ---------------- */
-  public void mover(){
     
-  }
-  /** ---------------- ZONA DE METODOS ASESORES ---------------- */
-  /* getters */
+  
+  
+  /** -- MÉTODOS -- */
+  /** Moviendo el objeto. */
+  public void mover(){}
+  
+    
+    
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** Getters. */
   public boolean getEncendido(){
     return this.encendido;
   }
-  /* setters */
+  
+  /** Setters. */
   public void setEncendido(boolean encendido){
     this.encendido=encendido;
-  }
-  
+  }  
 }

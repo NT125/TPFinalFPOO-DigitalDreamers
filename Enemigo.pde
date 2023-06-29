@@ -1,13 +1,20 @@
-/** clase que representa al enemigo */
+/** Clase principal del enemigo: Representa al enemigo individual. */
+
 class Enemigo extends SpriteObject implements IMovable, IVisualizable{
-  /* atributos */
+  /** -- ATRIBUTOS -- */
+  /** Sprite del enemigo */
   private PImage enemigo;
-  private PVector velocidad;  //Representa la velocidad del enemigo
   
-  /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
-  //Constructor por defecto
+  /** Vector velocidad del enemigo */
+  private PVector velocidad;
+  
+  
+  
+  /** -- CONSTRUCTORES -- */
+  /** Constructor por defecto */
   public Enemigo(){}
-  //Constructor parametrizado
+  
+  /** Constructor parametrizado */
   public Enemigo(PVector posicion,int ancho,int alto, PVector velocidad){
     this.ancho=ancho;
     this.alto=alto;
@@ -15,21 +22,29 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     this.enemigo = loadImage("enemigo-removebg-preview.png");
   }
-  /** ---------------- ZONA DE METODOS ---------------- */
+  
+  
+  /** -- MÉTODOS -- */
+  /** Dibujando al enemigo */
   public void display(){
     image(enemigo,posicion.x-ancho/2,posicion.y-alto/2,ancho,alto);
-    /** hitbox */
+    
+    //DEBUG: dibujando hitbox
     /*
     ellipse(posicion.x,posicion.y,ancho,alto);
     strokeWeight(3);
     point(posicion.x,posicion.y);
     strokeWeight(1);
     */
+    
   }
+  
+  /** Haciendo que el enemigo rebote al impactar una pared */
   public void rebotar(){
-    /** guía visual: rectangulo para ver donde colisiona el punto del enemigo */
+    //DEBUG: dibujando hitbox
     //rect(ancho,alto,width-ancho*2, height-alto*2);
-    /** el enemigono sale de la pantalla */
+    
+    // Limitando movimiento en la ventana
     if(this.posicion.x >= width-ancho || this.posicion.x<= 0+ancho){
       this.velocidad.x *= -1;
     }
@@ -37,20 +52,23 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
       this.velocidad.y *= -1;
     }
   }
+  
+  /** Moviendo al enemigo */
   public void mover(){
     float deltaTime= 1/ frameRate;
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
     posicion.add(velocidadNormal);
   }
-  public void colisionarParedes(){
   
-  }
-  /** ---------------- ZONA DE METODOS ASESORES ---------------- */
-  /* getters */
+  
+  
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* Getters */
   public PVector getVelocidad(){
     return this.velocidad;
   }
-  /* setters */
+  
+  /* Setters */
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;
   }

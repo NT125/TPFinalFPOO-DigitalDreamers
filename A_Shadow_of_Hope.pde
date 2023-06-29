@@ -3,6 +3,7 @@
 import gifAnimation.*;
 
 
+
 /** -- DECLARACIÓN DE OBJETOS -- */
 /** Clase que contiene el Array Fijo de las antorchas. */
 private GestorAntorcha getorAntorcha;
@@ -47,6 +48,7 @@ PFont fTitulo;
 PFont fEncabezado;
 PFont fTextos;
 PFont fTextosSmall;
+
 
 
 /** -- GAME LOOP -- */
@@ -240,6 +242,8 @@ void draw(){
       
   }//Fin del switch.
 }
+
+
 
 /** -- MÉTODOS EXTERNOS -- */
 /** - Métodos propios de Processing: - */
