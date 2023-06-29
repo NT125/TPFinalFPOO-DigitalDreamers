@@ -2,10 +2,10 @@
 
 class MaquinaEstados{
   /** Estado de inicio (Título) */
-  public static final int INICIANDO = 0;
+  public static final int TITULO = 0;
   
   /** Estado del tutorial (Cómo Jugar) */
-  public static final int INSTRUCCIONANDO =1;
+  public static final int CONTROLES =1;
   
   /** Estado in-game (Pleno Juego) */
   public static final int JUGANDO =2;

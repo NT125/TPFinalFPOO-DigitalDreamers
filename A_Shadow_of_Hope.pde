@@ -54,11 +54,11 @@ PFont fTextosSmall;
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup(){
-  estado = MaquinaEstados.INICIANDO;
+  estado = MaquinaEstados.TITULO;
   size(700,600);
   //frameRate(60);
   
-  jugador = new Jugador(new PVector(width/2, height/2), "SpritesSombra_ver1.png", 64, 64,true);
+  jugador = new Jugador(new PVector(width/2, height/2), requestImage("SpritesSombra_ver1.png"), 64, 64, 15);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
   enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
   clicable = false;
@@ -107,7 +107,7 @@ void draw(){
   background(0);
   
   switch (estado){
-    case MaquinaEstados.INICIANDO:
+    case MaquinaEstados.TITULO:
     
       // Cubriendo fondo del Título, y revelándolo con un fundido.  
       imageMode(CORNER);
@@ -161,7 +161,7 @@ void draw(){
       tiempoActual = millis(); // Obteniendo el tiempo actual en este momento para calcular la duración del pantallazo negro siguiente.
       break;
       
-    case MaquinaEstados.INSTRUCCIONANDO:
+    case MaquinaEstados.CONTROLES:
       //Pantalla de controles. 
       
       fill(255);
@@ -195,7 +195,7 @@ void draw(){
           if (fundido <= 0){
             fundidoCompleto = false; //alternando fundidoCompleto entre pantallas.
             fundido = 255; //reseteando fundido para la siguiente pantalla.
-            clicable = true;
+            clicable = false;
             tiempoActual = millis(); //Reseteando tiempoActual para siguiente pantalla.
           }
         }
@@ -219,7 +219,7 @@ void draw(){
       enemigo.rebotar();
       
       jugador.display();
-      jugador.update();
+      jugador.mover();
       
       //Fundido de inicio del juego, cortito a comparación de los anteriores.
       if(!fundidoCompleto){
@@ -250,10 +250,13 @@ void draw(){
 /** Acciones según se haga clic */
 void mousePressed(){
   if (clicable){    
-    if(estado== MaquinaEstados.INICIANDO){
+    if(estado== MaquinaEstados.TITULO){
       pantallaDeInicio.pause();
-      estado= MaquinaEstados.INSTRUCCIONANDO;
-    }else if(estado == MaquinaEstados.INSTRUCCIONANDO){
+      estado= MaquinaEstados.CONTROLES;
+    }
+  }
+  if(!clicable){    
+    if(estado == MaquinaEstados.CONTROLES){
       escenario.crearArboles();
       estado= MaquinaEstados.JUGANDO;
     }
