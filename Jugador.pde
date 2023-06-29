@@ -1,24 +1,29 @@
-/** Clase que representa al jugador */
+/** Clase principal del Jugador */
+
 class Jugador extends SpriteObject implements IMovable, IVisualizable {
-  /** atributos */
-  private boolean vivo;      //Representa si el jugador aun esta vivo
-  private PVector velocidad; //Representa al velocidad del jugador
-  private final float velocidadMov=120*(1/frameRate);
-  private int rangoVision;   //Representa el rango de vicion que tendra el jugador
-  /** atributos2 */
+  /** -- ATRIBUTOS --  */
+  /** Representa si el jugador aún está vivo */
+  private boolean vivo;
+  
+  /** Representa la velocidad del jugador */
+  private PVector velocidad;
+  
+  /** Representa el valor fijo de movimiento del jugador */
+  private final float velocidadMov=120*(1/frameRate); // <- MOVERLA A UNA CLASE DE CONSTANTES
+  
+  /** Representa el rango de visión que tendrá el jugador */
+  private int rangoVision;   // <- BORRAR DESPUES (?
+  
+  /** Representa la imagen superpuesta que actuará de oscuridad que rodea al jugador */
   private PImage luz;
 
-  /** ---------------- ZONA DE CONSTRUCTORES ---------------- */
-  //Constructor por defecto
-  public Jugador() {
-  }
-  //Constructor parametrizado
-  /*public Jugador(PVector posicion, int ancho, int alto, boolean vivo, PVector velocidad,int rangoVision){
-   super(posicion,ancho,alto);
-   this.vivo = vivo;
-   this.velocidad = velocidad;
-   this.rangoVision = rangoVision;
-   }*/
+
+
+  /** -- CONSTRUCTORES -- */
+  /** Constructor por defecto */
+  public Jugador() {}
+  
+  /** Constructor parametrizado */
   public Jugador(PVector posicion, String nombre, int anchoFrame, int altoFrame, boolean vivo) {
     super(anchoFrame, altoFrame);
     this.posicion = posicion;
@@ -28,11 +33,24 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     alto=altoFrame-9;
     ancho= anchoFrame/2;
   }
-  /** ---------------- ZONA DE METODOS ---------------- */
+  /*public Jugador(PVector posicion, int ancho, int alto, boolean vivo, PVector velocidad,int rangoVision){
+   super(posicion,ancho,alto);
+   this.vivo = vivo;
+   this.velocidad = velocidad;
+   this.rangoVision = rangoVision;
+   }*/
+   
+   
+   
+  /** -- MÉTODOS -- */
+  /** Dibujando al jugador */
   public void display() {
     //yFrame=64;
-    noTint();
+    
+    noTint();    
+    
     imageMode(CENTER);
+    
     if (animacionActivada) {
       image(sprite.get(xFrame, yFrame * 2, anchoFrame, altoFrame), posicion.x, posicion.y); // animacion hacia arriba
     } else if (animacionActivada1) {
@@ -44,10 +62,12 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     } else {
       image(sprite.get(xFrame * 0, yFrame * 0, anchoFrame, altoFrame), posicion.x, posicion.y);
     }
-    /** dibuja la luz que rodea al jugador */
+    
+    // dibuja la luz que rodea al jugador
     imageMode(CENTER);
     image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
-    /** dibuja la hitbox del jugador */
+    
+    //DEBUG: dibuja la hitbox del jugador
     /*
     rectMode(CORNER);
     stroke(#CDF56A);
@@ -55,12 +75,16 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     rect(posicion.x-ancho/2, posicion.y-alto/2, ancho, alto);
     */
   }
-  public void tirarAntorcha() {
-  }
+  
+  /** Tirando (colocando) una antorcha en el escenario */
+  public void tirarAntorcha() {}
+  
+  /** Moviendo al jugador */
   public void mover() {
     this.posicion.add(this.velocidad);
     //rect(ancho,ancho,width-ancho*2,height-ancho*2);
-    /** evita que el jugador salga del la pantalla*/
+    
+    // evita que el jugador salga de la pantalla
     if (this.posicion.x - ancho/2 <= 30) {
       this.posicion.x = ancho/2 + 30;
     }
@@ -74,12 +98,15 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       this.posicion.y = (height - 40) - alto/2;
     }
     
-  }//end mover
+  }
 
+  /** Leyendo el input del teclado */
   public char readCommand() {
     return key;
   }
 
+  /** - Métodos propios de Processing - */
+  /** Accionando según el input del teclado  */ 
   public void keyPressed() {
     if (this.readCommand() == 'w') {
       this.velocidad.y -= velocidadMov;
@@ -87,7 +114,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       if (this.velocidad.y <= velocidadMov*-1) {
         this.velocidad.y = velocidadMov*-1;
       }
-      this.animacionActivada = true; // Activa la animación cuando se mueve hacia arriba
+      this.animacionActivada = true;   // Activa la animación cuando se mueve hacia arriba
       this.animacionActivada1 = false; // Desactiva la animación hacia abajo
       this.animacionActivada2 = false; // Desactiva la animación hacia la izquierda
       this.animacionActivada3 = false; // Desactiva la animación hacia la derecha
@@ -127,6 +154,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     }
   }
   
+  /** Acciones según se suelte el input del teclado */
   public void keyReleased() {
     char command = readCommand();
     if (command == 'a' || command == 'd') {
@@ -179,9 +207,11 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       animationTime = 0; // Reinicia el tiempo de la animación
     }
   }
-  public void colisionarEnemigo(Enemigo e) {
-  }
-  //Verificar colisiones
+  
+  /** Chequeando la colisión con un enemigo */
+  public void colisionarEnemigo(Enemigo e) {}
+  
+  /** Verificando colisiones */
   /*boolean colisionarRectangulos(PVector posicion1, float tam1, PVector posicion2, float tam2) {
     // Verificar si hay una colisión entre dos rectángulos
     if (posicion1.x + tam1/2 >= posicion2.x - tam2/2 &&
@@ -192,24 +222,22 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     } else {
       return false;
     }
-  }//end colisionarRectangulos*/
+  }
 
-  /** ---------------- ZONA DE METODOS ASESORES ---------------- */
-  /* getters */
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* Getters */
   public boolean getVivo() {
     return this.vivo;
   }
   public PVector getVelocidad() {
     return this.velocidad;
   }
-  /* setters */
+  
+  /* Setters */
   public void setVivo(boolean vivo) {
     this.vivo = vivo;
   }
   public void setVelocidad(PVector velocidad) {
     this.velocidad = velocidad;
-  }
-  public PVector getPosicion() {
-    return this.posicion;
   }
 }
