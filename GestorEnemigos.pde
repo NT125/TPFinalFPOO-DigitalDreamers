@@ -11,7 +11,7 @@ class GestorEnemigos{
   }
   
   /** -- MÉTODOS -- */
-  /**  */
+  /** Gestionando los estados de los enemigos */
   public void generarFormacion(){}
   
 }

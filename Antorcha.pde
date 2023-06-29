@@ -3,8 +3,7 @@
 class Antorcha{    
   /** -- ATRIBUTOS -- */
   /** Verifica si la antorcha está encendida. */
-  private boolean encendido;
-    
+  private boolean encendido;    
   
     
   /** -- CONSTRUCTORES -- */
@@ -15,15 +14,13 @@ class Antorcha{
   public Antorcha(boolean encendido){
     this.encendido = encendido;
   }
-    
-  
+      
   
   /** -- MÉTODOS -- */
   /** Moviendo el objeto. */
   public void mover(){}
   
-    
-    
+        
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** Getters. */
   public boolean getEncendido(){
