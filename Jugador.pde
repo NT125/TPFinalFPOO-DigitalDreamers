@@ -1,4 +1,4 @@
-  /** Clase que representa al jugador */
+/** Clase que representa al jugador */
 class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** atributos */
   private boolean vivo;      //Representa si el jugador aun esta vivo
