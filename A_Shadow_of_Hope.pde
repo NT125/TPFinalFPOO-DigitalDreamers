@@ -264,12 +264,12 @@ void mousePressed(){
 void mouseReleased(){
 }
 
-/** Acciones según se pulse una tecla en el teclado */
+/** Acciones según el input del teclado */
 void keyPressed() {
   jugador.keyPressed();
 }
 
-/** Acciones según se deje de pulsar una tecla en el teclado */
+/** Acciones según se suelte el input del teclado */
 void keyReleased() {
   jugador.keyReleased();
 }
