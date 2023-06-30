@@ -15,4 +15,7 @@ class MaquinaEstadosAnimacion{
   
   /** Estado de Movimiento hacia abajo */
   public static final int MOV_IZQUIERDA = 4;
+  
+  /** Estado estático, para objetos sin animación que sólo se renderizan */
+  public static final int ESTATICO = 5;
 }

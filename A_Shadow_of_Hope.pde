@@ -58,7 +58,7 @@ void setup(){
   size(700,600);
   //frameRate(60);
   
-  jugador = new Jugador(new PVector(width/2, height/2), requestImage("SpritesSombra_ver1.png"), 64, 64, 15);
+  jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
   enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
   clicable = false;

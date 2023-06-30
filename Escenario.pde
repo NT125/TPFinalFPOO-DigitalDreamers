@@ -50,8 +50,8 @@ class Escenario extends GameObject implements IVisualizable {
   /** Colocando los árboles en el escnario */
   public void mostrarArboles(){
     Arbol arbol;
-    for (int i=0; i<arboles.size(); i++) {
-      arbol = arboles.get(i);
+    for (int i=0; i < this.arboles.size(); i++) {
+      arbol = this.arboles.get(i);
       arbol.display();
     }
   }
@@ -59,11 +59,31 @@ class Escenario extends GameObject implements IVisualizable {
   /** Creando un árbol individual */
   public void crearArboles(){
     Arbol arbol;
-    for (int i=0; i<random(2,6); i++) {
-      arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),50,50);
+    for (int i=0; i<random(4,6); i++) {
+      arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
       arboles.add(arbol);
     }
   }
+  /*
+  public void crearArboles(int cantidad){
+    Arbol arbol;
+    while(this.arboles.size() < cantidad) {      
+      if (this.arboles.size() > 0){         
+        arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);          
+        for (Arbol a: arboles){
+          while (arbol.posicion.dist(a.posicion) < 150){
+            arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
+          }
+        }
+        //arboles.add(arbol);
+      } else {        
+        arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
+        //arboles.add(arbol);
+      }
+      this.arboles.add(arbol);
+    }
+  }
+  */
   
   /** Calculando la colisión con el jugador */
   public void colisionarJugador(){}

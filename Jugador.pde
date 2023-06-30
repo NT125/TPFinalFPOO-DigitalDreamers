@@ -8,9 +8,6 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Representa la velocidad del jugador */
   private PVector velocidad;
   
-  /** Representa su estado actual para aplicar su respectiva animación */
-  private int estado;
-  
   /** Representa el valor fijo de movimiento del jugador */
   private final float velocidadMov=120*(1/frameRate); // <- MOVERLA A UNA CLASE DE CONSTANTES
   
@@ -28,18 +25,20 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   public Jugador() {}
   
   /** Constructor parametrizado */
-  public Jugador(PVector posicion, PImage spriteSheet, int anchoFrame, int altoFrame, float velocidadAnimacion) {
+  public Jugador(PVector posicion, int anchoFrame, int altoFrame, float velocidadAnimacion) {
     this.posicion = posicion;
     
-    this.spriteSheet = spriteSheet;
+    this.spriteSheet = requestImage("SpritesSombra_ver1.png");
     this.anchoFrame = anchoFrame;
-    this.altoFrame = altoFrame;    
+    this.altoFrame = altoFrame;   
+    
+    this.estado = MaquinaEstadosAnimacion.IDLE;
     
     this.velocidadAnimacion = velocidadAnimacion;
     
     this.velocidad = new PVector(0, 0);
     
-    this.luz = loadImage("LUZ.png");
+    //this.luz = loadImage("LUZ.png");
   }   
    
    
@@ -52,7 +51,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     
     // Dibujando la sombra que rodea al jugador
     imageMode(CENTER);
-    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
+    //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
     
     //DEBUG: dibuja la hitbox del jugador
     /*
@@ -141,7 +140,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     if (command == 'w' || command == 's') {
       this.velocidad.y = 0;
     }    
-    
+    this.estado = MaquinaEstadosAnimacion.IDLE;
   }
   
   /** Actualizando los datos del jugador (posición, animación) */

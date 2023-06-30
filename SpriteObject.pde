@@ -17,17 +17,17 @@ class SpriteObject extends GameObject{
   /** Posición inicial y del Frame (contador para animación hacia arriba) */
   protected int yFrame;
   
-  //atributos nuevos que reemplazarán los anteriores <- borrar desp
-  
   /** Puntero al primer píxel en x de un frame */
   protected float punteroXFrame;
   
   /** Puntero al primer píxel en x del siguiente frame a punteroXFrame; */
   protected float punteroXFrameSiguiente;
   
-  // HAY QUE OPTIMIZAR LA DURACIÓN DE LAS ANIMACIONES CON EL MÉTODO DEL PROFE
   /** Representa la velocidad con la que se reproducirá la animación (la transición entre sprites) */
   protected float velocidadAnimacion;
+  
+  /** Estado de la animación del objeto */
+  protected int estado;
   
   
     
@@ -58,9 +58,6 @@ class SpriteObject extends GameObject{
     
     //Calculando DeltaTime
     float deltaTime = 1/frameRate;
-    println(frameRate);
-    println(1/frameRate);
-    println("DELTATIME:",deltaTime);
     switch(estado){
       case MaquinaEstadosAnimacion.IDLE:
       {
@@ -72,9 +69,6 @@ class SpriteObject extends GameObject{
         
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
-        println(anchoFrame,velocidadAnimacion,deltaTime,anchoFrame*velocidadAnimacion*deltaTime);
-        println("IDLE");
-        println(this.xFrame, this.punteroXFrame);
         
         if(this.punteroXFrame >= this.punteroXFrameSiguiente){
           this.xFrame += this.anchoFrame;     
@@ -100,8 +94,6 @@ class SpriteObject extends GameObject{
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
-        print("ABJ");
-        println(this.xFrame, this.punteroXFrame);
         
         if(this.punteroXFrame >= this.punteroXFrameSiguiente){
           this.xFrame += this.anchoFrame;     
@@ -129,8 +121,6 @@ class SpriteObject extends GameObject{
         println(this.xFrame);
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
-        print("DER");
-        println(this.xFrame, this.punteroXFrame);
         
         if(this.punteroXFrame >= this.punteroXFrameSiguiente){
           this.xFrame += this.anchoFrame;     
@@ -157,8 +147,6 @@ class SpriteObject extends GameObject{
         
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
-        print("ARR");
-        println(this.xFrame, this.punteroXFrame);
         
         if(this.punteroXFrame >= this.punteroXFrameSiguiente){
           this.xFrame += this.anchoFrame;     
@@ -185,8 +173,6 @@ class SpriteObject extends GameObject{
         
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
-        print("IZQ");
-        println(this.xFrame, this.punteroXFrame);
         
         if(this.punteroXFrame >= this.punteroXFrameSiguiente){
           this.xFrame += this.anchoFrame;     
@@ -202,6 +188,9 @@ class SpriteObject extends GameObject{
             this.punteroXFrameSiguiente = this.anchoFrame;
           }
         } 
+      } break;
+      case MaquinaEstadosAnimacion.ESTATICO:{
+        image(this.spriteSheet, this.posicion.x, this.posicion.y, this.ancho, this.alto);        
       } break;
     }
   }

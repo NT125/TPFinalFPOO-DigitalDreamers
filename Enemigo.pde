@@ -1,10 +1,7 @@
 /** Clase principal del enemigo: Representa al enemigo individual. */
 
 class Enemigo extends SpriteObject implements IMovable, IVisualizable{
-  /** -- ATRIBUTOS -- */
-  /** Sprite del enemigo */
-  private PImage enemigo;
-  
+  /** -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
   
@@ -18,16 +15,20 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   public Enemigo(PVector posicion,int ancho,int alto, PVector velocidad){
     this.ancho=ancho;
     this.alto=alto;
+    
     this.posicion=posicion;
     this.velocidad = velocidad;
-    this.enemigo = loadImage("enemigo-removebg-preview.png");
+    
+    this.estado = MaquinaEstadosAnimacion.ESTATICO;
+    
+    this.spriteSheet = requestImage("enemigo-removebg-preview.png");
   }
   
   
   /** -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
-    image(enemigo,posicion.x-ancho/2,posicion.y-alto/2,ancho,alto);
+    this.render(this.estado);
     
     //DEBUG: dibujando hitbox
     /*
@@ -55,7 +56,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   
   /** Moviendo al enemigo */
   public void mover(){
-    float deltaTime= 1/ frameRate;
+    float deltaTime= 1/frameRate;
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
     posicion.add(velocidadNormal);
   }
