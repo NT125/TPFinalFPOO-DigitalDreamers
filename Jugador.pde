@@ -93,7 +93,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Accionando según el input del teclado  */ 
   public void keyPressed() {
     
-    if (this.readCommand() == 'w') {
+    if (this.readCommand() == 'w' || this.readCommand() == 'W') {
       this.estado = MaquinaEstadosAnimacion.MOV_ARRIBA;
       this.velocidad.y -= velocidadMov;
       //Regulando la velocidad
@@ -102,7 +102,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       }
     }
     
-    if (this.readCommand() == 'd') {
+    if (this.readCommand() == 'd' || this.readCommand() == 'D') {
       this.estado = MaquinaEstadosAnimacion.MOV_DERECHA;
       this.velocidad.x += velocidadMov;
       //Regulando la velocidad
@@ -111,7 +111,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       }
     }
     
-    if (this.readCommand() == 's') {
+    if (this.readCommand() == 's' || this.readCommand() == 'S') {
       this.estado = MaquinaEstadosAnimacion.MOV_ABAJO;
       this.velocidad.y += velocidadMov;
       //Regulando la velocidad
@@ -120,7 +120,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
       }
     }
     
-    if (this.readCommand() == 'a') {
+    if (this.readCommand() == 'a' || this.readCommand() == 'A') {
       this.estado = MaquinaEstadosAnimacion.MOV_IZQUIERDA;
       this.velocidad.x -= velocidadMov;
       //Regulando la velocidad
@@ -133,11 +133,11 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Acciones según se suelte el input del teclado */
   public void keyReleased() {
     char command = readCommand();
-    if (command == 'a' || command == 'd') {
+    if ((command == 'a' || command == 'd') || (command == 'A' || command == 'D')) {
       this.velocidad.x = 0;
     }
     
-    if (command == 'w' || command == 's') {
+    if ((command == 'w' || command == 's') || (command == 'W' || command == 'S')) {
       this.velocidad.y = 0;
     }    
     this.estado = MaquinaEstadosAnimacion.IDLE;

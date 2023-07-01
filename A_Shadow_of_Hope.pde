@@ -57,7 +57,7 @@ PFont fTextosSmall;
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup(){
-  estado = MaquinaEstados.JUGANDO;
+  estado = MaquinaEstados.TITULO;
   size(700,600);
   //frameRate(60);
   
@@ -211,13 +211,16 @@ void draw(){
       
       escenario.display();
       escenario.mostrarArboles();
+      
       enemigo.display();
-      llave.display();
       enemigo.mover();
       enemigo.rebotar();
+      
       jugador.display();
-      llave.display();
       jugador.mover();
+      
+      llave.display();
+      
       //Fundido de inicio del juego, cortito a comparación de los anteriores.
       if(!fundidoCompleto){
         fill(0,fundido);
@@ -234,18 +237,18 @@ void draw(){
       }
        // Verifica la colision entre el jugador y la llave
       if (colisiona(jugador.getPosicion(),jugador.getAncho(),jugador.getAlto(),llave.getPosicion(),llave.getAncho(),llave.getAlto())){
-        llave.setPosicion(new PVector(jugador.getPosicion().x-2,jugador.getPosicion().y+5));
-        llave.setAlto(25);
-        llave.setAncho(25);
+        llave.setPosicion(new PVector(jugador.getPosicion().x-2,jugador.getPosicion().y));
       }
       
       break;
+      
+      
     case MaquinaEstados.PERDIENDO:
       println("Perdiste"); //Imprime por consola perdiendo
       fill(255);
       textFont(fTitulo);
       textAlign(CENTER, CENTER);
-      text("Game over", width / 2, height / 2);
+      text("Game Over", width / 2, height / 2);
       textFont(fTextos);
       text("Presiona para continuar", width / 2, height -80);//Muestra un mensaje de Game Over
       // Reiniciamos el jugador, el escenario, el enemigo y habilitamos el clicable y mandamos al jugador a la pantalla de controles
@@ -315,6 +318,6 @@ boolean colisiona(PVector posA, int widthA, int heightA, PVector posB, int width
   
   return !(rectAX + widthA < rectBX ||
            rectAX > rectBX + widthB ||
-           rectAY + heightA < rectBY ||
+           rectAY + heightA < rectBY ||  
            rectAY > rectBY + heightB);
 }

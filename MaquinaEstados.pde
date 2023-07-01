@@ -5,14 +5,17 @@ class MaquinaEstados{
   public static final int TITULO = 0;
   
   /** Estado del tutorial (Cómo Jugar) */
-  public static final int CONTROLES =1;
+  public static final int CONTROLES = 1;
   
   /** Estado in-game (Pleno Juego) */
-  public static final int JUGANDO =2;
+  public static final int JUGANDO = 2;
+  
+  /** Estado de transición */
+  public static final int TRANSICIONANDO = 3;
   
   /** Estado de Derrota (Game Over) */
-  public static final int PERDIENDO = 3;
+  public static final int PERDIENDO = 4;
   
   /** Estado de Victoria (Juego Finalizado) */
-  public static final int GANANDO =4;
+  public static final int GANANDO = 5;
 }

@@ -5,6 +5,8 @@ class Escenario extends GameObject implements IVisualizable {
   /** ArrayList para almacenar los árboles del escenario */
   private ArrayList <Arbol> arboles;
   
+  private int escenario;
+  
   /** Imagen para que se dibuje el escenario */
   private PImage imagen;
   

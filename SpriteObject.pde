@@ -118,7 +118,6 @@ class SpriteObject extends GameObject{
         //Dibujando el frame
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
         
-        println(this.xFrame);
         //Transicionando entre los distintos Sprites
         this.punteroXFrame += anchoFrame*velocidadAnimacion*deltaTime;
         
