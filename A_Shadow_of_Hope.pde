@@ -23,6 +23,9 @@ private GestorEnemigos gestorEnemigo;
 /** Clase del escenario en pantalla. */
 private Escenario escenario;
 
+/** Clase de las puertas */
+private Puerta puerta;
+
 
 
 /** -- DECLARACIÓN DE VARIABLES -- */
@@ -64,7 +67,9 @@ void setup(){
   jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
   enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
+  puerta = new Puerta();
   llave = new Llave(new PVector(width/4,height/4),45,45);
+  
   clicable = false;
   
   fundido = 255;
@@ -212,6 +217,8 @@ void draw(){
       escenario.display();
       escenario.mostrarArboles();
       
+      puerta.display();
+      
       enemigo.display();
       enemigo.mover();
       enemigo.rebotar();
@@ -237,8 +244,14 @@ void draw(){
       }
        // Verifica la colision entre el jugador y la llave
       if (colisiona(jugador.getPosicion(),jugador.getAncho(),jugador.getAlto(),llave.getPosicion(),llave.getAncho(),llave.getAlto())){
-        llave.setPosicion(new PVector(jugador.getPosicion().x-2,jugador.getPosicion().y));
+        llave.setPosicion(new PVector(jugador.getPosicion().x-2,jugador.getPosicion().y-5));
       }
+      
+      //Verificando la colision con la puerta
+      if (colisiona(llave.getPosicion(),llave.getAncho(),llave.getAlto(),puerta.getPosicion(),puerta.getAncho(),puerta.getAlto())){
+        this.estado = MaquinaEstados.GANANDO;
+      }
+      
       
       break;
       
@@ -260,7 +273,11 @@ void draw(){
       break;
     case MaquinaEstados.GANANDO:
       // TRANSICIONAR ENTRE NIVELES
-      
+      fill(255);
+      textFont(fTitulo);
+      textAlign(CENTER, CENTER);
+      text(":D", width / 2, height / 2);
+      textFont(fTextos);
       break;
       
   }//Fin del switch.

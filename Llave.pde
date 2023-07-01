@@ -18,5 +18,4 @@ class Llave extends SpriteObject implements IVisualizable{
       this.render(this.estado);
       tint(255);
   }
-
 }
