@@ -30,26 +30,6 @@ class SpriteObject extends GameObject{
   protected int estado;
   
   
-    
-  
-  /** -- CONSTRUCTORES -- */
-  /** Constructor por Defecto */
-  public SpriteObject(){ } 
-  
-  /** Costructor Parametrizado */
-  public SpriteObject(int anchoFrame, int altoFrame, PImage spriteSheet){
-    this.xFrame = 0;
-    this.yFrame = 0;
-    this.anchoFrame = anchoFrame;
-    this.altoFrame = altoFrame;
-    
-    this.spriteSheet = spriteSheet;
-    
-    this.punteroXFrame = this.xFrame;
-    this.punteroXFrameSiguiente = this.anchoFrame;
-  }
-  
-  
   
   /** -- MÉTODOS -- */  
   /** Diubjando los Sprites */

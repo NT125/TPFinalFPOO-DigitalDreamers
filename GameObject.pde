@@ -16,21 +16,6 @@ abstract class GameObject {
   
   
   
-  /** -- CONSTRUCTORES -- */
-  /** Constructor por defecto */
-  public GameObject(){
-    this.posicion = new PVector(width/2, height/2);
-  }
-  
-  /** Constructor parametrizado */
-  public GameObject(PVector posicion, int ancho, int alto){
-    this.posicion = posicion;
-    this.ancho = ancho;
-    this.alto = alto;
-  }
-  
-  
-  
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** Getters */
   public PVector getPosicion(){
