@@ -14,6 +14,9 @@ private Jugador jugador;
 /** Clase principal del enemigo. */
 private Enemigo enemigo;
 
+/** Clase principal del enemigo. */
+private Llave llave;
+
 /** Clase que contiene el ArrayList de los Enemigos. */
 private GestorEnemigos gestorEnemigo;
 
@@ -61,6 +64,7 @@ void setup(){
   jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
   escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
   enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
+  llave = new Llave(new PVector(width/4,height/4),45,45);
   clicable = false;
   
   fundido = 255;
@@ -207,20 +211,13 @@ void draw(){
       
       escenario.display();
       escenario.mostrarArboles();
-      //Arbol arbol;
-      //solo coliciones
-      /*for (int i=0; i<escenario.arboles.size(); i++) {
-        arbol = escenario.arboles.get(i);
-        jugador.colisionarArbol(arbol);
-      }*/
-      
       enemigo.display();
+      llave.display();
       enemigo.mover();
       enemigo.rebotar();
-      
       jugador.display();
+      llave.display();
       jugador.mover();
-     
       //Fundido de inicio del juego, cortito a comparación de los anteriores.
       if(!fundidoCompleto){
         fill(0,fundido);
@@ -234,6 +231,12 @@ void draw(){
       // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
       if (colisiona(jugador.getPosicion(),jugador.getAncho(),jugador.getAlto(),enemigo.getPosicion(),enemigo.getAncho(),enemigo.getAlto())){
         estado= MaquinaEstados.PERDIENDO;
+      }
+       // Verifica la colision entre el jugador y la llave
+      if (colisiona(jugador.getPosicion(),jugador.getAncho(),jugador.getAlto(),llave.getPosicion(),llave.getAncho(),llave.getAlto())){
+        llave.setPosicion(new PVector(jugador.getPosicion().x-2,jugador.getPosicion().y+5));
+        llave.setAlto(25);
+        llave.setAncho(25);
       }
       
       break;
@@ -249,10 +252,12 @@ void draw(){
       jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
       escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
       enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
+      llave = new Llave(new PVector(width/4,height/4),45,45);
       clicable = true;
       break;
     case MaquinaEstados.GANANDO:
-      // TRANSICIONAR ENTRE NIVELES    
+      // TRANSICIONAR ENTRE NIVELES
+      
       break;
       
   }//Fin del switch.
