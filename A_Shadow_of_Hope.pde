@@ -54,7 +54,7 @@ PFont fTextosSmall;
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup(){
-  estado = MaquinaEstados.TITULO;
+  estado = MaquinaEstados.JUGANDO;
   size(700,600);
   //frameRate(60);
   
@@ -220,7 +220,7 @@ void draw(){
       
       jugador.display();
       jugador.mover();
-      
+     
       //Fundido de inicio del juego, cortito a comparación de los anteriores.
       if(!fundidoCompleto){
         fill(0,fundido);
@@ -231,10 +231,25 @@ void draw(){
           fundido = 255; //reseteando fundido para la siguiente pantalla
         }  
       }
+      // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
+      if (colisiona(jugador.getPosicion(),jugador.getAncho(),jugador.getAlto(),enemigo.getPosicion(),enemigo.getAncho(),enemigo.getAlto())){
+        estado= MaquinaEstados.PERDIENDO;
+      }
       
       break;
     case MaquinaEstados.PERDIENDO:
-      //TERMINAR PANTALLA DE GAME OVER   
+      println("Perdiste"); //Imprime por consola perdiendo
+      fill(255);
+      textFont(fTitulo);
+      textAlign(CENTER, CENTER);
+      text("Game over", width / 2, height / 2);
+      textFont(fTextos);
+      text("Presiona para continuar", width / 2, height -80);//Muestra un mensaje de Game Over
+      // Reiniciamos el jugador, el escenario, el enemigo y habilitamos el clicable y mandamos al jugador a la pantalla de controles
+      jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
+      escenario = new Escenario(new PVector(0,0),"fondo_juego.png");
+      enemigo = new Enemigo(new PVector(600,70),45,45, new PVector(60,-29.9));
+      clicable = true;
       break;
     case MaquinaEstados.GANANDO:
       // TRANSICIONAR ENTRE NIVELES    
@@ -249,12 +264,21 @@ void draw(){
 /** - Métodos propios de Processing: - */
 /** Acciones según se haga clic */
 void mousePressed(){
+  //Cuando el jugador esta en la pantalla de titulo debe hacer click para pasar a la pantalla de controles
   if (clicable){    
     if(estado== MaquinaEstados.TITULO){
       pantallaDeInicio.pause();
       estado= MaquinaEstados.CONTROLES;
     }
+    //Cuando el jugador esta en la pantalla de perdiendo debe hacer click para pasar a titulo
+    if(estado==MaquinaEstados.PERDIENDO){
+      fundido=255;
+      pantallaDeInicio.play();
+      fundido2=255;
+      estado= MaquinaEstados.TITULO;
+    }
   }
+  //Cuando el jugador esta en la pantalla de controles debe hacer click para pasar a jugar
   if(!clicable){    
     if(estado == MaquinaEstados.CONTROLES){
       escenario.crearArboles();
@@ -275,4 +299,17 @@ void keyPressed() {
 /** Acciones según se suelte el input del teclado */
 void keyReleased() {
   jugador.keyReleased();
+}
+
+
+boolean colisiona(PVector posA, int widthA, int heightA, PVector posB, int widthB, int heightB) {
+  float rectAX = posA.x - widthA / 2;
+  float rectAY = posA.y - heightA / 2;
+  float rectBX = posB.x - widthB / 2;
+  float rectBY = posB.y - heightB / 2;
+  
+  return !(rectAX + widthA < rectBX ||
+           rectAX > rectBX + widthB ||
+           rectAY + heightA < rectBY ||
+           rectAY > rectBY + heightB);
 }
