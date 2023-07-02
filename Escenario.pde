@@ -38,7 +38,7 @@ class Escenario extends GameObject implements IVisualizable {
   
   /** -- MÉTODOS -- */
   /** Dibujando el escenario */
-  public void display(){ 
+  public void display(){
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
     image(loadImage("borde_oscuro.png"),0,0);
@@ -51,14 +51,14 @@ class Escenario extends GameObject implements IVisualizable {
   
   /** Colocando los árboles en el escnario */
   public void mostrarArboles(){
-    Arbol arbol;
+    Arbol arbol; 
     for (int i=0; i < this.arboles.size(); i++) {
       arbol = this.arboles.get(i);
       arbol.display();
     }
   }
   
-  /** Creando un árbol individual */
+  /** Creando arboles */
   public void crearArboles(){
     Arbol arbol;
     arbol = new Arbol(new PVector(113,79),100,100);
@@ -111,7 +111,9 @@ class Escenario extends GameObject implements IVisualizable {
   public String getNombre(){
     return this.nombre;
   } 
-  
+  public ArrayList<Arbol> getArboles(){
+    return arboles;
+  }
   /** Setters */
   public void setNombre(String nombre){
     this.nombre = nombre;

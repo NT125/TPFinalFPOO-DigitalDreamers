@@ -67,11 +67,6 @@ void setup() {
   size(700, 600);
   //frameRate(60);
 
-  jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
-  escenario = new Escenario(new PVector(0, 0), "fondo_juego.png");
-  gestorEnemigos =new GestorEnemigos();
-  puerta = new Puerta();
-  gestorLlaves = new GestorLlaves();
 
   clicable = false;
   nivel=1;
@@ -217,17 +212,6 @@ void draw() {
 
   case MaquinaEstados.JUGANDO:
     // Pantalla Comenzando a jugar Nivel 1
-
-    escenario.display();
-    escenario.mostrarArboles();
-
-    puerta.display();
-
-
-    jugador.display();
-    jugador.mover();
-
-
     //Fundido de inicio del juego, cortito a comparación de los anteriores.
     if (!fundidoCompleto) {
       fill(0, fundido);
@@ -238,17 +222,25 @@ void draw() {
         fundido = 255; //reseteando fundido para la siguiente pantalla
       }
     }
+    escenario.display();
+    escenario.mostrarArboles();
+
+    puerta.display();
+
+    jugador.display();
+    jugador.mover();
+    jugador.verificarColision(escenario);
     gestorLlaves.dibujarLlaves();
     gestorLlaves.colisionarObjetos();
 
     gestorEnemigos.mostrarEnemigos();
     gestorEnemigos.colisionarObjetos();
+    gestorEnemigos.colisionarEnemigos();
 
 
     break;
 
-  case MaquinaEstados.PERDIENDO:
-    println("Perdiste"); //Imprime por consola perdiendo
+  case MaquinaEstados.PERDIENDO: 
     fill(255);
     textFont(fTitulo);
     textAlign(CENTER, CENTER);
@@ -294,12 +286,14 @@ void mousePressed() {
   }
   //Cuando el jugador esta en la pantalla de controles debe hacer click para pasar a jugar
   if (!clicable && estado == MaquinaEstados.CONTROLES) {
-      gestorLlaves.generarNivel(nivel);
-      gestorEnemigos.generarNivel(nivel);
-      escenario.crearArboles();
-      estado= MaquinaEstados.JUGANDO;
-    }
-  
+    jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
+    escenario = new Escenario(new PVector(0, 0), "fondo_juego.png");
+    gestorEnemigos =new GestorEnemigos(nivel);
+    gestorLlaves = new GestorLlaves(nivel);
+    puerta = new Puerta();
+    escenario.crearArboles();
+    estado= MaquinaEstados.JUGANDO;
+  }
 }
 
 /** Acciones según se deje de hacer clic */
@@ -316,13 +310,13 @@ void keyReleased() {
   jugador.keyReleased();
 }
 
-
-boolean colisiona(PVector posA, int widthA, int heightA, PVector posB, int widthB, int heightB) {
+boolean colisionar(PVector posA, int widthA, int heightA, PVector posB, int widthB, int heightB) {
   float rectAX = posA.x - widthA / 2;
   float rectAY = posA.y - heightA / 2;
   float rectBX = posB.x - widthB / 2;
   float rectBY = posB.y - heightB / 2;
-
+  //rect(rectAX,rectAY, widthA, heightA);
+  //rect(rectBX,rectBY, widthB, heightB);
   return !(rectAX + widthA < rectBX ||
     rectAX > rectBX + widthB ||
     rectAY + heightA < rectBY ||

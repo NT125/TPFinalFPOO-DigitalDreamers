@@ -4,7 +4,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   /** -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
-  
+  color Color;
   
   
   /** -- CONSTRUCTORES -- */
@@ -20,7 +20,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
-    
+    this.Color = 255;
     this.spriteSheet = requestImage("enemigo-removebg-preview.png");
   }
   
@@ -32,12 +32,13 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     this.render(this.estado);
     tint(255);
     //DEBUG: dibujando hitbox
-    /*
+    /*fill(Color);
+    ellipseMode(CORNER);
     ellipse(posicion.x,posicion.y,ancho,alto);
     strokeWeight(3);
     point(posicion.x,posicion.y);
-    strokeWeight(1);
-    */
+    strokeWeight(1);*/
+    
     
   }
   
@@ -61,7 +62,21 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
     posicion.add(velocidadNormal);
   }
+  /** Evalua un enemigo con otro */
+  public boolean chocarCon(Enemigo otro) {
+    // Comprobar colisión entre dos círculos
+    float distancia = dist(this.posicion.x, this.posicion.y, otro.getPosicion().x, otro.getPosicion().y);
+    return (distancia < (this.ancho/2 + otro.getAncho()/2));
+  }
   
+  public void cambiarDireccion() {
+    // Cambiar dirección del círculo
+    velocidad.x *= -1;
+    velocidad.y *= -1;
+  }
+  public void colisionarJugador(Jugador j) {
+   
+  }
   
   
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
@@ -74,4 +89,8 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;
   }
+  public void setColor(color Color){
+    this.Color=Color;
+  }
+  
 }

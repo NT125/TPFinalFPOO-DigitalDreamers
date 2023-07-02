@@ -6,8 +6,9 @@ class GestorEnemigos {
 
   /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
-  public GestorEnemigos() {
+  public GestorEnemigos(int nivel) {
     enemigos = new ArrayList <Enemigo>();
+    generarNivel(nivel);
   }
 
   /** -- MÉTODOS -- */
@@ -27,10 +28,10 @@ class GestorEnemigos {
         Enemigo e;
         e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(60, -29.9));
         enemigos.add(e);
-        e = new Enemigo(new PVector(300, 70), 45, 45, new PVector(60, -29.9));
+        e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(68, -29.9));
         enemigos.add(e);
-        e = new Enemigo(new PVector(100, 370), 45, 45, new PVector(60, -29.9));
-        enemigos.add(e);
+        e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(20, 29.9));
+        enemigos.add(e); 
         break;
       } //end case 1
     }//end Switch
@@ -39,11 +40,27 @@ class GestorEnemigos {
   public void colisionarObjetos() {
     for (Enemigo e : enemigos) {
       // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
-      if (colisiona(jugador.getPosicion(), jugador.getAncho(), jugador.getAlto(), e.getPosicion(), e.getAncho(), e.getAlto())) {
+      if (colisionar(jugador.getPosicion(), jugador.getAncho(), jugador.getAlto(), e.getPosicion(), e.getAncho(), e.getAlto())) {
         estado= MaquinaEstados.PERDIENDO;
+        println("hay colicion");
+      } 
+    }
+  }
+  /** Evalua la colision de un enemigo con otro */
+  public void colisionarEnemigos() {
+    for (int i= 0; i<enemigos.size(); i++) {
+      for (int j=i+1; j<enemigos.size(); j++) {
+        Enemigo e= enemigos.get(i);
+        Enemigo circulo2 = enemigos.get(j);
+        if (e.chocarCon(circulo2)) {
+          e.cambiarDireccion();
+          circulo2.cambiarDireccion();
+        }
       }
     }
   }
+  
+
   /** Gestionando la formacion de los enemigos */
   public void generarFormacion() {
   }
