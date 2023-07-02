@@ -5,11 +5,11 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Representa si el jugador aún está vivo */
   private boolean vivo;
   
-  /** Representa la velocidad del jugador */
+  /** Representa la velocidad aplicada del jugador */
   private PVector velocidad;
   
   /** Representa el valor fijo de movimiento del jugador */
-  private final float velocidadMov=120*(1/frameRate); // <- MOVERLA A UNA CLASE DE CONSTANTES
+  private final float velocidadMov=80;
   
   /** Representa el rango de visión que tendrá el jugador */
   private int rangoVision;   // <- BORRAR DESPUES (?
@@ -17,7 +17,6 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Representa la imagen superpuesta que actuará de oscuridad que rodea al jugador */
   private PImage luz;
   
-
 
 
   /** -- CONSTRUCTORES -- */
@@ -92,40 +91,41 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** - Métodos propios de Processing - */
   /** Accionando según el input del teclado  */ 
   public void keyPressed() {
+    float deltaTime = 1/frameRate;
     
     if (this.readCommand() == 'w' || this.readCommand() == 'W') {
       this.estado = MaquinaEstadosAnimacion.MOV_ARRIBA;
-      this.velocidad.y -= velocidadMov;
+      this.velocidad.y -= velocidadMov * deltaTime;
       //Regulando la velocidad
-      if (this.velocidad.y <= velocidadMov*-1) {
-        this.velocidad.y = velocidadMov*-1;
+      if (this.velocidad.y <= velocidadMov*-1 * deltaTime) {
+        this.velocidad.y = velocidadMov*-1 * deltaTime;
       }
     }
     
     if (this.readCommand() == 'd' || this.readCommand() == 'D') {
       this.estado = MaquinaEstadosAnimacion.MOV_DERECHA;
-      this.velocidad.x += velocidadMov;
+      this.velocidad.x += velocidadMov * deltaTime;
       //Regulando la velocidad
-      if (this.velocidad.x >= velocidadMov) {
-        this.velocidad.x = velocidadMov;
+      if (this.velocidad.x >= velocidadMov * deltaTime) {
+        this.velocidad.x = velocidadMov * deltaTime;
       }
     }
     
     if (this.readCommand() == 's' || this.readCommand() == 'S') {
       this.estado = MaquinaEstadosAnimacion.MOV_ABAJO;
-      this.velocidad.y += velocidadMov;
+      this.velocidad.y += velocidadMov * deltaTime;
       //Regulando la velocidad
-      if (this.velocidad.y >= velocidadMov) {
-        this.velocidad.y = velocidadMov;
+      if (this.velocidad.y >= velocidadMov * deltaTime) {
+        this.velocidad.y = velocidadMov * deltaTime;
       }
     }
     
     if (this.readCommand() == 'a' || this.readCommand() == 'A') {
       this.estado = MaquinaEstadosAnimacion.MOV_IZQUIERDA;
-      this.velocidad.x -= velocidadMov;
+      this.velocidad.x -= velocidadMov * deltaTime;
       //Regulando la velocidad
-      if (this.velocidad.x <= velocidadMov*-1) {
-        this.velocidad.x = velocidadMov*-1;
+      if (this.velocidad.x <= velocidadMov*-1 * deltaTime) {
+        this.velocidad.x = velocidadMov*-1 * deltaTime;
       }
     }
   }
