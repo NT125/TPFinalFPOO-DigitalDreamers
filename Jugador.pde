@@ -136,29 +136,41 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Acciones según se suelte el input del teclado */
   public void keyReleased() {
     char command = readCommand();
-    if ((command == 'a' || command == 'd') || (command == 'A' || command == 'D')) {
+    if (command == 'a' || command == 'A') {
       this.velocidad.x = 0;
+      this.estado = MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA;
     }
-
-    if ((command == 'w' || command == 's') || (command == 'W' || command == 'S')) {
+    else if(command == 'd' || command == 'D'){
+      this.velocidad.x=0;
+      this.estado = MaquinaEstadosAnimacion.ESTATICO_DERECHA;
+    }else
+    if (command == 'w' || command == 'W') {
       this.velocidad.y = 0;
+    this.estado = MaquinaEstadosAnimacion.ESTATICO_ARRIBA;
+        
+    }else
+    if(command == 's' || command == 'S'){
+      this.velocidad.y = 0;
+      this.estado = MaquinaEstadosAnimacion.ESTATICO_ABAJO;
     }
-    this.estado = MaquinaEstadosAnimacion.IDLE;
   }
 
+  /** Verificando colisiones con arboles*/
   public void verificarColision(Escenario escenario) {
+    char command = readCommand();
     // Verificar colisiones con los árboles
     ArrayList<Arbol> arboles=escenario.getArboles();
     for (Arbol arbol : arboles) {
-      if (colisionarArbol(arbol)) {
+      if (colisionarCirculo(arbol)) {
+        println("hay colision con Arbol");
         // Si hay colisión, deshacer el movimiento
-        if (key == 'w' || key == 'W') {
+        if (command == 'w' || command == 'W') {
           posicion.y += 2;
-        } else if (key == 's' || key == 'S') {
+        } else if (command == 's' || command == 'S') {
           posicion.y -= 2;
-        } else if (key == 'd' || key == 'D') {
+        } else if (command == 'd' || command == 'D') {
           posicion.x -= 2;
-        } else if (key == 'a' || key == 'A') {
+        } else if (command == 'a' || command == 'A') {
           posicion.x += 2;
         }
         break; // Salir del bucle, no es necesario verificar más colisiones
@@ -166,15 +178,12 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     }
   }
 
-  /** Verificando colisiones con arboles*/
-  boolean colisionarArbol(Arbol a) {
-    // Verificar si hay una colisión entre dos rectángulos
-
-    /** Evalua al jugador con un arbol*/
-    // Comprobar colisión entre dos círculos
-    float distancia = dist(this.posicion.x, this.posicion.y, a.getPosicion().x, a.getPosicion().y);
-    circle(a.getPosicion().x, a.getPosicion().y, a.getAncho()/3+ancho/2);
-    return (distancia < (this.ancho/2 + a.getAncho()/3)); 
+  /** Comprobar colisión entre dos círculos */
+  boolean colisionarCirculo(SpriteObject a) {
+    float distancia = PVector.dist(this.posicion, a.getPosicion());
+    //DEBUG: dibuja la hitbox del arbol
+    circle(a.getPosicion().x, a.getPosicion().y, a.getAncho()/2+ancho/2);
+    return (distancia < (this.ancho/2 + a.getAncho()/2)); 
   }
 
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
