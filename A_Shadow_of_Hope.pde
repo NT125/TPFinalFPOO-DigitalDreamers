@@ -1,7 +1,15 @@
+
+
 /** -- IMPORTACIÓN DE BIBLIOTECAS -- */
 /** Importando biblioteca para reproducir archivos GIF. */
 import gifAnimation.*;
-
+/** Importando biblioteca para reproducir AUDIO. */
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 
 
 /** -- DECLARACIÓN DE OBJETOS -- */
@@ -58,7 +66,10 @@ PFont fEncabezado;
 PFont fTextos;
 PFont fTextosSmall;
 
-
+/** Biblioteca Minim para la musica de fondo. */
+Minim minim;
+AudioPlayer musicaTitulo;
+AudioPlayer musicaEscenario;
 
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
@@ -66,8 +77,16 @@ void setup() {
   estado = MaquinaEstados.CONTROLES;
   size(700, 600);
   //frameRate(60);
+  
+  //  // Definimos la musica y los sonidos //
+ 
+  minim = new Minim(this);
+  musicaTitulo = minim.loadFile("vegeta.wav");
+  musicaEscenario = minim.loadFile("ambiente.mp3");
 
-
+ //   Terminamos de definir la musica y los sonidos
+  
+  
   clicable = false;
   nivel=1;
 
@@ -113,10 +132,25 @@ void setup() {
 /** Draw, se actualiza una vez cada {frameRate()} segundos. */
 void draw() {
   background(0);
-
   switch (estado) {
   case MaquinaEstados.TITULO:
 
+    musicaTitulo.play();//ponemos la musica
+    // Subir el volumen (aumentar en un 50%)
+    if (keyPressed && key == 'E' || keyPressed && key == 'e') {
+    float currentVolume = musicaTitulo.getGain();
+    float newVolume = currentVolume + 0.5;
+    musicaTitulo.setGain(newVolume);
+    }
+  
+  // Bajar el volumen (disminuir en un 50%)
+    if (keyPressed && key == 'Q' || keyPressed && key == 'q') {
+    float currentVolume = musicaTitulo.getGain();
+    float newVolume = currentVolume - 0.5;
+    musicaTitulo.setGain(newVolume);
+    }
+    
+    
     // Cubriendo fondo del Título, y revelándolo con un fundido.
     imageMode(CORNER);
     image(pantallaDeInicio, 0, 0);
@@ -128,6 +162,7 @@ void draw() {
         if (fundido2 <= 0) {
           fundidoCompleto2 = true;
           fundido2 = 255; //reseteando fundido para la siguiente pantalla.
+          
         }
       }
     }
@@ -167,11 +202,12 @@ void draw() {
     }
 
     tiempoActual = millis(); // Obteniendo el tiempo actual en este momento para calcular la duración del pantallazo negro siguiente.
+    
     break;
 
   case MaquinaEstados.CONTROLES:
-    //Pantalla de controles.
-
+      musicaTitulo.pause(); //ponemos la musica
+    //Pantalla de controles
     fill(255);
     textFont(fEncabezado);
     textAlign(CENTER, CENTER);
@@ -211,6 +247,7 @@ void draw() {
     break;
 
   case MaquinaEstados.JUGANDO:
+  musicaEscenario.play();
     // Pantalla Comenzando a jugar Nivel 1
     //Fundido de inicio del juego, cortito a comparación de los anteriores.
     if (!fundidoCompleto) {
@@ -240,7 +277,8 @@ void draw() {
 
     break;
 
-  case MaquinaEstados.PERDIENDO: 
+  case MaquinaEstados.PERDIENDO:
+   musicaEscenario.pause();
     fill(255);
     textFont(fTitulo);
     textAlign(CENTER, CENTER);
@@ -254,6 +292,7 @@ void draw() {
     break;
 
   case MaquinaEstados.GANANDO:
+  musicaEscenario.pause();
     // TRANSICIONAR ENTRE NIVELES
     fill(255);
     textFont(fTitulo);
