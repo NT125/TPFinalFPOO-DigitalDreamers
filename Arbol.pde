@@ -1,14 +1,14 @@
 /** Clase de los Árboles: obstáculos para el jugador */
 
 class Arbol extends SpriteObject implements IVisualizable {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   
-  /** DEBUG: para verificar visualmente la colisión */
+  /* DEBUG: para verificar visualmente la colisión */
   //private color Color;
   
   
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Arbol(){}
   
@@ -23,7 +23,7 @@ class Arbol extends SpriteObject implements IVisualizable {
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
   }
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al árbol */
   public void display() {
     imageMode(CORNER);

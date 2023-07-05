@@ -1,15 +1,12 @@
 /** Clase principal del Jugador */
 
 class Jugador extends SpriteObject implements IMovable, IVisualizable {
-  /** -- ATRIBUTOS --  */
+  /* -- ATRIBUTOS --  */
   /** Representa si el jugador aún está vivo */
   private boolean vivo;
 
   /** Representa la velocidad aplicada del jugador */
   private PVector velocidad;
-
-  /** Representa el valor fijo de movimiento del jugador */
-  private final float velocidadMov=80;
 
   /** Representa el rango de visión que tendrá el jugador */
   private int rangoVision;   // <- BORRAR DESPUES (?
@@ -17,9 +14,11 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Representa la imagen superpuesta que actuará de oscuridad que rodea al jugador */
   private PImage luz;
 
+  /** Representa el estado de movimiento del jugador */
+  private int estado;
 
 
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Jugador() {
   }
@@ -38,14 +37,13 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
 
     this.velocidadAnimacion = velocidadAnimacion;
 
-    this.velocidad = new PVector(0, 0);
+    this.velocidad = new PVector(80, 80);
 
     //this.luz = loadImage("LUZ.png");
   }
 
 
-
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
@@ -69,7 +67,26 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
 
   /** Moviendo al jugador */
   public void mover() {
-    this.posicion.add(this.velocidad);
+    float deltaTime = 1/frameRate;
+    
+    switch(estado){
+      case MaquinaEstadosAnimacion.MOV_ARRIBA:{
+        this.posicion.y-= this.velocidad.y * deltaTime;
+        break;
+      }
+      case MaquinaEstadosAnimacion.MOV_ABAJO:{
+        this.posicion.y+= this.velocidad.y * deltaTime;
+        break;
+      }
+      case MaquinaEstadosAnimacion.MOV_DERECHA:{
+        this.posicion.x+= this.velocidad.x * deltaTime;
+        break;
+      }
+      case MaquinaEstadosAnimacion.MOV_IZQUIERDA:{
+        this.posicion.x-= this.velocidad.x * deltaTime;
+        break;
+      }
+    }
 
     // evita que el jugador salga de la pantalla
     if (this.posicion.x - ancho/2 <= 30) {
@@ -91,91 +108,23 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     return key;
   }
 
-  /** - Métodos propios de Processing - */
-  /** Accionando según el input del teclado  */
-  public void keyPressed() {
-    float deltaTime = 1/frameRate;
-
-    if (this.readCommand() == 'w' || this.readCommand() == 'W') {
-      this.estado = MaquinaEstadosAnimacion.MOV_ARRIBA;
-      this.velocidad.y -= velocidadMov * deltaTime;
-      //Regulando la velocidad
-      if (this.velocidad.y <= velocidadMov*-1 * deltaTime) {
-        this.velocidad.y = velocidadMov*-1 * deltaTime;
-      }
-    }
-
-    if (this.readCommand() == 'd' || this.readCommand() == 'D') {
-      this.estado = MaquinaEstadosAnimacion.MOV_DERECHA;
-      this.velocidad.x += velocidadMov * deltaTime;
-      //Regulando la velocidad
-      if (this.velocidad.x >= velocidadMov * deltaTime) {
-        this.velocidad.x = velocidadMov * deltaTime;
-      }
-    }
-
-    if (this.readCommand() == 's' || this.readCommand() == 'S') {
-      this.estado = MaquinaEstadosAnimacion.MOV_ABAJO;
-      this.velocidad.y += velocidadMov * deltaTime;
-      //Regulando la velocidad
-      if (this.velocidad.y >= velocidadMov * deltaTime) {
-        this.velocidad.y = velocidadMov * deltaTime;
-      }
-    }
-
-    if (this.readCommand() == 'a' || this.readCommand() == 'A') {
-      this.estado = MaquinaEstadosAnimacion.MOV_IZQUIERDA;
-      this.velocidad.x -= velocidadMov * deltaTime;
-      //Regulando la velocidad
-      if (this.velocidad.x <= velocidadMov*-1 * deltaTime) {
-        this.velocidad.x = velocidadMov*-1 * deltaTime;
-      }
-    }
-  }
-
-  /** Acciones según se suelte el input del teclado */
-  public void keyReleased() {
-    char command = readCommand();
-    if (command == 'a' || command == 'A') {
-      this.velocidad.x = 0;
-      this.estado = MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA;
-    }
-    else if(command == 'd' || command == 'D'){
-      this.velocidad.x=0;
-      this.estado = MaquinaEstadosAnimacion.ESTATICO_DERECHA;
-    }else
-    if (command == 'w' || command == 'W') {
-      this.velocidad.y = 0;
-    this.estado = MaquinaEstadosAnimacion.ESTATICO_ARRIBA;
-        
-    }else
-    if(command == 's' || command == 'S'){
-      this.velocidad.y = 0;
-      this.estado = MaquinaEstadosAnimacion.ESTATICO_ABAJO;
-    }
-  }
-
   /** Verificando colisiones con arboles*/
-  public void verificarColision(Escenario escenario) {
-    char command = readCommand();
-    // Verificar colisiones con los árboles
-    ArrayList<Arbol> arboles=escenario.getArboles();
-    for (Arbol arbol : arboles) {
+  public void verificarColision(Arbol arbol) {
+    float deltaTime = 1/frameRate; 
+    // Verificar colisiones con un arbol
       if (colisionarCirculo(arbol)) {
         println("hay colision con Arbol");
-        // Si hay colisión, deshacer el movimiento
-        if (command == 'w' || command == 'W') {
-          posicion.y += 2;
-        } else if (command == 's' || command == 'S') {
-          posicion.y -= 2;
-        } else if (command == 'd' || command == 'D') {
-          posicion.x -= 2;
-        } else if (command == 'a' || command == 'A') {
-          posicion.x += 2;
-        }
-        break; // Salir del bucle, no es necesario verificar más colisiones
-      }
-    }
+        // Si hay colisión, deshacer el movimiento con el opuesto
+        if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
+          this.posicion.y+= this.velocidad.y * deltaTime;
+        } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
+          this.posicion.y-= this.velocidad.y * deltaTime;
+        } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
+          this.posicion.x-= this.velocidad.x * deltaTime;
+        } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
+          this.posicion.x+= this.velocidad.x * deltaTime;
+        } 
+      } 
   }
 
   /** Comprobar colisión entre dos círculos */
@@ -186,20 +135,28 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
     return (distancia < (this.ancho/2 + a.getAncho()/2)); 
   }
 
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* Getters */
+  /** Devuelve el valor del estado vivo del jugador */
   public boolean getVivo() {
     return this.vivo;
   }
+  /** Devuelve el valor de la velocidad del jugador */
   public PVector getVelocidad() {
     return this.velocidad;
   }
 
   /* Setters */
+  /** Asigna un valor del estado vivo del jugador */
   public void setVivo(boolean vivo) {
     this.vivo = vivo;
   }
+  /** Asigna un valor de si el jugador esta vivo */
   public void setVelocidad(PVector velocidad) {
     this.velocidad = velocidad;
+  }
+  /** Asigna un valor del estado del movimiento del jugador */
+  public void setEstado(int estado){
+    this.estado=estado;
   }
 }

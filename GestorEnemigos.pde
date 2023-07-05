@@ -1,17 +1,17 @@
 /** Clase que contiene el ArrayList de los Enemigos: Gestionará la aparición de varios enemigos */
 class GestorEnemigos {
-  /** -- ATRIBUTOS -- */
-  /** ArrayList dinámico que contiene a los enemigos */
+  /* -- ATRIBUTOS -- */
+  /** Representa la lista dinamica que contiene a los enemigos */
   private ArrayList<Enemigo> enemigos;
 
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public GestorEnemigos(int nivel) {
     enemigos = new ArrayList <Enemigo>();
     generarNivel(nivel);
   }
 
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Mostrando los enemigos */
   public void mostrarEnemigos() {
     for (Enemigo e : enemigos) {
@@ -20,7 +20,7 @@ class GestorEnemigos {
       e.rebotar();
     }
   }
-  /** Gestionando los estados de las llaves */
+  /** Genera a los enemigos segun el nivel */
   public void generarNivel(int nivel) {
     switch(nivel) {
     case 1:
@@ -58,10 +58,5 @@ class GestorEnemigos {
         }
       }
     }
-  }
-  
-
-  /** Gestionando la formacion de los enemigos */
-  public void generarFormacion() {
-  }
+  }//Fin colisionarEnemigos.
 }

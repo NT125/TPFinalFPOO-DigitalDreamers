@@ -1,24 +1,24 @@
 /** Clase del escenario en pantalla. */
 
 class Escenario extends GameObject implements IVisualizable {
-  /** -- ATRIBUTOS -- */
-  /** ArrayList para almacenar los árboles del escenario */
+  /* -- ATRIBUTOS -- */
+  /** Representa una lista que almacena los arboles del escenario */
   private ArrayList <Arbol> arboles;
   
+  /** Representa al escenario */
   private int escenario;
   
-  /** Imagen para que se dibuje el escenario */
+  /** Representa a la Imagen que se dibuja en el escenario */
   private PImage imagen;
   
   
-  
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Escenario(){
     this.posicion = new PVector(0,0);
   }
   
-  /* Constructor parametrizado */
+  /** Constructor parametrizado */
   public Escenario(PVector posicion,String nombre){
     this.posicion = posicion;
     //this.anchoP=30;
@@ -36,8 +36,8 @@ class Escenario extends GameObject implements IVisualizable {
   
   
   
-  /** -- MÉTODOS -- */
-  /** Dibujando el escenario */
+  /* -- MÉTODOS -- */
+  /** Dibuja el escenario */
   public void display(){
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
@@ -49,7 +49,7 @@ class Escenario extends GameObject implements IVisualizable {
     }*/
   }
   
-  /** Colocando los árboles en el escnario */
+  /** Mostrando los arboles en el escenario */
   public void mostrarArboles(){
     Arbol arbol; 
     for (int i=0; i < this.arboles.size(); i++) {
@@ -58,7 +58,7 @@ class Escenario extends GameObject implements IVisualizable {
     }
   }
   
-  /** Creando arboles */
+  /** Generando arboles uno a uno */
   public void crearArboles(){
     Arbol arbol;
     arbol = new Arbol(new PVector(113,79),100,100);
@@ -75,7 +75,7 @@ class Escenario extends GameObject implements IVisualizable {
     arboles.add(arbol);
     arbol = new Arbol(new PVector(552,479),100,100);
     arboles.add(arbol);
-    /**for (int i=0; i<random(3,5); i++) {
+    /*for (int i=0; i<random(3,5); i++) {
       arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
       arboles.add(arbol);
     }*/
@@ -105,16 +105,18 @@ class Escenario extends GameObject implements IVisualizable {
   public void colisionarJugador(){}
   
   
-  
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** Getters */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* Getters */
+  /** Devuelve el nombre del escenario */
   public String getNombre(){
     return this.nombre;
   } 
+  /** Devuelve la lista de arboles */
   public ArrayList<Arbol> getArboles(){
     return arboles;
   }
-  /** Setters */
+  /* Setters */
+  /** Cambia el nombre del escenario */
   public void setNombre(String nombre){
     this.nombre = nombre;
   }   

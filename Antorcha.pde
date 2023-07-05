@@ -1,12 +1,12 @@
 /** Clase de la Antorcha: Representa la antorcha individual. */
 
 class Antorcha{    
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Verifica si la antorcha está encendida. */
   private boolean encendido;    
   
     
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto. */
   public Antorcha(){}
   
@@ -16,19 +16,21 @@ class Antorcha{
   }
       
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Moviendo el objeto. */
   public void mover(){}
   
         
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** Getters. */
+  /* Devuelve el estado de la antorcha */
   public boolean getEncendido(){
     return this.encendido;
   }
   
   /** Setters. */
+  /* Asigna un valor al estado de la antorcha */
   public void setEncendido(boolean encendido){
     this.encendido=encendido;
-  }  
+  }
 }

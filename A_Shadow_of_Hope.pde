@@ -1,6 +1,5 @@
 
-
-/** -- IMPORTACIÓN DE BIBLIOTECAS -- */
+/* -- IMPORTACIÓN DE BIBLIOTECAS -- */
 /** Importando biblioteca para reproducir archivos GIF. */
 import gifAnimation.*;
 /** Importando biblioteca para reproducir AUDIO. */
@@ -12,66 +11,60 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 
-/** -- DECLARACIÓN DE OBJETOS -- */
-/** Clase que contiene el Array Fijo de las antorchas. */
+/* -- DECLARACIÓN DE VARIABLES -- */
+/** Representa al objeto que contiene el Array Fijo de las antorchas. */
 private GestorAntorcha getorAntorcha;
 
-/** Clase principal del Jugador. */
+/** Representa al Jugador. */
 private Jugador jugador;
 
-/** Clase principal del enemigo. */
-private Enemigo enemigo;
-
-/** Clase que gestiona las llaves. */
+/** Representa al objeto que contiene y gestiona las llaves. */
 private GestorLlaves gestorLlaves;
 
-/** Clase que contiene el ArrayList de los Enemigos. */
+/** Representa al objeto que contiene el ArrayList de los Enemigos. */
 private GestorEnemigos gestorEnemigos;
 
-/** Clase del escenario en pantalla. */
+/** Representa el escenario en pantalla. */
 private Escenario escenario;
 
-/** Clase de las puertas */
+/** Representa la puerta del escenario */
 private Puerta puerta;
 
-
-
-/** -- DECLARACIÓN DE VARIABLES -- */
 /** Estado del juego, toma los valores de MaquinaEstados. */
-int estado;
+private int estado;
 
-/** Nivel del juego */
-int nivel;
+/** Representa el Nivel del juego */
+private int nivel;
 
 /** Enteros auxiliares para calcular la opacidad de un efecto de fundido. */
-int fundido;
-int fundido2;
+private int fundido;
+private int fundido2;
 
 /** Booleanos auxiliares para verificar si se completó el fundido y prescindir de las variables enteras de fundido. */
-boolean fundidoCompleto;
-boolean fundidoCompleto2;
+private boolean fundidoCompleto;
+private boolean fundidoCompleto2;
 
 /** Auxiliar para medir en eventos basados en tiempo, se le asignará millis() en cada uso. */
-int tiempoActual;
+private int tiempoActual;
 
 /** Auxiliar para definir si se puede hacer clic en pantalla o no. */
-boolean clicable;
+private boolean clicable;
 
 /** Gif para cargar el fondo de la pantalla de título. */
 Gif pantallaDeInicio;
 
-/** Declaración de Variables que contengan las distintas fuentes de texto usadas en el juego. */
+/* Declaración de Variables que contengan las distintas fuentes de texto usadas en el juego. */
 PFont fTitulo;
 PFont fEncabezado;
 PFont fTextos;
 PFont fTextosSmall;
 
-/** Biblioteca Minim para la musica de fondo. */
+/* Declaracion de Variables para la musica de fondo. */
 Minim minim;
 AudioPlayer musicaTitulo;
 AudioPlayer musicaEscenario;
 
-/** -- GAME LOOP -- */
+/* -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup() {
   estado = MaquinaEstados.CONTROLES;
@@ -85,7 +78,6 @@ void setup() {
   musicaEscenario = minim.loadFile("ambiente.mp3");
 
  //   Terminamos de definir la musica y los sonidos
-  
   
   clicable = false;
   nivel=1;
@@ -101,8 +93,7 @@ void setup() {
   fEncabezado = createFont("arpegius.ttf", 50, false);
   fTextos = createFont("pixel-unicode.ttf", 30, false);
   fTextosSmall = createFont("pixel-unicode.ttf", 20, false);
-  //escenario.crearArboles();
-}
+}// Fin setup.
 
 /*void realizarFundido(boolean fundidoCompleto, int fundido, int duracion, int tiempoActual){
  
@@ -274,7 +265,6 @@ void draw() {
     gestorEnemigos.colisionarObjetos();
     gestorEnemigos.colisionarEnemigos();
 
-
     break;
 
   case MaquinaEstados.PERDIENDO:
@@ -301,12 +291,12 @@ void draw() {
     textFont(fTextos);
     break;
   }//Fin del switch.
-}
+}// Fin del draw.
 
 
 
-/** -- MÉTODOS EXTERNOS -- */
-/** - Métodos propios de Processing: - */
+/* -- MÉTODOS EXTERNOS -- */
+/* - Métodos propios de Processing: - */
 /** Acciones según se haga clic */
 void mousePressed() {
   //Cuando el jugador esta en la pantalla de titulo debe hacer click para pasar a la pantalla de controles
@@ -339,16 +329,44 @@ void mousePressed() {
 void mouseReleased() {
 }
 
+/** Lee el input del teclado */
+public char readCommand() {
+  return key;
+}
+
 /** Acciones según el input del teclado */
 void keyPressed() {
-  jugador.keyPressed();
+  if (readCommand() == 'w' || readCommand() == 'W') {
+    jugador.setEstado(MaquinaEstadosAnimacion.MOV_ARRIBA);
+  }
+  else if (readCommand() == 'd' || readCommand() == 'D') {
+    jugador.setEstado(MaquinaEstadosAnimacion.MOV_DERECHA);
+  }
+  else if (readCommand() == 's' || readCommand() == 'S') {
+    jugador.setEstado(MaquinaEstadosAnimacion.MOV_ABAJO);
+  }
+  else if (readCommand() == 'a' || readCommand() == 'A') {
+    jugador.setEstado(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
+  }
 }
 
 /** Acciones según se suelte el input del teclado */
 void keyReleased() {
-  jugador.keyReleased();
+  if (readCommand() == 'a' || readCommand() == 'A') {
+    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA);
+  }
+  else if (readCommand() == 'd' || readCommand() == 'D') {
+    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_DERECHA);
+  }
+  else if (readCommand() == 'w' || readCommand() == 'W') {
+    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ARRIBA);
+  }
+  else if (readCommand() == 's' || readCommand() == 'S') {
+    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
+  }
 }
 
+/** Colisiona un objeto con otro objeto ambos rectangulos */
 boolean colisionar(PVector posA, int widthA, int heightA, PVector posB, int widthB, int heightB) {
   float rectAX = posA.x - widthA / 2;
   float rectAY = posA.y - heightA / 2;

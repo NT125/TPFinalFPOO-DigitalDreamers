@@ -1,17 +1,17 @@
 /** Clase que contiene el Array Fijo de las antorchas: Gestionará la aparición de 5 las antorchas disponibles */
 class GestorAntorcha{
-  /** -- ATRIBUTOS -- */
-  /** Array de Antorchas que tendrá disponible el jugador */
+  /* -- ATRIBUTOS -- */
+  /** Representa a las Antorchas que tendrá disponible el jugador */
   private Antorcha[] antorchas;
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto, no es necesario un constructor parametrizado */
   public GestorAntorcha(){
     antorchas = new Antorcha[5];
   }
   
-  /** -- MÉTODOS -- */
-  /** Eliminando la antorcha */
+  /* -- MÉTODOS -- */
+  /** Elimina la antorcha */
   public void eliminarAntorcha(){}
   
 }

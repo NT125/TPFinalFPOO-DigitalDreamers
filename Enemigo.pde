@@ -1,13 +1,13 @@
 /** Clase principal del enemigo: Representa al enemigo individual. */
 
 class Enemigo extends SpriteObject implements IMovable, IVisualizable{
-  /** -- ATRIBUTOS -- */  
+  /* -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
   color Color;
   
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Enemigo(){}
   
@@ -25,7 +25,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   }
   
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
     tint(0);
@@ -42,7 +42,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     
   }
   
-  /** Haciendo que el enemigo rebote al impactar una pared */
+  /** Hace que el enemigo rebote al impactar una pared */
   public void rebotar(){
     //DEBUG: dibujando hitbox
     //rect(ancho,alto,width-ancho*2, height-alto*2);
@@ -56,7 +56,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     }
   }
   
-  /** Moviendo al enemigo */
+  /** Mueve al enemigo */
   public void mover(){
     float deltaTime= 1/frameRate;
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
@@ -68,27 +68,31 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     float distancia = dist(this.posicion.x, this.posicion.y, otro.getPosicion().x, otro.getPosicion().y);
     return (distancia < (this.ancho/2 + otro.getAncho()/2));
   }
-  
+  /** Cambia de direccion del enemigo */
   public void cambiarDireccion() {
     // Cambiar dirección del círculo
     velocidad.x *= -1;
     velocidad.y *= -1;
   }
+  /** Verifica la colision entre el enemigo y el jugador */
   public void colisionarJugador(Jugador j) {
    
   }
   
   
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* Getters */
+  /** Devuelve la velocidad del enemigo */
   public PVector getVelocidad(){
     return this.velocidad;
   }
   
   /* Setters */
+  /** Asigna una velocidad al enemigo */
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;
   }
+  /** Asigna un color al enemigo */
   public void setColor(color Color){
     this.Color=Color;
   }

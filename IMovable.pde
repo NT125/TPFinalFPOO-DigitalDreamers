@@ -1,7 +1,5 @@
 /** Interfaz que propone el movimiento de los objetos */
-
 interface IMovable{
-  
-  /** Proponiendo movimiento */
+  /** Contrato para aplicar movimiento */
   abstract public void mover(); 
 }
