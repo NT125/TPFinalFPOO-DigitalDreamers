@@ -1,6 +1,6 @@
 /** Clase abstracta que gestiona los sprites de los elementos renderizables del juego */
 
-class SpriteObject extends GameObject {
+class SpriteObject {
   /* -- ATRIBUTOS -- */
   /** Representa al SpriteSheet del Objeto */
   protected PImage spriteSheet;
@@ -28,11 +28,25 @@ class SpriteObject extends GameObject {
 
   /** Representa el Estado de la animación */
   protected int estado;
+  
+  /* -- CONSTRUCTORES -- */
+  /** Constructor Parametrizado */
+  public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
+    this.spriteSheet = requestImage(nombre);
+    this.anchoFrame = anchoFrame;
+    this.altoFrame = altoFrame;
+    this.xFrame=0;
+    this.yFrame=0;/*
+    this.xFrameFloat=0;
+    this.nextxFrameFloat=widthFrame;*/
+    
+    this.velocidadAnimacion = 20;
+  }
 
 
   /* -- MÉTODOS -- */
-  /** Diubjando los Sprites */
-  public void render(int estado) {
+  /** Diubjando los Sprites segun su estado */
+  public void render(int estado, PVector posicion) {
     imageMode(CENTER);
 
     switch(estado) {
@@ -41,7 +55,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de idle
         this.yFrame = 0;
         //Dibujando el frame
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
     case MaquinaEstadosAnimacion.MOV_ABAJO:
@@ -49,7 +63,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame;
         //Dibujando el frame
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
 
         moverSprite();
 
@@ -60,7 +74,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*2;
         //Dibujando el frame
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
 
         moverSprite();
         break;
@@ -70,7 +84,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*3;
         //Dibujando el frame
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
 
         moverSprite();
 
@@ -81,7 +95,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*4;
         //Dibujando el frame
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
 
         moverSprite();
 
@@ -90,7 +104,7 @@ class SpriteObject extends GameObject {
 
     case MaquinaEstadosAnimacion.ESTATICO:
       {
-        image(this.spriteSheet, this.posicion.x, this.posicion.y, this.ancho, this.alto);
+        image(this.spriteSheet, posicion.x, posicion.y, anchoFrame, altoFrame);
         break;
       }
 
@@ -99,7 +113,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*3;
         xFrame=0;
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
     case MaquinaEstadosAnimacion.ESTATICO_ABAJO:
@@ -107,7 +121,7 @@ class SpriteObject extends GameObject {
         xFrame=0;
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame;
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
     case MaquinaEstadosAnimacion.ESTATICO_DERECHA:
@@ -115,7 +129,7 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*2;
         xFrame=0;
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
     case MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA:
@@ -123,12 +137,12 @@ class SpriteObject extends GameObject {
         //Colocando el puntero en la fila de mov abajo
         this.yFrame = this.altoFrame*4;
         xFrame=0;
-        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), this.posicion.x, this.posicion.y);
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
     }
   }
-
+  /** Mueve la posicion del Frame en x del SpriteSheet */
   public void moverSprite() {
     //Calculando DeltaTime
     float deltaTime = 1/frameRate;

@@ -1,11 +1,15 @@
 /** Clase de los Árboles: obstáculos para el jugador */
 
-class Arbol extends SpriteObject implements IVisualizable {
+class Arbol extends GameObject implements IVisualizable {
   /* -- ATRIBUTOS -- */
+  /** Representa al sprite del arbol */
+  private SpriteObject sprite;
+  
+  /** Representa el estado del sprite del arbol */
+  private int estado;
   
   /* DEBUG: para verificar visualmente la colisión */
   //private color Color;
-  
   
   
   /* -- CONSTRUCTORES -- */
@@ -18,8 +22,7 @@ class Arbol extends SpriteObject implements IVisualizable {
     this.alto = alto;
     this.ancho = ancho;
     
-    this.spriteSheet = requestImage("arbol_grande.png");
-    
+    this.sprite = new SpriteObject("arbol_grande.png",ancho,alto);
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
   }
   
@@ -27,7 +30,7 @@ class Arbol extends SpriteObject implements IVisualizable {
   /** Dibujando al árbol */
   public void display() {
     imageMode(CORNER);
-    this.render(this.estado);
+    this.sprite.render(this.estado,this.posicion);
     circle(posicion.x,posicion.y,ancho);
     //ayuda para posicionar el sprite
     //rect(posicion.x, this.posicion.y, 100,100);

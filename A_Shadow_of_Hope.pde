@@ -197,7 +197,7 @@ void draw() {
     break;
 
   case MaquinaEstados.CONTROLES:
-      musicaTitulo.pause(); //ponemos la musica
+    musicaTitulo.pause(); //ponemos la musica
     //Pantalla de controles
     fill(255);
     textFont(fEncabezado);
@@ -238,7 +238,8 @@ void draw() {
     break;
 
   case MaquinaEstados.JUGANDO:
-  musicaEscenario.play();
+    println(frameRate);
+    musicaEscenario.play();
     // Pantalla Comenzando a jugar Nivel 1
     //Fundido de inicio del juego, cortito a comparación de los anteriores.
     if (!fundidoCompleto) {
@@ -257,7 +258,7 @@ void draw() {
 
     jugador.display();
     jugador.mover();
-    jugador.verificarColision(escenario);
+    //jugador.colisionarArbol(escenario.getArboles());
     gestorLlaves.dibujarLlaves();
     gestorLlaves.colisionarObjetos();
 
@@ -268,7 +269,7 @@ void draw() {
     break;
 
   case MaquinaEstados.PERDIENDO:
-   musicaEscenario.pause();
+     musicaEscenario.pause();
     fill(255);
     textFont(fTitulo);
     textAlign(CENTER, CENTER);
@@ -276,13 +277,13 @@ void draw() {
     textFont(fTextos);
     text("Presiona para continuar", width / 2, height -80);//Muestra un mensaje de Game Over
     // Reiniciamos el jugador, el escenario, el enemigo y habilitamos el clicable y mandamos al jugador a la pantalla de controles
-    jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
+    jugador = new Jugador(new PVector(width/2, height/2), 64, 64);
     escenario = new Escenario(new PVector(0, 0), "fondo_juego.png");
     clicable = true;
     break;
 
   case MaquinaEstados.GANANDO:
-  musicaEscenario.pause();
+    musicaEscenario.pause();
     // TRANSICIONAR ENTRE NIVELES
     fill(255);
     textFont(fTitulo);
@@ -315,7 +316,7 @@ void mousePressed() {
   }
   //Cuando el jugador esta en la pantalla de controles debe hacer click para pasar a jugar
   if (!clicable && estado == MaquinaEstados.CONTROLES) {
-    jugador = new Jugador(new PVector(width/2, height/2), 64, 64, 15);
+    jugador = new Jugador(new PVector(width/2, height/2), 64, 64);
     escenario = new Escenario(new PVector(0, 0), "fondo_juego.png");
     gestorEnemigos =new GestorEnemigos(nivel);
     gestorLlaves = new GestorLlaves(nivel);

@@ -1,9 +1,15 @@
 /** Clase principal del enemigo: Representa al enemigo individual. */
 
-class Enemigo extends SpriteObject implements IMovable, IVisualizable{
+class Enemigo extends GameObject implements IMovable, IVisualizable{
   /* -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
+  
+  /** Representa al sprite del enemigo */
+  private SpriteObject sprite;
+  
+  /** Representa el estado del sprite del enemigo */
+  private int estado;
   color Color;
   
   
@@ -19,9 +25,9 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
     this.posicion=posicion;
     this.velocidad = velocidad;
     
+    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho,alto);
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
     this.Color = 255;
-    this.spriteSheet = requestImage("enemigo-removebg-preview.png");
   }
   
   
@@ -29,7 +35,7 @@ class Enemigo extends SpriteObject implements IMovable, IVisualizable{
   /** Dibujando al enemigo */
   public void display(){
     tint(0);
-    this.render(this.estado);
+    this.sprite.render(this.estado,this.posicion);
     tint(255);
     //DEBUG: dibujando hitbox
     /*fill(Color);

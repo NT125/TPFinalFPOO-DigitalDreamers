@@ -1,6 +1,6 @@
 /** Clase principal del Jugador */
 
-class Jugador extends SpriteObject implements IMovable, IVisualizable {
+class Jugador extends GameObject implements IMovable, IVisualizable {
   /* -- ATRIBUTOS --  */
   /** Representa si el jugador aún está vivo */
   private boolean vivo;
@@ -16,6 +16,9 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
 
   /** Representa el estado de movimiento del jugador */
   private int estado;
+  
+  /** Representa al sprite del jugador */
+  private SpriteObject sprite;
 
 
   /* -- CONSTRUCTORES -- */
@@ -24,18 +27,11 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   }
 
   /** Constructor parametrizado */
-  public Jugador(PVector posicion, int anchoFrame, int altoFrame, float velocidadAnimacion) {
+  public Jugador(PVector posicion, int anchoFrame, int altoFrame) {
     this.posicion = posicion;
     this.ancho=anchoFrame/2;
     this.alto=altoFrame;
-
-    this.spriteSheet = requestImage("SpritesSombra_ver1.png");
-    this.anchoFrame = anchoFrame;
-    this.altoFrame = altoFrame;
-
-    this.estado = MaquinaEstadosAnimacion.IDLE;
-
-    this.velocidadAnimacion = velocidadAnimacion;
+    this.sprite = new SpriteObject("SpritesSombra_ver1.png",anchoFrame,altoFrame);
 
     this.velocidad = new PVector(80, 80);
 
@@ -47,7 +43,7 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
-    this.render(this.estado);
+    this.sprite.render(this.estado, this.posicion);
 
     // Dibujando la sombra que rodea al jugador
     imageMode(CENTER);
@@ -126,9 +122,16 @@ class Jugador extends SpriteObject implements IMovable, IVisualizable {
         } 
       } 
   }
+  /*
+  public void colisionarArbol(ArrayList<Escenario> arboles){
+    Arbol arbol; 
+    for(Arbol a: arboles) {
+      verificarColision(a);
+    }
+  }*/
 
   /** Comprobar colisión entre dos círculos */
-  boolean colisionarCirculo(SpriteObject a) {
+  boolean colisionarCirculo(Arbol a) {
     float distancia = PVector.dist(this.posicion, a.getPosicion());
     //DEBUG: dibuja la hitbox del arbol
     circle(a.getPosicion().x, a.getPosicion().y, a.getAncho()/2+ancho/2);
