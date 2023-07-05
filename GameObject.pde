@@ -8,10 +8,10 @@ abstract class GameObject {
   /** Representa la posición del objeto */
   protected PVector posicion;
   
-  /** Representa el ancho del objeto */
+  /** Representa el ancho (Hitbox) del objeto */
   protected int ancho; 
   
-  /** Representa el alto del objeto */
+  /** Representa el alto (Hitbox) del objeto */
   protected int alto;
   
   

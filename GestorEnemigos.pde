@@ -37,13 +37,16 @@ class GestorEnemigos {
     }//end Switch
   }
   /** Verificar colision con jugador*/
-  public void colisionarObjetos() {
+  public void colisionarObjetos(Jugador jugador) {
     for (Enemigo e : enemigos) {
       // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
-      if (colisionar(jugador.getPosicion(), jugador.getAncho(), jugador.getAlto(), e.getPosicion(), e.getAncho(), e.getAlto())) {
-        estado= MaquinaEstados.PERDIENDO;
+      if (colisionador.colisionarCircRect(jugador,e)) {
+        //estado= MaquinaEstados.PERDIENDO;
+        e.setColor(color(#DB1818));
         println("hay colicion");
-      } 
+      } else{
+        e.setColor(color(255,90));
+      }
     }
   }
   /** Evalua la colision de un enemigo con otro */

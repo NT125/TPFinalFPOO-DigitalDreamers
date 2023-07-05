@@ -25,7 +25,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     this.posicion=posicion;
     this.velocidad = velocidad;
     
-    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho,alto);
+    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+10,alto+10); //sumamos 10 para que el psrite sea un poco mas grande
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
     this.Color = 255;
   }
@@ -38,12 +38,11 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     this.sprite.render(this.estado,this.posicion);
     tint(255);
     //DEBUG: dibujando hitbox
-    /*fill(Color);
-    ellipseMode(CORNER);
+    fill(Color);
     ellipse(posicion.x,posicion.y,ancho,alto);
     strokeWeight(3);
     point(posicion.x,posicion.y);
-    strokeWeight(1);*/
+    strokeWeight(1);
     
     
   }

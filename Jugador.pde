@@ -43,18 +43,16 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
-    this.sprite.render(this.estado, this.posicion);
+    this.sprite.render(this.estado, new PVector(this.posicion.x+ancho/2,this.posicion.y+alto/2)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual 
 
     // Dibujando la sombra que rodea al jugador
-    imageMode(CENTER);
     //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
-
+    
     //DEBUG: dibuja la hitbox del jugador
     fill(255, 40);
-/*
-    rectMode(CORNER);
+
     stroke(#CDF56A);
-    rect(posicion.x, posicion.y, this.ancho, this.alto);*/
+    rect(posicion.x, posicion.y, this.ancho, this.alto);
   }
 
   /** Tirando (colocando) una antorcha en el escenario */
@@ -105,10 +103,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
   /** Verificando colisiones con arboles*/
+  /*
   public void verificarColision(Arbol arbol) {
     float deltaTime = 1/frameRate; 
     // Verificar colisiones con un arbol
-      if (colisionarCirculo(arbol)) {
+      if (colisionador.colisionarCirculo(arbol)) {
         println("hay colision con Arbol");
         // Si hay colisión, deshacer el movimiento con el opuesto
         if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
@@ -121,7 +120,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
           this.posicion.x+= this.velocidad.x * deltaTime;
         } 
       } 
-  }
+  }*/
   /*
   public void colisionarArbol(ArrayList<Escenario> arboles){
     Arbol arbol; 
@@ -130,13 +129,6 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     }
   }*/
 
-  /** Comprobar colisión entre dos círculos */
-  boolean colisionarCirculo(Arbol a) {
-    float distancia = PVector.dist(this.posicion, a.getPosicion());
-    //DEBUG: dibuja la hitbox del arbol
-    circle(a.getPosicion().x, a.getPosicion().y, a.getAncho()/2+ancho/2);
-    return (distancia < (this.ancho/2 + a.getAncho()/2)); 
-  }
 
   /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* Getters */

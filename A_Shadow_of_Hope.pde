@@ -30,6 +30,9 @@ private Escenario escenario;
 /** Representa la puerta del escenario */
 private Puerta puerta;
 
+/** Representa al Jugador. */
+private Colisionador colisionador;
+
 /** Estado del juego, toma los valores de MaquinaEstados. */
 private int estado;
 
@@ -263,7 +266,7 @@ void draw() {
     gestorLlaves.colisionarObjetos();
 
     gestorEnemigos.mostrarEnemigos();
-    gestorEnemigos.colisionarObjetos();
+    gestorEnemigos.colisionarObjetos(jugador);
     gestorEnemigos.colisionarEnemigos();
 
     break;
@@ -295,7 +298,6 @@ void draw() {
 }// Fin del draw.
 
 
-
 /* -- MÉTODOS EXTERNOS -- */
 /* - Métodos propios de Processing: - */
 /** Acciones según se haga clic */
@@ -323,6 +325,7 @@ void mousePressed() {
     puerta = new Puerta();
     escenario.crearArboles();
     estado= MaquinaEstados.JUGANDO;
+    colisionador= new Colisionador();
   }
 }
 
@@ -365,18 +368,4 @@ void keyReleased() {
   else if (readCommand() == 's' || readCommand() == 'S') {
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
   }
-}
-
-/** Colisiona un objeto con otro objeto ambos rectangulos */
-boolean colisionar(PVector posA, int widthA, int heightA, PVector posB, int widthB, int heightB) {
-  float rectAX = posA.x - widthA / 2;
-  float rectAY = posA.y - heightA / 2;
-  float rectBX = posB.x - widthB / 2;
-  float rectBY = posB.y - heightB / 2;
-  //rect(rectAX,rectAY, widthA, heightA);
-  //rect(rectBX,rectBY, widthB, heightB);
-  return !(rectAX + widthA < rectBX ||
-    rectAX > rectBX + widthB ||
-    rectAY + heightA < rectBY ||
-    rectAY > rectBY + heightB);
 }
