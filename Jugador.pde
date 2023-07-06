@@ -1,5 +1,4 @@
-/** Clase principal del Jugador */
-
+/** Clase que representa al Jugador */
 class Jugador extends GameObject implements IMovable, IVisualizable {
   /* -- ATRIBUTOS --  */
   /** Representa si el jugador aún está vivo */
@@ -27,11 +26,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
   /** Constructor parametrizado */
-  public Jugador(PVector posicion, int anchoFrame, int altoFrame) {
+  public Jugador(PVector posicion, int ancho, int alto) {
     this.posicion = posicion;
-    this.ancho=anchoFrame/2;
-    this.alto=altoFrame;
-    this.sprite = new SpriteObject("SpritesSombra_ver1.png",anchoFrame,altoFrame);
+    this.ancho=ancho/2;
+    this.alto=alto;
+    this.sprite = new SpriteObject("SpritesSombra_ver1.png",ancho,alto);
 
     this.velocidad = new PVector(80, 80);
 
@@ -43,16 +42,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
-    this.sprite.render(this.estado, new PVector(this.posicion.x+ancho/2,this.posicion.y+alto/2)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual 
+    this.sprite.render(this.estado, new PVector(this.posicion.x,this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual 
 
     // Dibujando la sombra que rodea al jugador
     //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
     
-    //DEBUG: dibuja la hitbox del jugador
-    fill(255, 40);
-
-    stroke(#CDF56A);
-    rect(posicion.x, posicion.y, this.ancho, this.alto);
   }
 
   /** Tirando (colocando) una antorcha en el escenario */
@@ -62,7 +56,6 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Moviendo al jugador */
   public void mover() {
     float deltaTime = 1/frameRate;
-    
     switch(estado){
       case MaquinaEstadosAnimacion.MOV_ARRIBA:{
         this.posicion.y-= this.velocidad.y * deltaTime;
@@ -89,11 +82,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     if (this.posicion.x + ancho/2 >= width - 30) {
       this.posicion.x = (width - 30) - ancho/2;
     }
-    if (this.posicion.y - alto/2 <= 40) {
-      this.posicion.y = alto/2 + 40;
+    if (this.posicion.y - alto/2 <= 30) {
+      this.posicion.y = alto/2 + 30;
     }
-    if (this.posicion.y + alto/2 >= height - 40) {
-      this.posicion.y = (height - 40) - alto/2;
+    if (this.posicion.y + alto/2 >= height - 30) {
+      this.posicion.y = (height - 30) - alto/2;
     }
   }
 
@@ -102,12 +95,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     return key;
   }
 
-  /** Verificando colisiones con arboles*/
-  /*
-  public void verificarColision(Arbol arbol) {
+  /** Verificando colisiones con un arbol */
+  public void colisionarArbol(Arbol a, Colisionador colisionador) {
     float deltaTime = 1/frameRate; 
     // Verificar colisiones con un arbol
-      if (colisionador.colisionarCirculo(arbol)) {
+      if (colisionador.colisionarCircRect(a,jugador)) {
         println("hay colision con Arbol");
         // Si hay colisión, deshacer el movimiento con el opuesto
         if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
@@ -120,14 +112,14 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
           this.posicion.x+= this.velocidad.x * deltaTime;
         } 
       } 
-  }*/
-  /*
-  public void colisionarArbol(ArrayList<Escenario> arboles){
-    Arbol arbol; 
+  }
+  
+  /** Recorre el array de los arboles */
+  public void recorrerArboles(ArrayList<Arbol> arboles, Colisionador colisionador){ 
     for(Arbol a: arboles) {
-      verificarColision(a);
+      colisionarArbol(a, colisionador);
     }
-  }*/
+  }
 
 
   /* -- ACCESORES (GETTERS Y SETTERS) -- */

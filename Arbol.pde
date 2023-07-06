@@ -1,5 +1,4 @@
 /** Clase de los Árboles: obstáculos para el jugador */
-
 class Arbol extends GameObject implements IVisualizable {
   /* -- ATRIBUTOS -- */
   /** Representa al sprite del arbol */
@@ -8,9 +7,6 @@ class Arbol extends GameObject implements IVisualizable {
   /** Representa el estado del sprite del arbol */
   private int estado;
   
-  /* DEBUG: para verificar visualmente la colisión */
-  //private color Color;
-  
   
   /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
@@ -18,28 +14,19 @@ class Arbol extends GameObject implements IVisualizable {
   
   /** Constructor parametrizado */
   public Arbol(PVector posicion, int alto, int ancho) {
-    this.posicion = posicion;
-    this.alto = alto;
-    this.ancho = ancho;
+    super(posicion,ancho,alto);
     
-    this.sprite = new SpriteObject("arbol_grande.png",ancho,alto);
+    this.sprite = new SpriteObject("arbol_grande.png",ancho+40,alto+40); //le sumamos 40 al sprite, asi la hitbox es mas pequeñav c
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
   }
   
   /* -- MÉTODOS -- */
   /** Dibujando al árbol */
   public void display() {
-    imageMode(CORNER);
-    this.sprite.render(this.estado,this.posicion);
-    circle(posicion.x,posicion.y,ancho);
-    //ayuda para posicionar el sprite
-    //rect(posicion.x, this.posicion.y, 100,100);
+    this.sprite.render(this.estado,new PVector(this.posicion.x,this.posicion.y+10)); //le sumamos 10 para que el sprite este mas abajo y la hitbox este mas arriba
     
     //DEBUG: dibujando hitbox
-    
-    //rect(posicion.x, this.posicion.y, this.ancho, this.alto);
-    
+    //circle(posicion.x,posicion.y,ancho);
     
   }
-  
 }

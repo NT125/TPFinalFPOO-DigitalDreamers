@@ -1,5 +1,4 @@
 /** Clase Abstracta que representa a todos los Objetos del juego */
-
 abstract class GameObject {
   /* -- ATRIBUTOS -- */
   /** Representa al nombre del objeto para aplicar su sprite */
@@ -14,7 +13,15 @@ abstract class GameObject {
   /** Representa el alto (Hitbox) del objeto */
   protected int alto;
   
-  
+  /* -- CONSTRUCTORES -- */
+  /** Constructor por Defecto */
+  public GameObject(){}
+  /** Constructor Parametrizado*/
+  public GameObject(PVector posicion, int ancho, int alto){
+    this.ancho=ancho;
+    this.alto=alto;
+    this.posicion=posicion;
+  }
   
   /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* Getters */

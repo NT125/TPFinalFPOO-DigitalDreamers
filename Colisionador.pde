@@ -1,49 +1,54 @@
-/** */
+/** Clase que verifica las coliciones entre objetos */
 class Colisionador {
 
+  /* -- CONSTRUCTORES -- */
+  /** Constructor por defecto */
+  public Colisionador(){}
+  
   /** Metodo que comprueba la colision entre dos objetos rectangulos */
   public boolean colisionarRectangulo(GameObject primero, GameObject segundo) {
-    float rectAX = primero.getPosicion().x - segundo.getAncho() / 2;
-    float rectAY = primero.getPosicion().y - segundo.getAlto() / 2;
-    float rectBX = segundo.getPosicion().x - primero.getAncho() / 2;
-    float rectBY = segundo.getPosicion().y - primero.getAncho() / 2;
+    
     //DEBUG: dibuja la hitbox de los rectangulos
-    rect(rectAX,rectAY, primero.getAncho(), primero.getAlto());
-    rect(rectBX,rectBY, segundo.getAncho(), segundo.getAlto());
-    return !(rectAX + primero.getAncho() < rectBX ||
-      rectAX > rectBX + segundo.getAncho() ||
-      rectAY + primero.getAlto() < rectBY ||
-      rectAY > rectBY + segundo.getAlto());
+    /*rectMode(CENTER);
+    rect(primero.getPosicion().x,primero.getPosicion().y, primero.getAncho(), primero.getAlto());
+    rect(segundo.getPosicion().x,segundo.getPosicion().y, segundo.getAncho(), segundo.getAlto());
+    */
+    return !(primero.getPosicion().x + primero.getAncho() < segundo.getPosicion().x ||
+      primero.getPosicion().x > segundo.getPosicion().x + segundo.getAncho() ||
+      primero.getPosicion().y + primero.getAlto() < segundo.getPosicion().y ||
+      primero.getPosicion().y > segundo.getPosicion().y + segundo.getAlto());
   }
   
   /** Metodo que comprueba la colisión entre dos objetos círculares */
   public boolean colisionarCirculo(GameObject primero, GameObject segundo) {
     float distancia = PVector.dist(primero.getPosicion(), segundo.getPosicion());
     //DEBUG: dibuja la hitbox del segundo circulo
-    circle(segundo.getPosicion().x, segundo.getPosicion().y, segundo.getAncho()/2+primero.getAncho()/2);
+    /*circle(primero.getPosicion().x,primero.getPosicion().y, primero.getAncho());
+    circle(segundo.getPosicion().x, segundo.getPosicion().y, segundo.getAncho());
+    */
     float radios = primero.getAncho()/2+segundo.getAncho()/2;
     return distancia <= radios; 
   }
   
   
   /** Metodo que comprueba la colicion de un objeto rectangulo con otro objeto circular */
-  public boolean colisionarCircRect(GameObject rectangulo, GameObject circulo){
+  public boolean colisionarCircRect(GameObject circulo, GameObject rectangulo){
     // Genera una variable que guarda la posicion(x,y) del circulo, que representara el punto mas cercano entre el rectangulo y el circulo
     PVector point = new PVector(circulo.getPosicion().x,circulo.getPosicion().y);
     
-    // actualiza la posicion X del punto más cercano a los extremos del rectángulo en el eje x
-    if(point.x < rectangulo.getPosicion().x){
-      point.x = rectangulo.getPosicion().x;
+    // actualiza la posicion X del punto más cercano a los extremos del rectángulo en el eje x, al ancho lo dividimos en 2 porque la imagen esta en el centro
+    if(point.x < rectangulo.getPosicion().x - rectangulo.getAncho()/2){
+      point.x = rectangulo.getPosicion().x - rectangulo.getAncho()/2;
     }
-    if(point.x > rectangulo.getPosicion().x + rectangulo.getAncho()){
-      point.x = rectangulo.getPosicion().x + rectangulo.getAncho();
+    if(point.x > rectangulo.getPosicion().x + rectangulo.getAncho()/2){
+      point.x = rectangulo.getPosicion().x + rectangulo.getAncho()/2;
     }
     // actualiza la posicion Y del punto más cercano a los extremos del rectángulo en el eje y
-    if(point.y < rectangulo.getPosicion().y){
-      point.y = rectangulo.getPosicion().y;
+    if(point.y < rectangulo.getPosicion().y - rectangulo.getAlto()/2){
+      point.y = rectangulo.getPosicion().y - rectangulo.getAlto()/2;
     }
-    if(point.y > rectangulo.getPosicion().y + rectangulo.getAlto()){
-      point.y = rectangulo.getPosicion().y + rectangulo.getAlto();
+    if(point.y > rectangulo.getPosicion().y + rectangulo.getAlto()/2){
+      point.y = rectangulo.getPosicion().y + rectangulo.getAlto()/2;
     }
     //DEBUG: dibuja el centro del circulo y la linea de distancia entre este y el punto mas cercano
     /*circle( circulo.getPosicion().x, circulo.getPosicion().y, 2);                //Representara el centro del circulo

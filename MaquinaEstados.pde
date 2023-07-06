@@ -1,5 +1,4 @@
 /** Máquina de Estados: Verificando los estados del Juego */
-
 class MaquinaEstados{
   //Estaticos para que no sea necesario instanciar la clase
   /** Estado de inicio (Título) */

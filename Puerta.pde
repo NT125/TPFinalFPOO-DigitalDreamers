@@ -1,5 +1,4 @@
 /** Clase que representa la puerta para salir del nivel */
-
 class Puerta extends GameObject implements IVisualizable{
   /* -- CONSTRUCTORES -- */
   /** Constructor por Defecto */

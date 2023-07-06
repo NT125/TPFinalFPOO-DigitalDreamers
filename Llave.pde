@@ -1,3 +1,4 @@
+/** Clase que representa a la llave del juego */
 class Llave extends GameObject implements IVisualizable {
   /* -- Atributos -- */
   /** Representa al sprite de la llave */
@@ -14,15 +15,14 @@ class Llave extends GameObject implements IVisualizable {
 
   /** Constructor parametrizado */
   public Llave(PVector posicion, int ancho, int alto) {
-    this.posicion = posicion;
-    this.ancho = ancho;
-    this.alto = alto;
+    super(posicion,ancho,alto);
     this.sprite = new SpriteObject("llave.png",ancho,alto);
     this.estado = MaquinaEstadosAnimacion.ESTATICO;
   }
   /** Dibuja la llave en el escenario */
   public void display() {
-    tint(105, 22, 32);
+    
+    tint(105, 22, 32);  //entinta la imagen a marron
     this.sprite.render(this.estado,this.posicion);
     tint(255);
   }

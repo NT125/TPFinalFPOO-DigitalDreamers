@@ -1,5 +1,4 @@
 /** Clase que representa a la Pared individual */
-
 class Pared extends GameObject implements IVisualizable {
   /* -- ATRIBUTOS -- */
   /** Representa el Color de la pared */ 
@@ -12,9 +11,7 @@ class Pared extends GameObject implements IVisualizable {
   
   /** Constructor parametrizado */
   public Pared(PVector posicion, int ancho, int alto) {
-    this.posicion=posicion;
-    this.alto = alto;
-    this.ancho = ancho;
+    super(posicion,ancho,alto);
     colorPared=130; 
   }
   

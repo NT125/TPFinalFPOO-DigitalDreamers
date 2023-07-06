@@ -1,5 +1,4 @@
 /** Máquina de Estados de Animación: Gestiona los estados de animación de los elementos renderizables del juego */
-
 class MaquinaEstadosAnimacion{
   /** Estado de reposo */
   public static final int IDLE = 0;

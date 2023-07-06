@@ -28,18 +28,18 @@ class GestorLlaves {
     }//end Switch
   }
   /** Evalua la colision entre la llave y otro objeto  */
-  public void colisionarObjetos() {/*
+  public void colisionarObjetos(Jugador jugador, Puerta puerta, Colisionador colisionador) {
     for (Llave l : llaves) {
       // Verifica la colision entre el jugador y la llave
-      if (colisionador.colisionar(jugador.getPosicion(), jugador.getAncho(), jugador.getAlto(), l.getPosicion(), l.getAncho(), l.getAlto())) {
-        l.setPosicion(new PVector(jugador.getPosicion().x-2, jugador.getPosicion().y-5));
+      if (colisionador.colisionarRectangulo(jugador,l)) {
+        l.setPosicion(new PVector(jugador.getPosicion().x, jugador.getPosicion().y));
       }
 
       //Verificando la colision de la llave con la puerta
-      if (colisionador.colisionar(l.getPosicion(), l.getAncho(), l.getAlto(), puerta.getPosicion(), puerta.getAncho(), puerta.getAlto())) {
+      if (colisionador.colisionarRectangulo(l,puerta)) {
         estado = MaquinaEstados.GANANDO;
       }
-    }*/
+    }
   }
   /** Dibuja las llaves en el escenario */
   public void dibujarLlaves() {

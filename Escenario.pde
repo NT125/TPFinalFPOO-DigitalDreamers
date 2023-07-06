@@ -1,5 +1,4 @@
 /** Clase del escenario en pantalla. */
-
 class Escenario extends GameObject implements IVisualizable {
   /* -- ATRIBUTOS -- */
   /** Representa una lista que almacena los arboles del escenario */
@@ -35,7 +34,6 @@ class Escenario extends GameObject implements IVisualizable {
   }
   
   
-  
   /* -- MÉTODOS -- */
   /** Dibuja el escenario */
   public void display(){
@@ -61,19 +59,19 @@ class Escenario extends GameObject implements IVisualizable {
   /** Generando arboles uno a uno */
   public void crearArboles(){
     Arbol arbol;
-    arbol = new Arbol(new PVector(113,79),100,100);
+    arbol = new Arbol(new PVector(113,79),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(469,74),100,100);
+    arbol = new Arbol(new PVector(469,74),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(236,258),100,100);
+    arbol = new Arbol(new PVector(236,258),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(555,169),100,100);
+    arbol = new Arbol(new PVector(555,169),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(430,300),100,100);
+    arbol = new Arbol(new PVector(430,300),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(180,412),100,100);
+    arbol = new Arbol(new PVector(180,412),60,60);
     arboles.add(arbol);
-    arbol = new Arbol(new PVector(552,479),100,100);
+    arbol = new Arbol(new PVector(552,479),60,60);
     arboles.add(arbol);
     /*for (int i=0; i<random(3,5); i++) {
       arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
@@ -101,9 +99,6 @@ class Escenario extends GameObject implements IVisualizable {
   }
   */
   
-  /** Calculando la colisión con el jugador */
-  public void colisionarJugador(){}
-  
   
   /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* Getters */
@@ -113,7 +108,7 @@ class Escenario extends GameObject implements IVisualizable {
   } 
   /** Devuelve la lista de arboles */
   public ArrayList<Arbol> getArboles(){
-    return arboles;
+    return this.arboles;
   }
   /* Setters */
   /** Cambia el nombre del escenario */

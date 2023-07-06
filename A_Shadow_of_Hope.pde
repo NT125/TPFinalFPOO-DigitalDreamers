@@ -72,16 +72,16 @@ AudioPlayer musicaEscenario;
 void setup() {
   estado = MaquinaEstados.CONTROLES;
   size(700, 600);
-  //frameRate(60);
-  
-  //  // Definimos la musica y los sonidos //
- 
+  //frameRate(5);
+
+  // Definimos la musica y los sonidos //
+
   minim = new Minim(this);
   musicaTitulo = minim.loadFile("vegeta.wav");
   musicaEscenario = minim.loadFile("ambiente.mp3");
 
- //   Terminamos de definir la musica y los sonidos
-  
+  //   Terminamos de definir la musica y los sonidos
+
   clicable = false;
   nivel=1;
 
@@ -132,19 +132,19 @@ void draw() {
     musicaTitulo.play();//ponemos la musica
     // Subir el volumen (aumentar en un 50%)
     if (keyPressed && key == 'E' || keyPressed && key == 'e') {
-    float currentVolume = musicaTitulo.getGain();
-    float newVolume = currentVolume + 0.5;
-    musicaTitulo.setGain(newVolume);
+      float currentVolume = musicaTitulo.getGain();
+      float newVolume = currentVolume + 0.5;
+      musicaTitulo.setGain(newVolume);
     }
-  
-  // Bajar el volumen (disminuir en un 50%)
+
+    // Bajar el volumen (disminuir en un 50%)
     if (keyPressed && key == 'Q' || keyPressed && key == 'q') {
-    float currentVolume = musicaTitulo.getGain();
-    float newVolume = currentVolume - 0.5;
-    musicaTitulo.setGain(newVolume);
+      float currentVolume = musicaTitulo.getGain();
+      float newVolume = currentVolume - 0.5;
+      musicaTitulo.setGain(newVolume);
     }
-    
-    
+
+
     // Cubriendo fondo del Título, y revelándolo con un fundido.
     imageMode(CORNER);
     image(pantallaDeInicio, 0, 0);
@@ -156,7 +156,6 @@ void draw() {
         if (fundido2 <= 0) {
           fundidoCompleto2 = true;
           fundido2 = 255; //reseteando fundido para la siguiente pantalla.
-          
         }
       }
     }
@@ -196,7 +195,7 @@ void draw() {
     }
 
     tiempoActual = millis(); // Obteniendo el tiempo actual en este momento para calcular la duración del pantallazo negro siguiente.
-    
+
     break;
 
   case MaquinaEstados.CONTROLES:
@@ -261,18 +260,20 @@ void draw() {
 
     jugador.display();
     jugador.mover();
-    //jugador.colisionarArbol(escenario.getArboles());
+    jugador.recorrerArboles(escenario.getArboles(),colisionador); 
+
     gestorLlaves.dibujarLlaves();
-    gestorLlaves.colisionarObjetos();
+    gestorLlaves.colisionarObjetos(jugador, puerta,colisionador);
 
     gestorEnemigos.mostrarEnemigos();
-    gestorEnemigos.colisionarObjetos(jugador);
-    gestorEnemigos.colisionarEnemigos();
+    gestorEnemigos.colisionarJugador(jugador,colisionador);
+    gestorEnemigos.colisionarEnemigos(colisionador);
+    gestorEnemigos.colisionarArboles(escenario.getArboles(),colisionador);
 
     break;
 
   case MaquinaEstados.PERDIENDO:
-     musicaEscenario.pause();
+    musicaEscenario.pause();
     fill(255);
     textFont(fTitulo);
     textAlign(CENTER, CENTER);
@@ -303,19 +304,18 @@ void draw() {
 /** Acciones según se haga clic */
 void mousePressed() {
   //Cuando el jugador esta en la pantalla de titulo debe hacer click para pasar a la pantalla de controles
-  if (clicable) {
-    if (estado== MaquinaEstados.TITULO) {
-      pantallaDeInicio.pause();
-      estado= MaquinaEstados.CONTROLES;
-    }
-    //Cuando el jugador esta en la pantalla de perdiendo debe hacer click para pasar a titulo
-    if (estado==MaquinaEstados.PERDIENDO) {
-      fundido=255;
-      pantallaDeInicio.play();
-      fundido2=255;
-      estado= MaquinaEstados.TITULO;
-    }
+  if (clicable && estado== MaquinaEstados.TITULO) {
+    pantallaDeInicio.pause();
+    estado= MaquinaEstados.CONTROLES;
   }
+  //Cuando el jugador esta en la pantalla de perdiendo debe hacer click para pasar a titulo
+  if (clicable &&estado==MaquinaEstados.PERDIENDO) {
+    fundido=255;
+    pantallaDeInicio.play();
+    fundido2=255;
+    estado= MaquinaEstados.TITULO;
+  }
+
   //Cuando el jugador esta en la pantalla de controles debe hacer click para pasar a jugar
   if (!clicable && estado == MaquinaEstados.CONTROLES) {
     jugador = new Jugador(new PVector(width/2, height/2), 64, 64);
@@ -342,14 +342,11 @@ public char readCommand() {
 void keyPressed() {
   if (readCommand() == 'w' || readCommand() == 'W') {
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_ARRIBA);
-  }
-  else if (readCommand() == 'd' || readCommand() == 'D') {
+  } else if (readCommand() == 'd' || readCommand() == 'D') {
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_DERECHA);
-  }
-  else if (readCommand() == 's' || readCommand() == 'S') {
+  } else if (readCommand() == 's' || readCommand() == 'S') {
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_ABAJO);
-  }
-  else if (readCommand() == 'a' || readCommand() == 'A') {
+  } else if (readCommand() == 'a' || readCommand() == 'A') {
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
   }
 }
@@ -358,14 +355,11 @@ void keyPressed() {
 void keyReleased() {
   if (readCommand() == 'a' || readCommand() == 'A') {
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA);
-  }
-  else if (readCommand() == 'd' || readCommand() == 'D') {
+  } else if (readCommand() == 'd' || readCommand() == 'D') {
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_DERECHA);
-  }
-  else if (readCommand() == 'w' || readCommand() == 'W') {
+  } else if (readCommand() == 'w' || readCommand() == 'W') {
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ARRIBA);
-  }
-  else if (readCommand() == 's' || readCommand() == 'S') {
+  } else if (readCommand() == 's' || readCommand() == 'S') {
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
   }
 }

@@ -1,5 +1,4 @@
 /** Clase de la Antorcha: Representa la antorcha individual. */
-
 class Antorcha{    
   /* -- ATRIBUTOS -- */
   /** Verifica si la antorcha está encendida. */

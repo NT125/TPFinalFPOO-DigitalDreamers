@@ -8,7 +8,7 @@ class GestorEnemigos {
   /** Constructor por defecto */
   public GestorEnemigos(int nivel) {
     enemigos = new ArrayList <Enemigo>();
-    generarNivel(nivel);
+    generarEnemigos(nivel);
   }
 
   /* -- MÉTODOS -- */
@@ -21,43 +21,53 @@ class GestorEnemigos {
     }
   }
   /** Genera a los enemigos segun el nivel */
-  public void generarNivel(int nivel) {
+  public void generarEnemigos(int nivel) {
     switch(nivel) {
     case 1:
       {
         Enemigo e;
-        e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(60, -29.9));
+        e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(80, -99.9));
         enemigos.add(e);
-        e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(68, -29.9));
+        e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, 39.3));
         enemigos.add(e);
-        e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(20, 29.9));
+        e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(50, -30.9));
         enemigos.add(e); 
         break;
       } //end case 1
     }//end Switch
   }
   /** Verificar colision con jugador*/
-  public void colisionarObjetos(Jugador jugador) {
+  public void colisionarJugador(Jugador jugador, Colisionador colisionador) {
     for (Enemigo e : enemigos) {
       // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
-      if (colisionador.colisionarCircRect(jugador,e)) {
-        //estado= MaquinaEstados.PERDIENDO;
-        e.setColor(color(#DB1818));
+      if (colisionador.colisionarCircRect(e,jugador)) {
         println("hay colicion");
-      } else{
-        e.setColor(color(255,90));
+        estado= MaquinaEstados.PERDIENDO;
       }
     }
   }
   /** Evalua la colision de un enemigo con otro */
-  public void colisionarEnemigos() {
+  public void colisionarEnemigos(Colisionador colisionador) {
     for (int i= 0; i<enemigos.size(); i++) {
+      Enemigo e= enemigos.get(i);
       for (int j=i+1; j<enemigos.size(); j++) {
-        Enemigo e= enemigos.get(i);
         Enemigo circulo2 = enemigos.get(j);
-        if (e.chocarCon(circulo2)) {
+        if (colisionador.colisionarCirculo(e,circulo2)) {
           e.cambiarDireccion();
           circulo2.cambiarDireccion();
+        }
+      }
+    }
+  }//Fin colisionarEnemigos.
+  
+  /** Evalua la colision de un enemigo con un arbol */
+  public void colisionarArboles(ArrayList<Arbol> arboles, Colisionador colisionador) {
+    for (int i= 0; i<enemigos.size(); i++) {
+      Enemigo e= enemigos.get(i);
+      for (int j=0; j<arboles.size(); j++) {
+        Arbol a = arboles.get(j);
+        if (colisionador.colisionarCirculo(e,a)) {
+          e.cambiarDireccion();
         }
       }
     }

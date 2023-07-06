@@ -29,6 +29,9 @@ class SpriteObject {
   /** Representa el Estado de la animación */
   protected int estado;
   
+  /** Representa el nombre del SpriteSheet */
+  protected String nombre;
+  
   /* -- CONSTRUCTORES -- */
   /** Constructor Parametrizado */
   public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
