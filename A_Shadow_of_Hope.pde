@@ -53,6 +53,8 @@ private int tiempoActual;
 /** Auxiliar para definir si se puede hacer clic en pantalla o no. */
 private boolean clicable;
 
+boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED;
+
 /** Gif para cargar el fondo de la pantalla de título. */
 Gif pantallaDeInicio;
 
@@ -341,12 +343,28 @@ public char readCommand() {
 /** Acciones según el input del teclado */
 void keyPressed() {
   if (readCommand() == 'w' || readCommand() == 'W') {
+    W_PRESSED=true;
+    A_PRESSED=false;
+    S_PRESSED=false;
+    D_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_ARRIBA);
   } else if (readCommand() == 'd' || readCommand() == 'D') {
+    D_PRESSED=true;
+    S_PRESSED=false;
+    A_PRESSED=false;
+    W_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_DERECHA);
   } else if (readCommand() == 's' || readCommand() == 'S') {
+    S_PRESSED=true;
+    D_PRESSED=false;
+    A_PRESSED=false;
+    W_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_ABAJO);
   } else if (readCommand() == 'a' || readCommand() == 'A') {
+    A_PRESSED=true;
+    S_PRESSED=false;
+    D_PRESSED=false;
+    W_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
   }
 }
@@ -354,12 +372,16 @@ void keyPressed() {
 /** Acciones según se suelte el input del teclado */
 void keyReleased() {
   if (readCommand() == 'a' || readCommand() == 'A') {
+    A_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA);
   } else if (readCommand() == 'd' || readCommand() == 'D') {
+    D_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_DERECHA);
   } else if (readCommand() == 'w' || readCommand() == 'W') {
+    W_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ARRIBA);
   } else if (readCommand() == 's' || readCommand() == 'S') {
+    S_PRESSED=false;
     jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
   }
 }

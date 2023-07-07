@@ -15,7 +15,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
   /** Representa el estado de movimiento del jugador */
   private int estado;
-  
+
   /** Representa al sprite del jugador */
   private SpriteObject sprite;
 
@@ -30,7 +30,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     this.posicion = posicion;
     this.ancho=ancho/2;
     this.alto=alto;
-    this.sprite = new SpriteObject("SpritesSombra_ver1.png",ancho,alto);
+    this.sprite = new SpriteObject("SpritesSombra_ver1.png", ancho, alto);
 
     this.velocidad = new PVector(80, 80);
 
@@ -42,11 +42,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
-    this.sprite.render(this.estado, new PVector(this.posicion.x,this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual 
+    this.sprite.render(this.estado, new PVector(this.posicion.x, this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual
 
     // Dibujando la sombra que rodea al jugador
     //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
-    
   }
 
   /** Tirando (colocando) una antorcha en el escenario */
@@ -56,27 +55,45 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Moviendo al jugador */
   public void mover() {
     float deltaTime = 1/frameRate;
-    switch(estado){
-      case MaquinaEstadosAnimacion.MOV_ARRIBA:{
+    /*switch(estado) {
+    case MaquinaEstadosAnimacion.MOV_ARRIBA:
+      {
         this.posicion.y-= this.velocidad.y * deltaTime;
         break;
       }
-      case MaquinaEstadosAnimacion.MOV_ABAJO:{
+    case MaquinaEstadosAnimacion.MOV_ABAJO:
+      {
         this.posicion.y+= this.velocidad.y * deltaTime;
         break;
       }
-      case MaquinaEstadosAnimacion.MOV_DERECHA:{
+    case MaquinaEstadosAnimacion.MOV_DERECHA:
+      {
         this.posicion.x+= this.velocidad.x * deltaTime;
         break;
       }
-      case MaquinaEstadosAnimacion.MOV_IZQUIERDA:{
+    case MaquinaEstadosAnimacion.MOV_IZQUIERDA:
+      {
         this.posicion.x-= this.velocidad.x * deltaTime;
         break;
       }
+    }*/
+
+    // Funciona pero tiene problemas con la colision
+    if (W_PRESSED && !A_PRESSED && !S_PRESSED && !D_PRESSED ) {
+      this.posicion.y-= this.velocidad.y * deltaTime;
+    }else
+    if (S_PRESSED && !D_PRESSED && !W_PRESSED && !A_PRESSED ) {
+      this.posicion.y+= this.velocidad.y * deltaTime;
+    }else
+    if (D_PRESSED && !W_PRESSED && !S_PRESSED && !A_PRESSED ) {
+      this.posicion.x+= this.velocidad.x * deltaTime;
+    }else
+    if (A_PRESSED && !S_PRESSED && !W_PRESSED && !D_PRESSED ) {
+      this.posicion.x-= this.velocidad.x * deltaTime;
     }
 
     // evita que el jugador salga de la pantalla
-    if (this.posicion.x - ancho/2 <= 30) {
+    /*if (this.posicion.x - ancho/2 <= 30) {
       this.posicion.x = ancho/2 + 30;
     }
     if (this.posicion.x + ancho/2 >= width - 30) {
@@ -87,7 +104,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     }
     if (this.posicion.y + alto/2 >= height - 30) {
       this.posicion.y = (height - 30) - alto/2;
-    }
+    }*/
   }
 
   /** Leyendo el input del teclado */
@@ -97,26 +114,26 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
   /** Verificando colisiones con un arbol */
   public void colisionarArbol(Arbol a, Colisionador colisionador) {
-    float deltaTime = 1/frameRate; 
+    float deltaTime = 1/frameRate;
     // Verificar colisiones con un arbol
-      if (colisionador.colisionarCircRect(a,jugador)) {
-        println("hay colision con Arbol");
-        // Si hay colisión, deshacer el movimiento con el opuesto
-        if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
-          this.posicion.y+= this.velocidad.y * deltaTime;
-        } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
-          this.posicion.y-= this.velocidad.y * deltaTime;
-        } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
-          this.posicion.x-= this.velocidad.x * deltaTime;
-        } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
-          this.posicion.x+= this.velocidad.x * deltaTime;
-        } 
-      } 
+    if (colisionador.colisionarCircRect(a, jugador)) {
+      println("hay colision con Arbol");
+      // Si hay colisión, deshacer el movimiento con el opuesto
+      if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
+        this.posicion.y+= this.velocidad.y * deltaTime;
+      } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
+        this.posicion.y-= this.velocidad.y * deltaTime;
+      } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
+        this.posicion.x-= this.velocidad.x * deltaTime;
+      } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
+        this.posicion.x+= this.velocidad.x * deltaTime;
+      }
+    }
   }
-  
+
   /** Recorre el array de los arboles */
-  public void recorrerArboles(ArrayList<Arbol> arboles, Colisionador colisionador){ 
-    for(Arbol a: arboles) {
+  public void recorrerArboles(ArrayList<Arbol> arboles, Colisionador colisionador) {
+    for (Arbol a : arboles) {
       colisionarArbol(a, colisionador);
     }
   }
@@ -143,7 +160,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     this.velocidad = velocidad;
   }
   /** Asigna un valor del estado del movimiento del jugador */
-  public void setEstado(int estado){
+  public void setEstado(int estado) {
     this.estado=estado;
   }
 }
