@@ -1,14 +1,11 @@
 /** Clase que representa al Jugador */
 class Jugador extends GameObject implements IMovable, IVisualizable {
-  /* -- ATRIBUTOS --  */
+  /** -- ATRIBUTOS --  */
   /** Representa si el jugador aún está vivo */
   private boolean vivo;
 
   /** Representa la velocidad aplicada del jugador */
   private PVector velocidad;
-
-  /** Representa el rango de visión que tendrá el jugador */
-  private int rangoVision;   // <- BORRAR DESPUES (?
 
   /** Representa la imagen superpuesta que actuará de oscuridad que rodea al jugador */
   private PImage luz;
@@ -20,7 +17,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   private SpriteObject sprite;
 
 
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Jugador() {
   }
@@ -38,7 +35,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
 
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
@@ -46,10 +43,6 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
     // Dibujando la sombra que rodea al jugador
     //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
-  }
-
-  /** Tirando (colocando) una antorcha en el escenario */
-  public void tirarAntorcha() {
   }
 
   /** Moviendo al jugador */
@@ -139,8 +132,8 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
 
-  /* -- ACCESORES (GETTERS Y SETTERS) -- */
-  /* Getters */
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** Getters */
   /** Devuelve el valor del estado vivo del jugador */
   public boolean getVivo() {
     return this.vivo;
@@ -150,7 +143,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     return this.velocidad;
   }
 
-  /* Setters */
+  /** Setters */
   /** Asigna un valor del estado vivo del jugador */
   public void setVivo(boolean vivo) {
     this.vivo = vivo;

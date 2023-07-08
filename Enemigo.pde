@@ -1,6 +1,6 @@
 /** Clase principal del enemigo: Representa al enemigo individual. */
 class Enemigo extends GameObject implements IMovable, IVisualizable{
-  /* -- ATRIBUTOS -- */  
+  /** -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
   
@@ -11,7 +11,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   private int estado;
   
   
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Enemigo(){}
   
@@ -25,7 +25,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   }
   
   
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
     tint(0);
@@ -68,14 +68,14 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   }
   
   
-  /* -- ACCESORES (GETTERS Y SETTERS) -- */
-  /* Getters */
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** - Getters - */
   /** Devuelve la velocidad del enemigo */
   public PVector getVelocidad(){
     return this.velocidad;
   }
   
-  /* Setters */
+  /** - Setters - */
   /** Asigna una velocidad al enemigo */
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;

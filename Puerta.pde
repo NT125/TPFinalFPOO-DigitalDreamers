@@ -1,13 +1,15 @@
 /** Clase que representa la puerta para salir del nivel */
 class Puerta extends GameObject implements IVisualizable{
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por Defecto */
   public Puerta(){
     this.alto = 120;
     this.ancho = 50;
     this.posicion = new PVector(width-ancho/2,height/2);
   }
-  /** Dibuja a la pared */
+  
+  /** -- MÉTODOS -- */
+  /** Dibuja la puerta */
   public void display(){
     stroke(255);
     fill(0);

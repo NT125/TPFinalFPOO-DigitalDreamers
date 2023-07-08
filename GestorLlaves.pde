@@ -1,6 +1,6 @@
 /** Clase que contendrá el ArrayList de las llaves esparcidas por el escenario */
 class GestorLlaves {
-  /* -- ATRIBUTOS -- */
+  /** -- ATRIBUTOS -- */
   /** Representa una lista dinamica que contiene a las llaves */
   private ArrayList<Llave> llaves;
 
@@ -11,7 +11,7 @@ class GestorLlaves {
     generarNivel(nivel);
   }
 
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Genera a las llaves segun el nivel */
   public void generarNivel(int nivel) {
     switch(nivel) {

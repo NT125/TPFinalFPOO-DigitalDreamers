@@ -2,17 +2,31 @@
 
 public class Menu{
   /** -- ATRIBUTOS -- */
+  /** Atributos Enteros que determinan el valor de transparencia del recuadro negro que cubre la pantalla */
   private int fundido;
   private int fundido2;
+  
+  /** Atributos booleanos que determinan si se completó el fundido */
   private boolean fundidoCompleto;
   private boolean fundidoCompleto2;
+  
+  /** Atributo para obtener el tiempo actual de ejecución en milisegundos */
   private int tiempoActual;
   
-  /* Declaración de las distintas fuentes de texto usadas en el juego. */
+  /** Declaración de las distintas fuentes de texto usadas en el juego. */
+  /** Fuente para el título del juego */
   private PFont fTitulo;
+  
+  /** Fuente para textos de encabezado */
   private PFont fEncabezado;
+  
+  /** Fuente para textos regular */
   private PFont fTextos;
+  
+  /** Fuente para textos regular pero en menor tamaño */
   private PFont fTextosSmall;
+  
+    
   
   /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
@@ -110,6 +124,7 @@ public class Menu{
     text("Trabajo Práctico Final - FPOO, TUDIVJ", width-10, height-10);
   }
   
+  /** Método para retratar la pantalla del tutorial de controles */
   public void displayControles(){
     this.displayTextosControles();
     
@@ -126,6 +141,7 @@ public class Menu{
     }
   }
   
+  /** Método para escribir el texto de la pantalla del tutorial de controles */
   public void displayTextosControles(){    
     fill(255);
     textFont(fEncabezado);
@@ -168,42 +184,48 @@ public class Menu{
     textFont(fTextos);
     text("Presiona para continuar", width / 2, height -80);//Muestra un mensaje de Game Over
   }
-    
-  
-    
-  
+
+
+
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** -- Getters -- */
+  /** Devuelve el valor de transparencia para un fundido */
   public int getFundido(){
     return this.fundido;
   }
   
+  /** Devuelve el valor de transparencia para un segundo fundido */
   public int getFundido2(){
     return this.fundido2;
   }
   
+  /** Devuelve si se completó un fundido */
   public boolean getFundidoCompleto(){
     return this.fundidoCompleto;
   }
   
+  /** Devuelve si se completó el segundo fundido */
   public boolean getFundidoCompleto2(){
     return this.fundidoCompleto2;
   }
   
   /** -- Setters -- */
-  
+  /** Establece el valor de transparencia para un fundido */
   public void setFundido(int fundido){
     this.fundido = fundido;
   }
   
+  /** Establece el valor de transparencia para un segundo fundido */
   public void setFundido2(int fundido2){
     this.fundido2 = fundido2;
   }
   
+  /** Establece si se completó un fundido */
   public void setFundidoCompleto(boolean completo){
     this.fundidoCompleto = completo;
   }
   
+  /** Establece si se completó el segundo fundido */
   public void setFundidoCompleto2(boolean completo2){
     this.fundidoCompleto2 = completo2;
   }

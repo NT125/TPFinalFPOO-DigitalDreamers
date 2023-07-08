@@ -1,17 +1,14 @@
 /** Clase del escenario en pantalla. */
 class Escenario extends GameObject implements IVisualizable {
-  /* -- ATRIBUTOS -- */
+  /** -- ATRIBUTOS -- */
   /** Representa una lista que almacena los arboles del escenario */
   private ArrayList <Arbol> arboles;
-  
-  /** Representa al escenario */
-  private int escenario;
   
   /** Representa a la Imagen que se dibuja en el escenario */
   private PImage imagen;
   
   
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Escenario(){
     this.posicion = new PVector(0,0);
@@ -34,14 +31,13 @@ class Escenario extends GameObject implements IVisualizable {
   }
   
   
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Dibuja el escenario */
   public void display(){
     imageMode(CORNER);
     image(this.imagen,this.posicion.x,this.posicion.y);
     image(loadImage("borde_oscuro.png"),0,0);
     
-    /*dibuja las Paredes*/
     /*for(Pared p:paredes){
       p.display();
     }*/
@@ -100,8 +96,8 @@ class Escenario extends GameObject implements IVisualizable {
   */
   
   
-  /* -- ACCESORES (GETTERS Y SETTERS) -- */
-  /* Getters */
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** - Getters - */
   /** Devuelve el nombre del escenario */
   public String getNombre(){
     return this.nombre;
@@ -110,7 +106,7 @@ class Escenario extends GameObject implements IVisualizable {
   public ArrayList<Arbol> getArboles(){
     return this.arboles;
   }
-  /* Setters */
+  /** Setters */
   /** Cambia el nombre del escenario */
   public void setNombre(String nombre){
     this.nombre = nombre;

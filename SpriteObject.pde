@@ -1,7 +1,7 @@
 /** Clase abstracta que gestiona los sprites de los elementos renderizables del juego */
 
 class SpriteObject {
-  /* -- ATRIBUTOS -- */
+  /** -- ATRIBUTOS -- */
   /** Representa al SpriteSheet del Objeto */
   protected PImage spriteSheet;
 
@@ -32,7 +32,7 @@ class SpriteObject {
   /** Representa el nombre del SpriteSheet */
   protected String nombre;
   
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor Parametrizado */
   public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
     this.spriteSheet = requestImage(nombre);
@@ -47,7 +47,7 @@ class SpriteObject {
   }
 
 
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Diubjando los Sprites segun su estado */
   public void render(int estado, PVector posicion) {
     imageMode(CENTER);

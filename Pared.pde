@@ -1,11 +1,11 @@
 /** Clase que representa a la Pared individual */
 class Pared extends GameObject implements IVisualizable {
-  /* -- ATRIBUTOS -- */
+  /** -- ATRIBUTOS -- */
   /** Representa el Color de la pared */ 
   private color colorPared;
   
   
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Pared() {}
   
@@ -16,7 +16,7 @@ class Pared extends GameObject implements IVisualizable {
   }
   
   
-  /* -- MÉTODOS -- */
+  /** -- MÉTODOS -- */
   /** Dibujando la pared */
   public void display() {
     rectMode(CORNER);
@@ -26,7 +26,7 @@ class Pared extends GameObject implements IVisualizable {
   }
   
   
-  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** Setters */
   /** Asigna un nuevo color al color de la pared */
   public void setcolorPared(color colorPared){

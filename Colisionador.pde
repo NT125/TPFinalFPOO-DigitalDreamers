@@ -1,10 +1,12 @@
 /** Clase que verifica las coliciones entre objetos */
 class Colisionador {
 
-  /* -- CONSTRUCTORES -- */
+  /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Colisionador(){}
   
+  
+  /** -- MÉTODOS -- */  
   /** Metodo que comprueba la colision entre dos objetos rectangulos */
   public boolean colisionarRectangulo(GameObject primero, GameObject segundo) {
     

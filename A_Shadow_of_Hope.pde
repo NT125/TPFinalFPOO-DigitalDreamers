@@ -1,7 +1,7 @@
-
-/* -- IMPORTACIÓN DE BIBLIOTECAS -- */
+/** -- IMPORTACIÓN DE BIBLIOTECAS -- */
 /** Importando biblioteca para reproducir archivos GIF. */
 import gifAnimation.*;
+
 /** Importando biblioteca para reproducir AUDIO. */
 import ddf.minim.*;
 import ddf.minim.analysis.*;
@@ -11,10 +11,7 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 
-/* -- DECLARACIÓN DE VARIABLES -- */
-/** Representa al objeto que contiene el Array Fijo de las antorchas. */
-private GestorAntorcha getorAntorcha;
-
+/** -- DECLARACIÓN DE VARIABLES -- */
 /** Representa al Jugador. */
 private Jugador jugador;
 
@@ -42,21 +39,22 @@ private int estado;
 /** Representa el Nivel del juego */
 private int nivel;
 
+/** Valores booleanos que verifican las teclas de movimiento */
 boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED;
 
 /** Gif para cargar el fondo de la pantalla de título. */
 Gif pantallaDeInicio;
 
 
-/* Declaracion de Variables para la musica de fondo. */
+/** Declaracion de Variables para la musica de fondo. */
 Minim minim;
 AudioPlayer musicaTitulo;
 AudioPlayer musicaEscenario;
 
-/* -- GAME LOOP -- */
+/** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup() {
-  estado = MaquinaEstados.TITULO;
+  estado = MaquinaEstados.CONTROLES;
   size(700, 600);
   //frameRate(5);
 
@@ -141,8 +139,8 @@ void draw() {
 }// Fin del draw.
 
 
-/* -- MÉTODOS EXTERNOS -- */
-/* - Métodos propios de Processing: - */
+/** -- MÉTODOS EXTERNOS -- */
+/** - Métodos propios de Processing: */
 /** Acciones según se haga clic */
 void mousePressed() {
   //Cuando el jugador esta en la pantalla de titulo debe hacer click para pasar a la pantalla de controles
