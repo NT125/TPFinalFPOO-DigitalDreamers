@@ -47,6 +47,9 @@ Gif pantallaDeInicio;
 Minim minim;
 AudioPlayer musicaTitulo;
 AudioPlayer musicaEscenario;
+AudioPlayer musicaDerrota;
+AudioPlayer musicaVictoria;
+AudioPlayer sonidoMuerte;
 
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
@@ -56,10 +59,15 @@ void setup() {
   //frameRate(5);
 
   // Definimos la musica y los sonidos //
-
+  
   minim = new Minim(this);
-  musicaTitulo = minim.loadFile("vegeta.wav");
+  musicaTitulo = minim.loadFile("nachoenmp3.wav");
+  musicaTitulo.setGain(-7);
   musicaEscenario = minim.loadFile("ambiente.mp3");
+    musicaEscenario.setGain(-7);
+  musicaDerrota = minim.loadFile("derrota.mp3");
+  musicaVictoria = minim.loadFile("victoria.mp3");
+  sonidoMuerte = minim.loadFile("sonidomuerte.mp3");
 
   //   Terminamos de definir la musica y los sonidos
   
@@ -76,21 +84,13 @@ void draw() {
   background(0);
   switch (estado) {
     case MaquinaEstados.TITULO:
-  
-      musicaTitulo.play();//ponemos la musica
-      // Subir el volumen (aumentar en un 50%)
-      if (keyPressed && key == 'E' || keyPressed && key == 'e') {
-        float currentVolume = musicaTitulo.getGain();
-        float newVolume = currentVolume + 0.5;
-        musicaTitulo.setGain(newVolume);
-      }
-  
-      // Bajar el volumen (disminuir en un 50%)
-      if (keyPressed && key == 'Q' || keyPressed && key == 'q') {
-        float currentVolume = musicaTitulo.getGain();
-        float newVolume = currentVolume - 0.5;
-        musicaTitulo.setGain(newVolume);
-      }
+       //MUSICA
+      musicaTitulo.play();
+      musicaDerrota.pause();
+      sonidoMuerte.pause();
+      musicaDerrota.pause();
+      musicaEscenario.rewind();
+      //FIN MUSICA
       
       menu.display(estado);  
       
@@ -103,7 +103,13 @@ void draw() {
   
     case MaquinaEstados.JUGANDO:
       println(frameRate);
-      //musicaEscenario.play();
+       //MUSICA
+      musicaEscenario.play();
+      musicaVictoria.rewind();
+      musicaDerrota.rewind();
+      musicaTitulo.rewind();
+      sonidoMuerte.rewind();
+      //FIN MUSICA
       
       escenario.display();
       escenario.mostrarArboles();
@@ -125,10 +131,15 @@ void draw() {
   
     case MaquinaEstados.PERDIENDO:
       menu.display(estado);
+       musicaEscenario.pause();
+      musicaDerrota.play();
+      sonidoMuerte.play();
     break;
     
     case MaquinaEstados.GANANDO:
       menu.display(estado);
+      musicaEscenario.pause();
+      musicaVictoria.play();
     break;
   }//Fin del switch.
 }// Fin del draw.
