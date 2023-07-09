@@ -3,34 +3,34 @@
 class SpriteObject {
   /** -- ATRIBUTOS -- */
   /** Representa al SpriteSheet del Objeto */
-  protected PImage spriteSheet;
+  private PImage spriteSheet;
 
   /** Representa el Ancho del Frame individual */
-  protected int anchoFrame;
+  private int anchoFrame;
 
   /** Representa el Alto del Frame individual */
-  protected int altoFrame;
+  private int altoFrame;
 
   /** Representa la Posición inicial x del Frame */
-  protected int xFrame;
+  private int xFrame;
 
   /** Representa la Posición inicial y del Frame (contador para animación hacia arriba) */
-  protected int yFrame;
+  private int yFrame;
 
   /** Representa el Puntero al primer píxel en x de un frame */
-  protected float punteroXFrame;
+  private float punteroXFrame;
 
   /** Representa el Puntero al primer píxel en x del siguiente frame a punteroXFrame; */
-  protected float punteroXFrameSiguiente;
+  private float punteroXFrameSiguiente;
 
   /** Representa la velocidad con la que se reproducirá la animación (la transición entre sprites) */
-  protected float velocidadAnimacion;
+  private float velocidadAnimacion;
 
   /** Representa el Estado de la animación */
-  protected int estado;
+  private int estado;
   
   /** Representa el nombre del SpriteSheet */
-  protected String nombre;
+  private String nombre;
   
   /** -- CONSTRUCTORES -- */
   /** Constructor Parametrizado */
