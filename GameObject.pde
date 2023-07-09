@@ -1,6 +1,6 @@
 /** Clase Abstracta que representa a todos los Objetos del juego */
 abstract class GameObject {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Representa al nombre del objeto para aplicar su sprite */
   protected String nombre; 
   
@@ -13,7 +13,7 @@ abstract class GameObject {
   /** Representa el alto (Hitbox) del objeto */
   protected int alto;
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por Defecto */
   public GameObject(){}
   /** Constructor Parametrizado*/
@@ -23,8 +23,8 @@ abstract class GameObject {
     this.posicion=posicion;
   }
   
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** Getters */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* Getters */
   /** Devuelve la posicion del objeto */
   public PVector getPosicion(){
     return this.posicion;
@@ -38,7 +38,7 @@ abstract class GameObject {
     return this.ancho;
   }
   
-  /** Setters */
+  /* Setters */
   /** Cambia la posicion del objeto */
   public void setPosicion(PVector posicion){
     this.posicion=posicion;

@@ -1,7 +1,6 @@
 /** Clase abstracta que gestiona los sprites de los elementos renderizables del juego */
-
 class SpriteObject {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Representa al SpriteSheet del Objeto */
   private PImage spriteSheet;
 
@@ -26,7 +25,7 @@ class SpriteObject {
   /** Representa la velocidad con la que se reproducirá la animación (la transición entre sprites) */
   private float velocidadAnimacion;
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor Parametrizado */
   public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
     this.spriteSheet = requestImage(nombre);
@@ -36,16 +35,14 @@ class SpriteObject {
     this.yFrame=0;/*
     this.xFrameFloat=0;
     this.nextxFrameFloat=widthFrame;*/
-    
     this.velocidadAnimacion = 20;
   }
 
 
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Diubjando los Sprites segun su estado */
   public void render(int estado, PVector posicion) {
     imageMode(CENTER);
-
     switch(estado) {
     case MaquinaEstadosAnimacion.IDLE:
       {
@@ -158,5 +155,5 @@ class SpriteObject {
         this.xFrame = 0;
       }
     }
-  }
+  }//fin moverSprite
 }

@@ -10,6 +10,8 @@ class MaquinaEstados{
   /** Estado in-game (Pleno Juego) */
   public static final int JUGANDO = 2;
   
+  /* Estado 3 era un transicionado de niveles*/
+  
   /** Estado de Derrota (Game Over) */
   public static final int PERDIENDO = 4;
   

@@ -1,12 +1,12 @@
 /** Clase que verifica las coliciones entre objetos */
 class Colisionador {
 
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Colisionador(){}
   
   
-  /** -- MÉTODOS -- */  
+  /* -- MÉTODOS -- */  
   /** Metodo que comprueba la colision entre dos objetos rectangulos */
   public boolean colisionarRectangulo(GameObject primero, GameObject segundo) {
     
@@ -59,8 +59,8 @@ class Colisionador {
     fill( 0, 255, 0 );
     stroke(0,255,0);
     circle( point.x, point.y, 3);                                                //Dibuja el punto mas cercano
+    circle(circulo.getPosicion().x, circulo.getPosicion().y,circulo.getAncho());
     */
-    
     float distance = point.dist(circulo.getPosicion());         //Calcula la distancia entre el punto cercano y la posicion del circulo
     return distance <= circulo.getAncho()/2;
   }

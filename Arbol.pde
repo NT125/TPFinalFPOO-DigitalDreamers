@@ -1,6 +1,6 @@
 /** Clase de los Árboles: obstáculos para el jugador */
 class Arbol extends GameObject implements IVisualizable {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Representa al sprite del arbol */
   private SpriteObject sprite;
   
@@ -8,7 +8,7 @@ class Arbol extends GameObject implements IVisualizable {
   private int estadoAnim;
   
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Arbol(){}
   
@@ -20,13 +20,11 @@ class Arbol extends GameObject implements IVisualizable {
     this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO;
   }
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al árbol */
   public void display() {
     this.sprite.render(this.estadoAnim,new PVector(this.posicion.x,this.posicion.y+10)); //le sumamos 10 para que el sprite este mas abajo y la hitbox este mas arriba
-    
     //DEBUG: dibujando hitbox
     //circle(posicion.x,posicion.y,ancho);
-    
   }
 }

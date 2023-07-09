@@ -1,6 +1,6 @@
 /** Clase del escenario en pantalla. */
 class Escenario extends GameObject implements IVisualizable {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Representa una lista que almacena los arboles del escenario */
   private ArrayList <Arbol> arboles;
   
@@ -8,7 +8,7 @@ class Escenario extends GameObject implements IVisualizable {
   private PImage imagen;
   
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Escenario(){
     this.posicion = new PVector(0,0);
@@ -20,7 +20,7 @@ class Escenario extends GameObject implements IVisualizable {
     //this.anchoP=30;
     this.nombre=nombre; 
     this.imagen = loadImage(nombre);
-    //this.imagen.resize(width+4,height);
+    this.imagen.resize(width+4,height);
     arboles = new ArrayList();
     /*
     paredes= new Pared[4];
@@ -31,16 +31,15 @@ class Escenario extends GameObject implements IVisualizable {
   }
   
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibuja el escenario */
   public void display(){
     imageMode(CORNER);
+    tint(160, 185, 62);  //entinta la imagen a marron
     image(this.imagen,this.posicion.x,this.posicion.y);
+    tint(255);
     image(loadImage("borde_oscuro.png"),0,0);
     
-    /*for(Pared p:paredes){
-      p.display();
-    }*/
   }
   
   /** Mostrando los arboles en el escenario */
@@ -96,8 +95,8 @@ class Escenario extends GameObject implements IVisualizable {
   */
   
   
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** - Getters - */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* - Getters - */
   /** Devuelve el nombre del escenario */
   public String getNombre(){
     return this.nombre;
@@ -106,7 +105,7 @@ class Escenario extends GameObject implements IVisualizable {
   public ArrayList<Arbol> getArboles(){
     return this.arboles;
   }
-  /** Setters */
+  /* Setters */
   /** Cambia el nombre del escenario */
   public void setNombre(String nombre){
     this.nombre = nombre;

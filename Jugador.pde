@@ -1,6 +1,6 @@
 /** Clase que representa al Jugador */
 class Jugador extends GameObject implements IMovable, IVisualizable {
-  /** -- ATRIBUTOS --  */
+  /* -- ATRIBUTOS --  */
   /** Representa si el jugador aún está vivo */
   private boolean vivo;
 
@@ -17,8 +17,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   private SpriteObject sprite;
 
 
-
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Jugador() {
   }
@@ -36,8 +35,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
 
-
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
@@ -85,10 +83,10 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     return key;
   }
 
-  /** Verificando colisiones con un arbol */
+  /** Verificando colisiones con los arboles */
   public void colisionarArbol(Colisionador colisionador, ArrayList<Arbol> arboles) {
     float deltaTime = 1/frameRate;
-    for (Arbol a : arboles) {      
+    for (Arbol a : arboles) {   
       // Verificar colisiones con un arbol
       if (colisionador.colisionarCircRect(a, jugador)) {
         println("hay colision con Arbol");
@@ -114,9 +112,8 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   } */
 
 
-
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** Getters */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* Getters */
   /** Devuelve el valor del estadoAnim vivo del jugador */
   public boolean getVivo() {
     return this.vivo;
@@ -126,7 +123,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     return this.velocidad;
   }
 
-  /** Setters */
+  /* Setters */
   /** Asigna un valor del estadoAnim vivo del jugador */
   public void setVivo(boolean vivo) {
     this.vivo = vivo;

@@ -1,7 +1,6 @@
 /** Clase que dibujará las pantallas de menús e intermisiones del juego */
-
 public class Menu{
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Atributos Enteros que determinan el valor de transparencia del recuadro negro que cubre la pantalla */
   private int fundido;
   private int fundido2;
@@ -26,11 +25,15 @@ public class Menu{
   /** Fuente para textos regular pero en menor tamaño */
   private PFont fTextosSmall;
   
+  /** Representa la pantalla de inicio que es un gif */
+  private Gif pantallaInicial;
     
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
-  public Menu(){
+  public Menu(){}
+  /** Constructor Parametrizado */
+  public Menu(PApplet p){
     this.fundido = 255;
     this.fundido2 = 255;
     this.fundidoCompleto = false;
@@ -40,11 +43,11 @@ public class Menu{
     this.fEncabezado = createFont("arpegius.ttf", 50, false);
     this.fTextos = createFont("pixel-unicode.ttf", 30, false);
     this.fTextosSmall = createFont("pixel-unicode.ttf", 20, false);
+    pantallaInicial= new Gif(p, "TitleScreen.gif");
   }
   
   
-  
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Método para dibujar el menú correspondiente */
   public void display(int estado){
     switch(estado){
@@ -73,7 +76,8 @@ public class Menu{
   
   /** Método para retratar el menú de título */
   public void displayTitulo(){    
-    this.displayFondo(loadImage("TitleScreen.png"));
+    this.pantallaInicial.play(); 
+    displayFondo(pantallaInicial);
     
      if (!this.fundidoCompleto) {
       fill(0, this.fundido);
@@ -161,7 +165,7 @@ public class Menu{
   }
   
   /** Método para dibujar un fondo */
-  public void displayFondo(PImage fondo){
+  public void displayFondo(Gif fondo){
     imageMode(CORNER);
     image(fondo, 0, 0);    
   }
@@ -173,6 +177,7 @@ public class Menu{
     textAlign(CENTER, CENTER);
     text("Ganaste :D", width / 2, height / 2);
     textFont(fTextos);
+    text("Presiona para volver al menu", width / 2, height -80);
    }
   
   /** Método para retratar la pantalla de Game Over */
@@ -187,8 +192,8 @@ public class Menu{
 
 
 
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** -- Getters -- */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* -- Getters -- */
   /** Devuelve el valor de transparencia para un fundido */
   public int getFundido(){
     return this.fundido;
@@ -209,7 +214,7 @@ public class Menu{
     return this.fundidoCompleto2;
   }
   
-  /** -- Setters -- */
+  /* -- Setters -- */
   /** Establece el valor de transparencia para un fundido */
   public void setFundido(int fundido){
     this.fundido = fundido;

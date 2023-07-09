@@ -1,6 +1,6 @@
 /** Clase principal del enemigo: Representa al enemigo individual. */
 class Enemigo extends GameObject implements IMovable, IVisualizable{
-  /** -- ATRIBUTOS -- */  
+  /* -- ATRIBUTOS -- */  
   /** Vector velocidad del enemigo */
   private PVector velocidad;
   
@@ -11,7 +11,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   private int estadoAnim;
   
   
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Enemigo(){}
   
@@ -20,12 +20,12 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     super(posicion,ancho,alto);
     this.velocidad = velocidad;
     
-    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+10,alto+10); //sumamos 10 para que el psrite sea un poco mas grande
+    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+15,alto+15); //sumamos 15 para que el psrite sea un poco mas grande
     this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO;
   }
   
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
     this.sprite.render(this.estadoAnim,this.posicion);
@@ -38,7 +38,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     
   }
   
-  /** Hace que el enemigo rebote al impactar una pared */
+  /** Hace que el enemigo rebote dentro del size */
   public void rebotar(){
     //DEBUG: dibujando bordes
     //rect(ancho,alto,width-ancho*2, height-alto*2);
@@ -58,22 +58,22 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
     posicion.add(velocidadNormal);
   }
-  /** Cambia de direccion del enemigo */
+  /** Cambia la direccion del enemigo */
   public void cambiarDireccion() {
     velocidad.mult(-1);
     /*velocidad.x *= -1;
     velocidad.y *= -1;*/
   }
   
-  /** -- ACCESORES (GETTERS Y SETTERS) -- */
-  /** - Getters - */
+  /* -- ACCESORES (GETTERS Y SETTERS) -- */
+  /* - Getters - */
   /** Devuelve la velocidad del enemigo */
   public PVector getVelocidad(){
     return this.velocidad;
   }
   
-  /** - Setters - */
-  /** Asigna una velocidad al enemigo */
+  /* - Setters - */
+  /** Asigna una nueva velocidad al enemigo */
   public void setVelocidad(PVector velocidad){
     this.velocidad = velocidad;
   }

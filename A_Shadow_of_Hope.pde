@@ -1,17 +1,11 @@
-/** -- IMPORTACIÓN DE BIBLIOTECAS -- */
+/* -- IMPORTACIÓN DE BIBLIOTECAS -- */
 /** Importando biblioteca para reproducir archivos GIF. */
 import gifAnimation.*;
 
 /** Importando biblioteca para reproducir AUDIO. */
-import ddf.minim.*;
-import ddf.minim.analysis.*;
-import ddf.minim.effects.*;
-import ddf.minim.signals.*;
-import ddf.minim.spi.*;
-import ddf.minim.ugens.*;
+import ddf.minim.*; 
 
-
-/** -- DECLARACIÓN DE VARIABLES -- */
+/* -- DECLARACIÓN DE VARIABLES -- */
 /** Representa al Jugador. */
 private Jugador jugador;
 
@@ -37,47 +31,39 @@ private Colisionador colisionador;
 private int estado;
 
 /** Valores booleanos que verifican las teclas de movimiento */
-boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED;
+private boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED;
 
-/** Gif para cargar el fondo de la pantalla de título. */
-Gif pantallaDeInicio;
+/** Variables para la musica y sonidos de fondo. */
+private Minim minim;
+private AudioPlayer musicaTitulo;
+private AudioPlayer musicaEscenario;
+private AudioPlayer musicaDerrota;
+private AudioPlayer musicaVictoria;
+private AudioPlayer sonidoMuerte;
+private AudioPlayer sonidoRelampago;
 
-
-/** Declaracion de Variables para la musica de fondo. */
-Minim minim;
-AudioPlayer musicaTitulo;
-AudioPlayer musicaEscenario;
-AudioPlayer musicaDerrota;
-AudioPlayer musicaVictoria;
-AudioPlayer sonidoMuerte;
-AudioPlayer sonidoRelampago;
-
-/** -- GAME LOOP -- */
+/* -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
 void setup() {
-  estado = MaquinaEstados.CONTROLES;
+  estado = MaquinaEstados.TITULO;
   size(700, 600);
-  //frameRate(5);
+  //frameRate(15);
 
   // Definimos la musica y los sonidos //
-  
   minim = new Minim(this);
   musicaTitulo = minim.loadFile("nachoenmp3.wav");
-  musicaTitulo.setGain(-7);
+  musicaTitulo.setGain(20);
   musicaEscenario = minim.loadFile("ambiente.mp3");
-    musicaEscenario.setGain(-7);
+  musicaEscenario.setGain(-7);
   musicaDerrota = minim.loadFile("derrota.mp3");
   musicaVictoria = minim.loadFile("victoria.mp3");
   sonidoMuerte = minim.loadFile("sonidomuerte.mp3");
   sonidoRelampago = minim.loadFile("relampago.mp3");
-
-  //   Terminamos de definir la musica y los sonidos
+  // Terminamos de definir la musica y los sonidos
   
-  menu = new Menu();
-  
-  colisionador = new Colisionador();  
-  // Definición de fuentes.
-  
+  musicaTitulo.loop(); // dejamos la musica aqui porque no se lo puede dejar en maquinaEstados.TITULO
+  menu = new Menu(this);
+  colisionador = new Colisionador();
 }// Fin setup.
 
 
@@ -86,38 +72,20 @@ void draw() {
   background(0);
   switch (estado) {
     case MaquinaEstados.TITULO:
-       //MUSICA
-      musicaTitulo.play();
-      musicaDerrota.pause();
-      sonidoMuerte.pause();
-      musicaDerrota.pause();
-      musicaEscenario.rewind();
-      sonidoRelampago.rewind();
+      //MUSICA
       //FIN MUSICA
-      
       menu.display(estado);  
-      
     break;
   
     case MaquinaEstados.CONTROLES:
-    sonidoRelampago.play();
-      musicaTitulo.pause(); //ponemos la musica
+      sonidoRelampago.play();
       menu.display(estado);
     break;
   
     case MaquinaEstados.JUGANDO:
       println(frameRate);
-       //MUSICA
-      musicaEscenario.play();
-      musicaVictoria.rewind();
-      musicaDerrota.rewind();
-      musicaTitulo.rewind();
-      sonidoMuerte.rewind();
-      //FIN MUSICA
-      
       escenario.display();
       escenario.mostrarArboles();
-  
       puerta.display();
   
       gestorLlaves.dibujarLlaves();
@@ -136,9 +104,9 @@ void draw() {
   
     case MaquinaEstados.PERDIENDO:
       menu.display(estado);
-       musicaEscenario.pause();
+      musicaEscenario.pause();
+      sonidoMuerte.play(); 
       musicaDerrota.play();
-      sonidoMuerte.play();
     break;
     
     case MaquinaEstados.GANANDO:
@@ -150,16 +118,22 @@ void draw() {
 }// Fin del draw.
 
 
-/** -- MÉTODOS EXTERNOS -- */
-/** - Métodos propios de Processing: */
+/* -- MÉTODOS EXTERNOS -- */
+/* - Métodos propios de Processing: */
 /** Acciones según se haga clic */
 void mousePressed() {
   //Cuando el jugador esta en la pantalla de titulo debe hacer click para pasar a la pantalla de controles
   if (estado == MaquinaEstados.TITULO) {
     println("Titulo -> Controles");
-    estado = MaquinaEstados.CONTROLES;    
+    //Sonido
+    musicaTitulo.pause(); 
+    musicaTitulo.rewind(); 
+    musicaEscenario.rewind();
+    sonidoRelampago.rewind();  
+    //FIN Sonido
     menu.setFundido(255);
     menu.setFundidoCompleto(false);
+    estado = MaquinaEstados.CONTROLES;
   } 
   else if (estado == MaquinaEstados.CONTROLES){  
     println("Controles -> Juego");
@@ -169,13 +143,37 @@ void mousePressed() {
     gestorLlaves = new GestorLlaves();
     puerta = new Puerta();
     escenario.crearArboles();
+    //MUSICA
+    musicaEscenario.loop();
+      
     estado = MaquinaEstados.JUGANDO;
   }
   else if (estado == MaquinaEstados.PERDIENDO) {
+    println("Perdiendo -> Titulo");
     menu.setFundido(255);
     menu.setFundido2(255);
     menu.setFundidoCompleto(false);
     menu.setFundidoCompleto2(false);
+    
+    musicaDerrota.pause();
+    sonidoMuerte.pause(); 
+    musicaDerrota.rewind();
+    sonidoMuerte.rewind();
+    musicaTitulo.loop();
+    
+    estado = MaquinaEstados.TITULO;
+  }
+  else if (estado == MaquinaEstados.GANANDO) {
+    println("Ganando -> Titulo");
+    menu.setFundido(255);
+    menu.setFundido2(255);
+    menu.setFundidoCompleto(false);
+    menu.setFundidoCompleto2(false);
+    
+    musicaVictoria.pause();
+    musicaVictoria.rewind();
+    musicaTitulo.loop();
+    
     estado = MaquinaEstados.TITULO;
   }
 }

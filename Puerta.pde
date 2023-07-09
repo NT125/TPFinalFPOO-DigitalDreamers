@@ -1,21 +1,28 @@
 /** Clase que representa la puerta para salir del nivel */
 class Puerta extends GameObject implements IVisualizable{
-  /** -- CONSTRUCTORES -- */
+  /* -- ATRIBUTOS -- */
+  /** Representa al sprite de la puerta */
+  private SpriteObject sprite;
+  
+  /** Representa el estadoAnim del sprite de la puerta */
+  private int estadoAnim;
+  
+  
+  /* -- CONSTRUCTORES -- */
   /** Constructor por Defecto */
   public Puerta(){
-    this.alto = 120;
-    this.ancho = 50;
+    this.alto = 100;
+    this.ancho = 80;
     this.posicion = new PVector(width-ancho/2,height/2);
+    this.sprite = new SpriteObject("puerta.png",ancho,alto);
+    this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO;
   }
   
-  /** -- MÉTODOS -- */
+  /* -- MÉTODOS -- */
   /** Dibuja la puerta */
   public void display(){
-    stroke(255);
-    fill(0);
-    rectMode(CENTER);
-    rect(this.posicion.x, this.posicion.y, this.ancho, this.alto);
-    rectMode(CORNER);
-    stroke(0);
+    tint(225, 200, 80);
+    this.sprite.render(this.estadoAnim,this.posicion);
+    tint(255);
   }
 }

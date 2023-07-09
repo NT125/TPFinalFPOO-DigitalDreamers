@@ -1,10 +1,10 @@
 /** Clase que contiene el ArrayList de los Enemigos: Gestionará la aparición de varios enemigos */
 class GestorEnemigos {
-  /** -- ATRIBUTOS -- */
+  /* -- ATRIBUTOS -- */
   /** Representa la lista dinamica que contiene a los enemigos */
   private ArrayList<Enemigo> enemigos;
 
-  /** -- CONSTRUCTORES -- */
+  /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public GestorEnemigos() {
     enemigos = new ArrayList <Enemigo>();
