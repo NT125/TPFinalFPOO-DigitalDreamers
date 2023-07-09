@@ -17,6 +17,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   private SpriteObject sprite;
 
 
+
   /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public Jugador() {
@@ -33,6 +34,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
     //this.luz = loadImage("LUZ.png");
   }
+
 
 
   /** -- MÉTODOS -- */
@@ -84,30 +86,33 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
   /** Verificando colisiones con un arbol */
-  public void colisionarArbol(Arbol a, Colisionador colisionador) {
+  public void colisionarArbol(Colisionador colisionador, ArrayList<Arbol> arboles) {
     float deltaTime = 1/frameRate;
-    // Verificar colisiones con un arbol
-    if (colisionador.colisionarCircRect(a, jugador)) {
-      println("hay colision con Arbol");
-      // Si hay colisión, deshacer el movimiento con el opuesto
-      if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
-        this.posicion.y+= this.velocidad.y * deltaTime;
-      } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
-        this.posicion.y-= this.velocidad.y * deltaTime;
-      } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
-        this.posicion.x-= this.velocidad.x * deltaTime;
-      } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
-        this.posicion.x+= this.velocidad.x * deltaTime;
+    for (Arbol a : arboles) {      
+      // Verificar colisiones con un arbol
+      if (colisionador.colisionarCircRect(a, jugador)) {
+        println("hay colision con Arbol");
+        // Si hay colisión, deshacer el movimiento con el opuesto
+        if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
+          this.posicion.y+= this.velocidad.y * deltaTime;
+        } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
+          this.posicion.y-= this.velocidad.y * deltaTime;
+        } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
+          this.posicion.x-= this.velocidad.x * deltaTime;
+        } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
+          this.posicion.x+= this.velocidad.x * deltaTime;
+        }
       }
     }
   }
 
-  /** Recorre el array de los arboles */
+  /** Recorre el array de los arboles
   public void recorrerArboles(ArrayList<Arbol> arboles, Colisionador colisionador) {
     for (Arbol a : arboles) {
       colisionarArbol(a, colisionador);
     }
-  }
+  } */
+
 
 
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
