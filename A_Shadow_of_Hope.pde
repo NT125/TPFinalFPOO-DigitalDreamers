@@ -36,9 +36,6 @@ private Colisionador colisionador;
 /** Estado del juego, toma los valores de MaquinaEstados. */
 private int estado;
 
-/** Representa el Nivel del juego */
-private int nivel;
-
 /** Valores booleanos que verifican las teclas de movimiento */
 boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED;
 
@@ -68,11 +65,9 @@ void setup() {
   
   menu = new Menu();
   
-  colisionador = new Colisionador();
-  
-  nivel=1;
-  
+  colisionador = new Colisionador();  
   // Definición de fuentes.
+  
 }// Fin setup.
 
 
@@ -108,7 +103,7 @@ void draw() {
   
     case MaquinaEstados.JUGANDO:
       println(frameRate);
-      musicaEscenario.play();
+      //musicaEscenario.play();
       
       escenario.display();
       escenario.mostrarArboles();
@@ -154,8 +149,8 @@ void mousePressed() {
     println("Controles -> Juego");
     jugador = new Jugador(new PVector(width/2, height/2), 64, 64);
     escenario = new Escenario(new PVector(0, 0), "fondo_juego.png");
-    gestorEnemigos = new GestorEnemigos(nivel);
-    gestorLlaves = new GestorLlaves(nivel);
+    gestorEnemigos = new GestorEnemigos();
+    gestorLlaves = new GestorLlaves();
     puerta = new Puerta();
     escenario.crearArboles();
     estado = MaquinaEstados.JUGANDO;

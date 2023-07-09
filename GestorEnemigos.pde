@@ -6,9 +6,9 @@ class GestorEnemigos {
 
   /** -- CONSTRUCTORES -- */
   /** Constructor por defecto */
-  public GestorEnemigos(int nivel) {
+  public GestorEnemigos() {
     enemigos = new ArrayList <Enemigo>();
-    generarEnemigos(nivel);
+    generarEnemigos();
   }
 
   /* -- MÉTODOS -- */
@@ -20,21 +20,15 @@ class GestorEnemigos {
       e.rebotar();
     }
   }
-  /** Genera a los enemigos segun el nivel */
-  public void generarEnemigos(int nivel) {
-    switch(nivel) {
-    case 1:
-      {
-        Enemigo e;
-        e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(80, -99.9));
-        enemigos.add(e);
-        e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, 39.3));
-        enemigos.add(e);
-        e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(50, -30.9));
-        enemigos.add(e); 
-        break;
-      } //end case 1
-    }//end Switch
+  /** Genera el grupo de enemigos */
+  public void generarEnemigos() {
+    Enemigo e;
+    e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(80, -99.9));
+    enemigos.add(e);
+    e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, 39.3));
+    enemigos.add(e);
+    e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(50, -30.9));
+    enemigos.add(e); 
   }
   /** Verificar colision con jugador*/
   public void colisionarJugador(Jugador jugador, Colisionador colisionador) {

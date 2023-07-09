@@ -6,27 +6,19 @@ class GestorLlaves {
 
   /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
-  public GestorLlaves(int nivel) {
+  public GestorLlaves() {
     llaves = new ArrayList <Llave>();
-    generarNivel(nivel);
+    generarNivel();
   }
 
   /** -- MÉTODOS -- */
   /** Genera a las llaves segun el nivel */
-  public void generarNivel(int nivel) {
-    switch(nivel) {
-    case 1:
-      {
-        Llave l;
-        l= new Llave(new PVector(width/4, height/4), 45, 45);
-        llaves.add(l);
-        /*  Aun hay errores al poner ambas llaves
-         l= new Llave(new PVector(width/2,height/2),45,45);
-         llaves.add(l); */
-        break;
-      } //end case 1
-    }//end Switch
+  public void generarNivel(){
+    Llave l;
+    l= new Llave(new PVector(width/4, height/4), 45, 45);
+    llaves.add(l);
   }
+  
   /** Evalua la colision entre la llave y otro objeto  */
   public void colisionarObjetos(Jugador jugador, Puerta puerta, Colisionador colisionador) {
     for (Llave l : llaves) {

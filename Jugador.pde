@@ -48,29 +48,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Moviendo al jugador */
   public void mover() {
     float deltaTime = 1/frameRate;
-    /*switch(estado) {
-    case MaquinaEstadosAnimacion.MOV_ARRIBA:
-      {
-        this.posicion.y-= this.velocidad.y * deltaTime;
-        break;
-      }
-    case MaquinaEstadosAnimacion.MOV_ABAJO:
-      {
-        this.posicion.y+= this.velocidad.y * deltaTime;
-        break;
-      }
-    case MaquinaEstadosAnimacion.MOV_DERECHA:
-      {
-        this.posicion.x+= this.velocidad.x * deltaTime;
-        break;
-      }
-    case MaquinaEstadosAnimacion.MOV_IZQUIERDA:
-      {
-        this.posicion.x-= this.velocidad.x * deltaTime;
-        break;
-      }
-    }*/
-
+    
     // Funciona pero tiene problemas con la colision
     if (W_PRESSED && !A_PRESSED && !S_PRESSED && !D_PRESSED ) {
       this.posicion.y-= this.velocidad.y * deltaTime;
@@ -86,7 +64,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     }
 
     // evita que el jugador salga de la pantalla
-    /*if (this.posicion.x - ancho/2 <= 30) {
+    if (this.posicion.x - ancho/2 <= 30) {
       this.posicion.x = ancho/2 + 30;
     }
     if (this.posicion.x + ancho/2 >= width - 30) {
@@ -97,7 +75,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     }
     if (this.posicion.y + alto/2 >= height - 30) {
       this.posicion.y = (height - 30) - alto/2;
-    }*/
+    }
   }
 
   /** Leyendo el input del teclado */
