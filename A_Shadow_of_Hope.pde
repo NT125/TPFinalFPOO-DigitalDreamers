@@ -50,6 +50,7 @@ AudioPlayer musicaEscenario;
 AudioPlayer musicaDerrota;
 AudioPlayer musicaVictoria;
 AudioPlayer sonidoMuerte;
+AudioPlayer sonidoRelampago;
 
 /** -- GAME LOOP -- */
 /** Setup, se ejecuta una sola vez. */
@@ -68,6 +69,7 @@ void setup() {
   musicaDerrota = minim.loadFile("derrota.mp3");
   musicaVictoria = minim.loadFile("victoria.mp3");
   sonidoMuerte = minim.loadFile("sonidomuerte.mp3");
+  sonidoRelampago = minim.loadFile("relampago.mp3");
 
   //   Terminamos de definir la musica y los sonidos
   
@@ -90,6 +92,7 @@ void draw() {
       sonidoMuerte.pause();
       musicaDerrota.pause();
       musicaEscenario.rewind();
+      sonidoRelampago.rewind();
       //FIN MUSICA
       
       menu.display(estado);  
@@ -97,6 +100,7 @@ void draw() {
     break;
   
     case MaquinaEstados.CONTROLES:
+    sonidoRelampago.play();
       musicaTitulo.pause(); //ponemos la musica
       menu.display(estado);
     break;

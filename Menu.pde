@@ -146,14 +146,14 @@ public class Menu{
     fill(255);
     textFont(fEncabezado);
     textAlign(CENTER, CENTER);
-    text("- Cómo jugar -", width/2, 60);
+    text("- Cómo jugar -", width/2, 120);
 
     textFont(fTextos);
-    textAlign(LEFT, CENTER);
-    text("W/A/S/D:  Mover al personaje", 60, 160);
+    textAlign(CENTER, CENTER);
+    text("W/A/S/D:  Mover al personaje", width/2, 230);
 
     textAlign(CENTER, TOP);
-    text("Tu visión está limitada hasta donde alumbre tu antorcha.\nEvita en todo momento a los Devoradores.\nBusca la llave perdida en el mapa y sal de ahí.", width/2, 370);
+    text("Tu visión está limitada hasta donde alumbre tu antorcha.\nEvita en todo momento a los Devoradores.\nBusca las llaves perdidas en el mapa y sal de ahí.", width/2, 320);
 
     textFont(fTextosSmall);
     textAlign(RIGHT, CENTER);
