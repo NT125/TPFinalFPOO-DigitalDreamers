@@ -116,10 +116,6 @@ void draw() {
   
       puerta.display();
   
-      jugador.display();
-      jugador.mover();
-      jugador.colisionarArbol(colisionador,escenario.getArboles()); 
-  
       gestorLlaves.dibujarLlaves();
       gestorLlaves.colisionarJugador(jugador,colisionador);
       gestorLlaves.abrirPuerta();
@@ -128,6 +124,10 @@ void draw() {
       gestorEnemigos.verificarColisionesJugador(jugador,colisionador);
       gestorEnemigos.colisionarEnemigos(colisionador);
       gestorEnemigos.colisionarArboles(escenario.getArboles(),colisionador);
+  
+      jugador.display();
+      jugador.mover();
+      jugador.colisionarArbol(colisionador,escenario.getArboles()); 
     break;
   
     case MaquinaEstados.PERDIENDO:

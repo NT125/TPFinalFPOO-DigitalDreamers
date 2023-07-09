@@ -28,9 +28,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   /** -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
-    tint(0);
     this.sprite.render(this.estadoAnim,this.posicion);
-    tint(255);
     //DEBUG: dibujando hitbox
     /*fill(Color);
     ellipse(posicion.x,posicion.y,ancho,alto);

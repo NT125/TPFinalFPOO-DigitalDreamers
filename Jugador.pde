@@ -32,7 +32,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
     this.velocidad = new PVector(80, 80);
 
-    //this.luz = loadImage("LUZ.png");
+    this.luz = loadImage("LUZ.png");
   }
 
 
@@ -44,7 +44,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     this.sprite.render(this.estadoAnim, new PVector(this.posicion.x, this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual
 
     // Dibujando la sombra que rodea al jugador
-    //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
+    image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
   }
 
   /** Moviendo al jugador */
