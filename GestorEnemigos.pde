@@ -23,18 +23,20 @@ class GestorEnemigos {
   /** Genera el grupo de enemigos */
   public void generarEnemigos() {
     Enemigo e;
-    e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(80, -99.9));
+    e = new Enemigo(new PVector(100, 300), 45, 45, new PVector(80, -99.9));
     this.enemigos.add(e);
-    e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, 39.3));
+    e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, -39.3));
     this.enemigos.add(e);
-    e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(50, -30.9));
+    e = new Enemigo(new PVector(400, 400), 45, 45, new PVector(50, 30.9));
     this.enemigos.add(e); 
   }
   
   /** Verificar la colisión con el jugador de cada instancia de Enemigo */
   public void verificarColisionesJugador(Jugador jugador, Colisionador colisionador) {
     for (Enemigo e: this.enemigos){
-      e.colisionarJugador(jugador,colisionador);
+      if (colisionador.colisionarCircRect(e,jugador)) {
+        estado = MaquinaEstados.PERDIENDO;
+      }
     }
   }
 

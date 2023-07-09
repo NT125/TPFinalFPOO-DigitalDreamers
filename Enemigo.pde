@@ -67,14 +67,6 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     velocidad.y *= -1;*/
   }
   
-  /** Verificar colision con jugador*/
-  public void colisionarJugador(Jugador jugador, Colisionador colisionador) {
-    // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
-    if (colisionador.colisionarCircRect(this,jugador)) {
-      estado = MaquinaEstados.PERDIENDO;
-    }
-  }
-  
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** - Getters - */
   /** Devuelve la velocidad del enemigo */

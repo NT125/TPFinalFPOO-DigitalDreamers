@@ -15,24 +15,35 @@ class GestorLlaves {
   /** Genera a las llaves segun el nivel */
   public void generarNivel(){
     Llave l;
-    l= new Llave(new PVector(width/4, height/4), 45, 45);
-    llaves.add(l);
+    l = new Llave(new PVector(width/4, height/4), 45, 45);
+    this.llaves.add(l);
+    l = new Llave(new PVector(width/3, height/1.2), 45, 45);
+    this.llaves.add(l);
   }
   
   /** Evalua la colision entre la llave y otro objeto  */
-  public void colisionarObjetos(Jugador jugador, Puerta puerta, Colisionador colisionador) {
-    for (Llave l : llaves) {
+  public void colisionarJugador(Jugador jugador, Colisionador colisionador) {
+    for (Llave l : this.llaves) {
       // Verifica la colision entre el jugador y la llave
       if (colisionador.colisionarRectangulo(jugador,l)) {
         l.setPosicion(new PVector(jugador.getPosicion().x, jugador.getPosicion().y));
       }
-
-      //Verificando la colision de la llave con la puerta
-      if (colisionador.colisionarRectangulo(l,puerta)) {
-        estado = MaquinaEstados.GANANDO;
-      }
     }
   }
+  
+  /** Permite "abrir la puerta" y salir del nivel */
+  public void abrirPuerta(){
+    boolean abierta = true;
+    for (Llave l : this.llaves){
+      if(!l.colisionarPuerta()){
+        abierta = false;
+      }
+    }
+    if (abierta){
+      estado = MaquinaEstados.GANANDO;
+    }    
+  }
+  
   /** Dibuja las llaves en el escenario */
   public void dibujarLlaves() {
     for (Llave l : llaves) {

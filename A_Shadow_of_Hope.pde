@@ -121,7 +121,8 @@ void draw() {
       jugador.colisionarArbol(colisionador,escenario.getArboles()); 
   
       gestorLlaves.dibujarLlaves();
-      gestorLlaves.colisionarObjetos(jugador, puerta,colisionador);
+      gestorLlaves.colisionarJugador(jugador,colisionador);
+      gestorLlaves.abrirPuerta();
   
       gestorEnemigos.mostrarEnemigos();
       gestorEnemigos.verificarColisionesJugador(jugador,colisionador);
