@@ -10,8 +10,8 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Representa la imagen superpuesta que actuará de oscuridad que rodea al jugador */
   private PImage luz;
 
-  /** Representa el estado de movimiento del jugador */
-  private int estado;
+  /** Representa el estadoAnim de movimiento del jugador */
+  private int estadoAnim;
 
   /** Representa al sprite del jugador */
   private SpriteObject sprite;
@@ -41,7 +41,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   /** Dibujando al jugador */
   public void display() {
     // Dibujando al jugador
-    this.sprite.render(this.estado, new PVector(this.posicion.x, this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual
+    this.sprite.render(this.estadoAnim, new PVector(this.posicion.x, this.posicion.y)); // le pasamos la posicion dividida porque el ImageMode CENTER cambia de manera visual
 
     // Dibujando la sombra que rodea al jugador
     //image(luz,jugador.getPosicion().x,jugador.getPosicion().y);
@@ -93,13 +93,13 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
       if (colisionador.colisionarCircRect(a, jugador)) {
         println("hay colision con Arbol");
         // Si hay colisión, deshacer el movimiento con el opuesto
-        if ( this.estado==MaquinaEstadosAnimacion.MOV_ARRIBA) {
+        if ( this.estadoAnim==MaquinaEstadosAnimacion.MOV_ARRIBA) {
           this.posicion.y+= this.velocidad.y * deltaTime;
-        } else if (this.estado == MaquinaEstadosAnimacion.MOV_ABAJO) {
+        } else if (this.estadoAnim == MaquinaEstadosAnimacion.MOV_ABAJO) {
           this.posicion.y-= this.velocidad.y * deltaTime;
-        } else if (this.estado== MaquinaEstadosAnimacion.MOV_DERECHA) {
+        } else if (this.estadoAnim== MaquinaEstadosAnimacion.MOV_DERECHA) {
           this.posicion.x-= this.velocidad.x * deltaTime;
-        } else if (this.estado == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
+        } else if (this.estadoAnim == MaquinaEstadosAnimacion.MOV_IZQUIERDA) {
           this.posicion.x+= this.velocidad.x * deltaTime;
         }
       }
@@ -117,7 +117,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** Getters */
-  /** Devuelve el valor del estado vivo del jugador */
+  /** Devuelve el valor del estadoAnim vivo del jugador */
   public boolean getVivo() {
     return this.vivo;
   }
@@ -127,7 +127,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   }
 
   /** Setters */
-  /** Asigna un valor del estado vivo del jugador */
+  /** Asigna un valor del estadoAnim vivo del jugador */
   public void setVivo(boolean vivo) {
     this.vivo = vivo;
   }
@@ -135,8 +135,8 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
   public void setVelocidad(PVector velocidad) {
     this.velocidad = velocidad;
   }
-  /** Asigna un valor del estado del movimiento del jugador */
-  public void setEstado(int estado) {
-    this.estado=estado;
+  /** Asigna un valor del estadoAnim del movimiento del jugador */
+  public void setEstadoAnim(int estadoAnim) {
+    this.estadoAnim=estadoAnim;
   }
 }

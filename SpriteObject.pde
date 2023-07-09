@@ -25,12 +25,6 @@ class SpriteObject {
 
   /** Representa la velocidad con la que se reproducirá la animación (la transición entre sprites) */
   private float velocidadAnimacion;
-
-  /** Representa el Estado de la animación */
-  private int estado;
-  
-  /** Representa el nombre del SpriteSheet */
-  private String nombre;
   
   /** -- CONSTRUCTORES -- */
   /** Constructor Parametrizado */

@@ -118,7 +118,7 @@ void draw() {
       gestorLlaves.colisionarObjetos(jugador, puerta,colisionador);
   
       gestorEnemigos.mostrarEnemigos();
-      gestorEnemigos.colisionarJugador(jugador,colisionador);
+      gestorEnemigos.verificarColisionesJugador(jugador,colisionador);
       gestorEnemigos.colisionarEnemigos(colisionador);
       gestorEnemigos.colisionarArboles(escenario.getArboles(),colisionador);
     break;
@@ -180,25 +180,25 @@ void keyPressed() {
     A_PRESSED=false;
     S_PRESSED=false;
     D_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.MOV_ARRIBA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.MOV_ARRIBA);
   } else if (readCommand() == 'd' || readCommand() == 'D') {
     D_PRESSED=true;
     S_PRESSED=false;
     A_PRESSED=false;
     W_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.MOV_DERECHA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.MOV_DERECHA);
   } else if (readCommand() == 's' || readCommand() == 'S') {
     S_PRESSED=true;
     D_PRESSED=false;
     A_PRESSED=false;
     W_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.MOV_ABAJO);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.MOV_ABAJO);
   } else if (readCommand() == 'a' || readCommand() == 'A') {
     A_PRESSED=true;
     S_PRESSED=false;
     D_PRESSED=false;
     W_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
   }
 }
 
@@ -206,15 +206,15 @@ void keyPressed() {
 void keyReleased() {
   if (readCommand() == 'a' || readCommand() == 'A') {
     A_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA);
   } else if (readCommand() == 'd' || readCommand() == 'D') {
     D_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_DERECHA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.ESTATICO_DERECHA);
   } else if (readCommand() == 'w' || readCommand() == 'W') {
     W_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ARRIBA);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.ESTATICO_ARRIBA);
   } else if (readCommand() == 's' || readCommand() == 'S') {
     S_PRESSED=false;
-    jugador.setEstado(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
+    jugador.setEstadoAnim(MaquinaEstadosAnimacion.ESTATICO_ABAJO);
   }
 }

@@ -14,7 +14,7 @@ class GestorEnemigos {
   /* -- MÉTODOS -- */
   /** Mostrando los enemigos */
   public void mostrarEnemigos() {
-    for (Enemigo e : enemigos) {
+    for (Enemigo e : this.enemigos) {
       e.display();
       e.mover();
       e.rebotar();
@@ -24,28 +24,26 @@ class GestorEnemigos {
   public void generarEnemigos() {
     Enemigo e;
     e = new Enemigo(new PVector(600, 70), 45, 45, new PVector(80, -99.9));
-    enemigos.add(e);
+    this.enemigos.add(e);
     e = new Enemigo(new PVector(200, 100), 45, 45, new PVector(108, 39.3));
-    enemigos.add(e);
+    this.enemigos.add(e);
     e = new Enemigo(new PVector(500, 400), 45, 45, new PVector(50, -30.9));
-    enemigos.add(e); 
+    this.enemigos.add(e); 
   }
-  /** Verificar colision con jugador*/
-  public void colisionarJugador(Jugador jugador, Colisionador colisionador) {
-    for (Enemigo e : enemigos) {
-      // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
-      if (colisionador.colisionarCircRect(e,jugador)) {
-        println("hay colicion");
-        estado= MaquinaEstados.PERDIENDO;
-      }
+  
+  /** Verificar la colisión con el jugador de cada instancia de Enemigo */
+  public void verificarColisionesJugador(Jugador jugador, Colisionador colisionador) {
+    for (Enemigo e: this.enemigos){
+      e.colisionarJugador(jugador,colisionador);
     }
   }
+
   /** Evalua la colision de un enemigo con otro */
   public void colisionarEnemigos(Colisionador colisionador) {
-    for (int i= 0; i<enemigos.size(); i++) {
-      Enemigo e= enemigos.get(i);
-      for (int j=i+1; j<enemigos.size(); j++) {
-        Enemigo circulo2 = enemigos.get(j);
+    for (int i= 0; i<this.enemigos.size(); i++) {
+      Enemigo e = this.enemigos.get(i);
+      for (int j=i+1; j<this.enemigos.size(); j++) {
+        Enemigo circulo2 = this.enemigos.get(j);
         if (colisionador.colisionarCirculo(e,circulo2)) {
           e.cambiarDireccion();
           circulo2.cambiarDireccion();
@@ -56,8 +54,8 @@ class GestorEnemigos {
   
   /** Evalua la colision de un enemigo con un arbol */
   public void colisionarArboles(ArrayList<Arbol> arboles, Colisionador colisionador) {
-    for (int i= 0; i<enemigos.size(); i++) {
-      Enemigo e= enemigos.get(i);
+    for (int i= 0; i<this.enemigos.size(); i++) {
+      Enemigo e= this.enemigos.get(i);
       for (int j=0; j<arboles.size(); j++) {
         Arbol a = arboles.get(j);
         if (colisionador.colisionarCirculo(e,a)) {

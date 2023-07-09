@@ -8,7 +8,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   private SpriteObject sprite;
   
   /** Representa el estado del sprite del enemigo */
-  private int estado;
+  private int estadoAnim;
   
   
   /** -- CONSTRUCTORES -- */
@@ -21,7 +21,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     this.velocidad = velocidad;
     
     this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+10,alto+10); //sumamos 10 para que el psrite sea un poco mas grande
-    this.estado = MaquinaEstadosAnimacion.ESTATICO;
+    this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO;
   }
   
   
@@ -29,7 +29,7 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   /** Dibujando al enemigo */
   public void display(){
     tint(0);
-    this.sprite.render(this.estado,this.posicion);
+    this.sprite.render(this.estadoAnim,this.posicion);
     tint(255);
     //DEBUG: dibujando hitbox
     /*fill(Color);
@@ -67,6 +67,13 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     velocidad.y *= -1;*/
   }
   
+  /** Verificar colision con jugador*/
+  public void colisionarJugador(Jugador jugador, Colisionador colisionador) {
+    // Verifica la colision entre el jugador y el enemigo para pasar al estado perdiendo
+    if (colisionador.colisionarCircRect(this,jugador)) {
+      estado = MaquinaEstados.PERDIENDO;
+    }
+  }
   
   /** -- ACCESORES (GETTERS Y SETTERS) -- */
   /** - Getters - */
