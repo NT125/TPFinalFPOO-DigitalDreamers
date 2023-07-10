@@ -7,7 +7,7 @@ class GestorLlaves {
   /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public GestorLlaves() {
-    llaves = new ArrayList <Llave>();
+    this.llaves = new ArrayList <Llave>();
     generarNivel();
   }
 
@@ -46,7 +46,7 @@ class GestorLlaves {
   
   /** Dibuja las llaves en el escenario */
   public void dibujarLlaves() {
-    for (Llave l : llaves) {
+    for (Llave l : this.llaves) {
       l.display();
     }
   }

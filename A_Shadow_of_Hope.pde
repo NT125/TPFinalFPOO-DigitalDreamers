@@ -210,7 +210,7 @@ void keyPressed() {
     W_PRESSED=false;
     jugador.setEstadoAnim(MaquinaEstadosAnimacion.MOV_IZQUIERDA);
   }
-  }
+}
 
 /** Acciones según se suelte el input del teclado */
 void keyReleased() {

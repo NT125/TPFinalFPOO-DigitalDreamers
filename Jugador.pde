@@ -19,8 +19,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
   /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
-  public Jugador() {
-  }
+  public Jugador() {}
 
   /** Constructor parametrizado */
   public Jugador(PVector posicion, int ancho, int alto) {
@@ -28,9 +27,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     this.ancho=ancho/2;
     this.alto=alto;
     this.sprite = new SpriteObject("SpritesSombra_ver1.png", ancho, alto);
-
     this.velocidad = new PVector(80, 80);
-
     this.luz = loadImage("LUZ.png");
   }
 
@@ -47,7 +44,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
 
   /** Moviendo al jugador */
   public void mover() {
-    float deltaTime = 1/frameRate;
+    float deltaTime = 1.0/frameRate;
     
     // Funciona pero tiene problemas con la colision
     if (W_PRESSED && !A_PRESSED && !S_PRESSED && !D_PRESSED ) {
@@ -76,16 +73,11 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
     if (this.posicion.y + alto/2 >= height - 30) {
       this.posicion.y = (height - 30) - alto/2;
     }
-  }
-
-  /** Leyendo el input del teclado */
-  public char readCommand() {
-    return key;
-  }
+  }// fin mover
 
   /** Verificando colisiones con los arboles */
   public void colisionarArbol(Colisionador colisionador, ArrayList<Arbol> arboles) {
-    float deltaTime = 1/frameRate;
+    float deltaTime = 1.0/frameRate;
     for (Arbol a : arboles) {   
       // Verificar colisiones con un arbol
       if (colisionador.colisionarCircRect(a, jugador)) {
@@ -102,14 +94,7 @@ class Jugador extends GameObject implements IMovable, IVisualizable {
         }
       }
     }
-  }
-
-  /** Recorre el array de los arboles
-  public void recorrerArboles(ArrayList<Arbol> arboles, Colisionador colisionador) {
-    for (Arbol a : arboles) {
-      colisionarArbol(a, colisionador);
-    }
-  } */
+  } //Fin colisionarArbol
 
 
   /* -- ACCESORES (GETTERS Y SETTERS) -- */

@@ -7,7 +7,7 @@ class GestorEnemigos {
   /* -- CONSTRUCTORES -- */
   /** Constructor por defecto */
   public GestorEnemigos() {
-    enemigos = new ArrayList <Enemigo>();
+    this.enemigos = new ArrayList <Enemigo>();
     generarEnemigos();
   }
 

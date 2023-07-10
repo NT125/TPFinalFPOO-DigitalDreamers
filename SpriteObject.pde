@@ -44,93 +44,68 @@ class SpriteObject {
   public void render(int estado, PVector posicion) {
     imageMode(CENTER);
     switch(estado) {
-    case MaquinaEstadosAnimacion.IDLE:
-      {
-        //Colocando el puntero en la fila de idle
+    case MaquinaEstadosAnimacion.IDLE:{
+        //Colocando la imagen en la fila del Sprite de idle
         this.yFrame = 0;
         //Dibujando el frame
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
-    case MaquinaEstadosAnimacion.MOV_ABAJO:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.MOV_ABAJO:{
+        //Colocando la imagen en la fila del Sprite mov abajo
         this.yFrame = this.altoFrame;
         //Dibujando el frame
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
-
         moverSprite();
-
         break;
       }
-    case MaquinaEstadosAnimacion.MOV_DERECHA:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.MOV_DERECHA:{
+        //Colocando la imagen en la fila del Sprite mov derecha
         this.yFrame = this.altoFrame*2;
         //Dibujando el frame
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
-
         moverSprite();
         break;
       }
-    case MaquinaEstadosAnimacion.MOV_ARRIBA:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.MOV_ARRIBA:{
+        //Colocando la imagen en la fila del Sprite mov arriba
         this.yFrame = this.altoFrame*3;
-        //Dibujando el frame
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
-
         moverSprite();
-
         break;
       }
-    case MaquinaEstadosAnimacion.MOV_IZQUIERDA:
-      {
-        //Colocando el puntero en la fila de mov abajo
-        this.yFrame = this.altoFrame*4;
-        //Dibujando el frame
+    case MaquinaEstadosAnimacion.MOV_IZQUIERDA:{
+        //Colocando la imagen en la fila del Sprite mov izquierda
+        this.yFrame = this.altoFrame*4; 
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
-
         moverSprite();
-
         break;
       }
-
-    case MaquinaEstadosAnimacion.ESTATICO:
-      {
+    case MaquinaEstadosAnimacion.ESTATICO:{ 
         image(this.spriteSheet, posicion.x, posicion.y, anchoFrame, altoFrame);
         break;
       }
-
-    case MaquinaEstadosAnimacion.ESTATICO_ARRIBA:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.ESTATICO_ARRIBA:{ 
         this.yFrame = this.altoFrame*3;
-        xFrame=0;
+        this.xFrame=0;
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
-    case MaquinaEstadosAnimacion.ESTATICO_ABAJO:
-      {
-        xFrame=0;
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.ESTATICO_ABAJO:{
+        this.xFrame=0; 
         this.yFrame = this.altoFrame;
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
-    case MaquinaEstadosAnimacion.ESTATICO_DERECHA:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.ESTATICO_DERECHA:{ 
         this.yFrame = this.altoFrame*2;
-        xFrame=0;
+        this.xFrame=0;
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }
-    case MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA:
-      {
-        //Colocando el puntero en la fila de mov abajo
+    case MaquinaEstadosAnimacion.ESTATICO_IZQUIERDA:{
         this.yFrame = this.altoFrame*4;
-        xFrame=0;
+        this.xFrame=0;
         image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), posicion.x, posicion.y);
         break;
       }

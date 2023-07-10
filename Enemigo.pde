@@ -56,11 +56,11 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   public void mover(){
     float deltaTime= 1/frameRate;
     PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
-    posicion.add(velocidadNormal);
+    this.posicion.add(velocidadNormal);
   }
   /** Cambia la direccion del enemigo */
   public void cambiarDireccion() {
-    velocidad.mult(-1);
+    this.velocidad.mult(-1);
     /*velocidad.x *= -1;
     velocidad.y *= -1;*/
   }

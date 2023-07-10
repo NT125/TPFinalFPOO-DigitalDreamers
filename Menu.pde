@@ -43,7 +43,7 @@ public class Menu{
     this.fEncabezado = createFont("arpegius.ttf", 50, false);
     this.fTextos = createFont("pixel-unicode.ttf", 30, false);
     this.fTextosSmall = createFont("pixel-unicode.ttf", 20, false);
-    pantallaInicial= new Gif(p, "TitleScreen.gif");
+    this.pantallaInicial= new Gif(p, "TitleScreen.gif");
   }
   
   

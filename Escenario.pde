@@ -21,7 +21,7 @@ class Escenario extends GameObject implements IVisualizable {
     this.nombre=nombre; 
     this.imagen = loadImage(nombre);
     this.imagen.resize(width+4,height);
-    arboles = new ArrayList();
+    this.arboles = new ArrayList();
     /*
     paredes= new Pared[4];
     paredes[0]=new Pared(new PVector(0,0), width, this.ancho); 
@@ -39,7 +39,6 @@ class Escenario extends GameObject implements IVisualizable {
     image(this.imagen,this.posicion.x,this.posicion.y);
     tint(255);
     image(loadImage("borde_oscuro.png"),0,0);
-    
   }
   
   /** Mostrando los arboles en el escenario */
