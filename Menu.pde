@@ -48,7 +48,7 @@ public class Menu{
   
   
   /* -- MÉTODOS -- */
-  /** Método para dibujar el menú correspondiente */
+  /** Método para dibujar el menú correspondiente al estado */
   public void display(int estado){
     switch(estado){
       case MaquinaEstados.TITULO:
@@ -77,32 +77,38 @@ public class Menu{
   /** Método para retratar el menú de título */
   public void displayTitulo(){    
     this.pantallaInicial.play(); 
-    displayFondo(pantallaInicial);
+    displayFondo(pantallaInicial); //Diubjando la imagen de fondo
     
+    /* Realizamos el fundido (cubre la imagen de fondo) */
      if (!this.fundidoCompleto) {
-      fill(0, this.fundido);
-      rect(0, 0, width, height);
-      if (millis()>=4500) {
-        this.fundido -= 2;
+      fill(0, this.fundido); // Setea el color negro con opacidad variable.
+      rect(0, 0, width, height); //Dibuja un recuadro negro que cubrirá toda la pantalla.
+      if (millis()>=4500) { //Pasados 4.5 segundos, el recuadro negro empezará a hacerse transparente.
+        this.fundido -= 2; //La opacidad del recuadro disminuye a un ritmo de 2 unidades por fotograma.
         if (this.fundido <= 0) {
-          this.fundidoCompleto = true;  
+          this.fundidoCompleto = true;  // Deja de evaluar if
         }
       }
     }
     
-    this.displayTextosDelTitulo(); 
+    this.displayTextosDelTitulo(); //Dibujando los títulos
     
+    /* Realizamos el fundido (cubre los títulos)*/
     if (!this.fundidoCompleto2) {
-      fill(0, this.fundido2);
-      rect(0, 0, width, height);
-      if (millis()>=3000) {
-        this.fundido2 -= 3;
+      fill(0, this.fundido2); // Setea el color negro con transparencia variable (usando otra variable).
+      rect(0, 0, width, height); //Dibuja un recuadro negro que cubrirá toda la pantalla.
+      if (millis()>=3000) { //Pasados 3 segundos, el recuadro negro empezará a hacerse transparente.
+        this.fundido2 -= 3; //La opacidad del recuadro disminuye a un ritmo de 3 unidades por fotograma, más rápido que en el fundido anterior.
         if (this.fundido2 <= 0) {
-          this.fundidoCompleto2 = true;
+          this.fundidoCompleto2 = true; //Deja de evaluar if
         }
       }
-    }   
-    this.tiempoActual = millis();
+    }    
+    /*  La necesidad de hacer dos fundidos desde negro al mismo tiempo y evaluar dos pares de variables distintas (pero con el mismo fin) se presenta para visualizar el efecto que buscábamos.
+        Primero se muestran los títulos (los cubre el segundo recuadro negro), y poco a poco aparece la imagen de fondo (los cubre el primer recuadro negro)  */
+    
+        this.tiempoActual = millis(); /*  Guardamos el tiempo hasta este momento para evaluar los segundos en que se mantendrá la pantalla negra siguiente, seguido de la pantalla de controles.
+                                          Todo esto es únicamente con el propósito de presentar el diseño visual que teníamos en mente */
   }
   
   /** Método para escribir el texto del menú (título, créditos, etc.) */
@@ -132,11 +138,11 @@ public class Menu{
   public void displayControles(){
     this.displayTextosControles();
     
-    //Efecto de fundido
+    /* Efecto de fundido */
     if (!this.fundidoCompleto){
       fill(0, this.fundido);
       rect(0, 0, width, height);
-      if (millis() - this.tiempoActual >= 3000) {
+      if (millis() - this.tiempoActual >= 3000) { //Usamos tiempo actual para calcuar 3 segundos desde un punto de la ejecución del programa. Operamos con millis() por que nos da el tiempo transcurrido en milisegundos desde el inicio del programa
         this.fundido -= 15;
         if (this.fundido <= 0) {
           this.fundidoCompleto = true; //alternando fundidoCompleto entre pantallas.
@@ -177,7 +183,7 @@ public class Menu{
     textAlign(CENTER, CENTER);
     text("Ganaste :D", width / 2, height / 2);
     textFont(fTextos);
-    text("Presiona para volver al menu", width / 2, height -80);
+    text("Clic para volver al inicio", width / 2, height -80);
    }
   
   /** Método para retratar la pantalla de Game Over */
@@ -187,7 +193,7 @@ public class Menu{
     textAlign(CENTER, CENTER);
     text("Game Over", width / 2, height / 2);
     textFont(fTextos);
-    text("Presiona para continuar", width / 2, height -80);//Muestra un mensaje de Game Over
+    text("Clic para volver al inicio", width / 2, height -80);//Muestra un mensaje de Game Over
   }
 
 
