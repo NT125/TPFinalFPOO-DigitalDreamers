@@ -23,9 +23,9 @@ class Llave extends GameObject implements IVisualizable {
   /* -- MÉTODOS -- */
   /** Dibuja la llave en el escenario */
   public void display() {    
-    tint(225, 185, 32);  //entinta la imagen a marron
+    tint(225, 185, 32);  //Tintamos la llave de dorado
     this.sprite.render(this.estadoAnim,this.posicion);
-    tint(255);
+    tint(255); //Devolvemos el tinte al valor predeterminado
   }
   
   /** Verifica la colisión individual con la puerta */

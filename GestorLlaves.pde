@@ -8,12 +8,12 @@ class GestorLlaves {
   /** Constructor por defecto */
   public GestorLlaves() {
     this.llaves = new ArrayList <Llave>();
-    generarNivel();
+    generarLlaves();
   }
 
   /* -- MÉTODOS -- */
-  /** Genera a las llaves segun el nivel */
-  public void generarNivel(){
+  /** Genera las llaves */
+  public void generarLlaves(){
     Llave l;
     l = new Llave(new PVector(width/4, height/4), 45, 45);
     this.llaves.add(l);
@@ -31,7 +31,7 @@ class GestorLlaves {
     }
   }
   
-  /** Permite "abrir la puerta" y salir del nivel */
+  /** Permite "abrir la puerta" y ganar el juego*/
   public void abrirPuerta(){
     boolean abierta = true;
     for (Llave l : this.llaves){

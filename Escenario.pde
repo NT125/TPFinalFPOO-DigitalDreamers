@@ -5,7 +5,10 @@ class Escenario extends GameObject implements IVisualizable {
   private ArrayList <Arbol> arboles;
   
   /** Representa a la Imagen que se dibuja en el escenario */
-  private PImage imagen;
+  private PImage fondo;
+  
+  /** Representa a la Imagen que se dibuja en el escenario */
+  private String rutaFondo;
   
   
   /* -- CONSTRUCTORES -- */
@@ -15,19 +18,12 @@ class Escenario extends GameObject implements IVisualizable {
   }
   
   /** Constructor parametrizado */
-  public Escenario(PVector posicion,String nombre){
+  public Escenario(PVector posicion,String rutaFondo){
     this.posicion = posicion;
-    //this.anchoP=30;
-    this.nombre=nombre; 
-    this.imagen = loadImage(nombre);
-    this.imagen.resize(width+4,height);
+    this.rutaFondo=rutaFondo; 
+    this.fondo = loadImage(rutaFondo);
+    this.fondo.resize(width+4,height);
     this.arboles = new ArrayList();
-    /*
-    paredes= new Pared[4];
-    paredes[0]=new Pared(new PVector(0,0), width, this.ancho); 
-    paredes[1]=new Pared(new PVector(0,height-this.ancho), width, this.ancho);
-    paredes[2]=new Pared(new PVector(0,0),this.ancho,height);
-    paredes[3]=new Pared(new PVector(width-this.ancho,0),this.ancho,height);*/
   }
   
   
@@ -36,7 +32,7 @@ class Escenario extends GameObject implements IVisualizable {
   public void display(){
     imageMode(CORNER);
     tint(160, 185, 62);  //entinta la imagen a marron
-    image(this.imagen,this.posicion.x,this.posicion.y);
+    image(this.fondo,this.posicion.x,this.posicion.y);
     tint(255);
     image(loadImage("borde_oscuro.png"),0,0);
   }
@@ -67,46 +63,21 @@ class Escenario extends GameObject implements IVisualizable {
     arboles.add(arbol);
     arbol = new Arbol(new PVector(552,479),60,60);
     arboles.add(arbol);
-    /*for (int i=0; i<random(3,5); i++) {
-      arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
-      arboles.add(arbol);
-    }*/
   }
-  /*
-  public void crearArboles(int cantidad){
-    Arbol arbol;
-    while(this.arboles.size() < cantidad) {      
-      if (this.arboles.size() > 0){         
-        arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);          
-        for (Arbol a: arboles){
-          while (arbol.posicion.dist(a.posicion) < 150){
-            arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
-          }
-        }
-        //arboles.add(arbol);
-      } else {        
-        arbol = new Arbol(new PVector(random(100,width-100),random(100,height-100)),100,100);
-        //arboles.add(arbol);
-      }
-      this.arboles.add(arbol);
-    }
-  }
-  */
-  
   
   /* -- ACCESORES (GETTERS Y SETTERS) -- */
   /* - Getters - */
-  /** Devuelve el nombre del escenario */
-  public String getNombre(){
-    return this.nombre;
+  /** Devuelve el rutaFondo del escenario */
+  public String getRutaFondo(){
+    return this.rutaFondo;
   } 
   /** Devuelve la lista de arboles */
   public ArrayList<Arbol> getArboles(){
     return this.arboles;
   }
   /* Setters */
-  /** Cambia el nombre del escenario */
-  public void setNombre(String nombre){
-    this.nombre = nombre;
+  /** Cambia el rutaFondo del escenario */
+  public void setRutaFondo(String rutaFondo){
+    this.rutaFondo = rutaFondo;
   }   
 }

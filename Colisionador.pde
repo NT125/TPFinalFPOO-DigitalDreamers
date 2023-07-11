@@ -9,12 +9,6 @@ class Colisionador {
   /* -- MÉTODOS -- */  
   /** Metodo que comprueba la colision entre dos objetos rectangulos */
   public boolean colisionarRectangulo(GameObject primero, GameObject segundo) {
-    
-    //DEBUG: dibuja la hitbox de los rectangulos
-    /*rectMode(CENTER);
-    rect(primero.getPosicion().x,primero.getPosicion().y, primero.getAncho(), primero.getAlto());
-    rect(segundo.getPosicion().x,segundo.getPosicion().y, segundo.getAncho(), segundo.getAlto());
-    */
     return !(primero.getPosicion().x + primero.getAncho() < segundo.getPosicion().x ||
       primero.getPosicion().x > segundo.getPosicion().x + segundo.getAncho() ||
       primero.getPosicion().y + primero.getAlto() < segundo.getPosicion().y ||
@@ -24,10 +18,6 @@ class Colisionador {
   /** Metodo que comprueba la colisión entre dos objetos círculares */
   public boolean colisionarCirculo(GameObject primero, GameObject segundo) {
     float distancia = PVector.dist(primero.getPosicion(), segundo.getPosicion());
-    //DEBUG: dibuja la hitbox del segundo circulo
-    /*circle(primero.getPosicion().x,primero.getPosicion().y, primero.getAncho());
-    circle(segundo.getPosicion().x, segundo.getPosicion().y, segundo.getAncho());
-    */
     float radios = primero.getAncho()/2+segundo.getAncho()/2;
     return distancia <= radios; 
   }
@@ -52,15 +42,6 @@ class Colisionador {
     if(point.y > rectangulo.getPosicion().y + rectangulo.getAlto()/2){
       point.y = rectangulo.getPosicion().y + rectangulo.getAlto()/2;
     }
-    //DEBUG: dibuja el centro del circulo y la linea de distancia entre este y el punto mas cercano
-    /*circle( circulo.getPosicion().x, circulo.getPosicion().y, 2);                //Representara el centro del circulo
-    stroke(255,0,0);
-    line( point.x, point.y, circulo.getPosicion().x, circulo.getPosicion().y );  //Dibuja la linea de distancia entre el centro del circulo y el punto cercano
-    fill( 0, 255, 0 );
-    stroke(0,255,0);
-    circle( point.x, point.y, 3);                                                //Dibuja el punto mas cercano
-    circle(circulo.getPosicion().x, circulo.getPosicion().y,circulo.getAncho());
-    */
     float distance = point.dist(circulo.getPosicion());         //Calcula la distancia entre el punto cercano y la posicion del circulo
     return distance <= circulo.getAncho()/2;
   }

@@ -1,4 +1,4 @@
-/** Clase abstracta que gestiona los sprites de los elementos renderizables del juego */
+/** Clase que gestiona los sprites de los elementos renderizables del juego */
 class SpriteObject {
   /* -- ATRIBUTOS -- */
   /** Representa al SpriteSheet del Objeto */
@@ -30,14 +30,12 @@ class SpriteObject {
   public SpriteObject(){}
   
   /** Constructor Parametrizado */
-  public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
-    this.spriteSheet = requestImage(nombre);
+  public SpriteObject(String spriteSheet, int anchoFrame, int altoFrame) {
+    this.spriteSheet = requestImage(spriteSheet);
     this.anchoFrame = anchoFrame;
     this.altoFrame = altoFrame;
     this.xFrame=0;
-    this.yFrame=0;/*
-    this.xFrameFloat=0;
-    this.nextxFrameFloat=widthFrame;*/
+    this.yFrame=0;
     this.velocidadAnimacion = 20;
   }
 

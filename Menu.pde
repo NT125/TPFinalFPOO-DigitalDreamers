@@ -12,7 +12,7 @@ public class Menu{
   /** Atributo para obtener el tiempo actual de ejecución en milisegundos */
   private int tiempoActual;
   
-  /** Declaración de las distintas fuentes de texto usadas en el juego. */
+  /* Declaración de las distintas fuentes de texto usadas en el juego. */
   /** Fuente para el título del juego */
   private PFont fTitulo;
   

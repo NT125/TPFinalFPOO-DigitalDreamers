@@ -20,30 +20,20 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
     super(posicion,ancho,alto);
     this.velocidad = velocidad;
     
-    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+15,alto+15); //sumamos 15 para que el psrite sea un poco mas grande
-    this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO;
+    this.sprite = new SpriteObject("enemigo-removebg-preview.png",ancho+15,alto+15); //sumamos 15 para que Sprite sea acorde a la hitbox
+    this.estadoAnim = MaquinaEstadosAnimacion.ESTATICO; //Usamos el estado ESTATICO porque la instancia de esta clase no tendran animacion
   }
   
   
   /* -- MÉTODOS -- */
   /** Dibujando al enemigo */
   public void display(){
-    this.sprite.render(this.estadoAnim,this.posicion);
-    //DEBUG: dibujando hitbox
-    /*fill(Color);
-    ellipse(posicion.x,posicion.y,ancho,alto);
-    strokeWeight(3);
-    point(posicion.x,posicion.y);
-    strokeWeight(1);*/
-    
+    this.sprite.render(this.estadoAnim,this.posicion);   // Accedemos al metodo RENDER de spirteObject para renderizar el sprite del Enemigo 
   }
   
   /** Hace que el enemigo rebote dentro del size */
   public void rebotar(){
-    //DEBUG: dibujando bordes
-    //rect(ancho,alto,width-ancho*2, height-alto*2);
-    
-    // Limitando movimiento en la ventana
+    // Limitando movimiento en la ventana, haciendo que no se salga del mapa y rebote
     if(this.posicion.x >= width-ancho || this.posicion.x<= 0+ancho){
       this.velocidad.x *= -1;
     }
@@ -55,14 +45,12 @@ class Enemigo extends GameObject implements IMovable, IVisualizable{
   /** Mueve al enemigo */
   public void mover(){
     float deltaTime= 1/frameRate;
-    PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime);                
+    PVector velocidadNormal= new PVector(this.velocidad.x*deltaTime,this.velocidad.y*deltaTime); //Normaliza la velocidad independientemente de los FPS del usuario           
     this.posicion.add(velocidadNormal);
   }
   /** Cambia la direccion del enemigo */
   public void cambiarDireccion() {
     this.velocidad.mult(-1);
-    /*velocidad.x *= -1;
-    velocidad.y *= -1;*/
   }
   
   /* -- ACCESORES (GETTERS Y SETTERS) -- */
