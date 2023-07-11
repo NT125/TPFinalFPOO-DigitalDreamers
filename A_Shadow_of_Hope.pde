@@ -53,7 +53,7 @@ void setup() {
 
 /* Definimos la musica del juego y los sonidos. */
   minim = new Minim(this);
-  musicaTitulo = minim.loadFile("musicatitulo.mp3");
+  musicaTitulo = minim.loadFile("titulo.mp3");
   musicaTitulo.setGain(0); //Regulamos el sonido del juego
   musicaEscenario = minim.loadFile("ambiente.mp3");
   musicaEscenario.setGain(-7); //Regulamos el sonido del juego

@@ -26,6 +26,9 @@ class SpriteObject {
   private float velocidadAnimacion;
   
   /* -- CONSTRUCTORES -- */
+  /** Constructor por Defecto */
+  public SpriteObject(){}
+  
   /** Constructor Parametrizado */
   public SpriteObject(String nombre, int anchoFrame, int altoFrame) {
     this.spriteSheet = requestImage(nombre);
